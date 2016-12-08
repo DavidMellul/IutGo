@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -12,7 +11,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Random;
 
 import com.maxmind.geoip.Location;
 import com.maxmind.geoip.LookupService;
@@ -171,22 +169,7 @@ public class GPSManager implements Serializable {
 
 	        double lat = location.latitude;
 	        double lon = location.longitude;
-	        Date d = new Date(getRandomTimeBetweenTwoDates());
+	        Date d = new Date();
 	        return new GPSData(new Coordinate(lat, lon), d);
-	    }
-
-	    public double randomInRange(double min, double max) {
-	        Random r = new Random();
-	        double range = max - min;
-	        double scaled = r.nextDouble() * range;
-	        double shifted = scaled + min;
-	        return shifted;
-	    }
-
-	    public long getRandomTimeBetweenTwoDates () {
-	        long beginTime = Timestamp.valueOf("2016-01-01 00:00:00").getTime();
-	        long endTime = Timestamp.valueOf("2018-01-01 00:59:59").getTime();
-	        long diff = endTime - beginTime + 1;
-	        return beginTime + (long) (Math.random() * diff);
 	    }
 }
