@@ -23,6 +23,11 @@ import Utils.Mood;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class Member implements Serializable{
+
+	// --------------------------------------- SERIAL VERSION ID -----------------------------------
+	private static final long serialVersionUID = -741883278053815891L;
+
+	
 	private static int ID_MEMBER = 1; 
 	
 	// ---------------------------------------------- BASE -----------------------------------------
@@ -199,7 +204,7 @@ public class Member implements Serializable{
 	
 	// --------------------------------------------- PARTIE LINKED ------------------------------------
 	public ArrayList<Member> getRelations(String type) {
-        LinkManager lm = LinkManager.getInstance();
+        //LinkManager lm = LinkManager.getInstance();
         ArrayList<Member> relations = new ArrayList<Member>();
         for (Link link : this.m_links) {
             if (link.getType().equals(type))
@@ -298,7 +303,10 @@ public class Member implements Serializable{
             System.out.println(locationStart+" "+locationEnd);
             if(locationEnd.equalsIgnoreCase(destination) && locationStart.equalsIgnoreCase(myPosition)) {
                 Calendar tmp = Calendar.getInstance();
-                if(tmp.YEAR == dTravel.YEAR && tmp.MONTH == dTravel.MONTH && tmp.DATE == dTravel.DATE && tmp.HOUR_OF_DAY <= dTravel.HOUR_OF_DAY) {
+                if(			tmp.get(Calendar.YEAR) == dTravel.get(Calendar.YEAR) 
+                		&& 	tmp.get(Calendar.MONTH) == dTravel.get(Calendar.MONTH) 
+                		&& 	tmp.get(Calendar.DATE) == dTravel.get(Calendar.DATE) 
+                		&& 	tmp.get(Calendar.HOUR_OF_DAY) <= dTravel.get(Calendar.HOUR_OF_DAY)) {
                     listTravels.add(t);
                 }
             }

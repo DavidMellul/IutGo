@@ -1,7 +1,6 @@
 package Ui;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Rectangle;
 
@@ -11,6 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 public class TitleBarForms extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8792583867779037608L;
 	JLabel labelCroix;
 	JLabel labelMinus;
 	JLabel logo;

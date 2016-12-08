@@ -15,10 +15,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
-import Data.SerialManager;
-import Member.Member;
 
 public class AccountCreationForm extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7826705477790848021L;
 	private JTextField fieldLogin;
 	private JTextField fieldPass;
 	private JLabel lblNomDeCompte;

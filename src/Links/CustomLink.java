@@ -6,7 +6,11 @@ import java.util.List;
 import Utils.Util;
 
 public class CustomLink extends Link implements Serializable {
-    private List<String> cLink = Util.getProhibitedWords();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2804961861766509495L;
+	private List<String> cLink = Util.getProhibitedWords();
 
     public CustomLink() {
 

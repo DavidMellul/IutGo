@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,10 +15,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
-import Member.Member;
 
 public class LoginForm extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1424984070958388055L;
 	private JLabel lblIutGo;
 	private JLabel lblDescription;
 	

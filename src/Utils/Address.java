@@ -8,7 +8,11 @@ import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class Address implements Serializable{
 
-    private Coordinate m_coordinateGps;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7530102637176081952L;
+	private Coordinate m_coordinateGps;
     private Member m_member;
     private Formation m_formation;
     private ArrayList<Member> listAddress= new ArrayList<Member>();

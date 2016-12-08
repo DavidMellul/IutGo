@@ -7,7 +7,11 @@ import Member.Member;
 
 public class Formation implements Serializable{
 
-    private ArrayList<Member> m_listMembers;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4410636572584937846L;
+	private ArrayList<Member> m_listMembers;
     private String m_formationName;
 
     public Formation() { this.m_listMembers = new ArrayList<Member>(); this.m_formationName = "undefined";}
