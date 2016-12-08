@@ -55,6 +55,8 @@ public class Controller {
 				break;
 			}
 		}
+		if(memberTest != null)
+			this.m_currentMember = memberTest;
 		return memberTest != null;
 	}
 

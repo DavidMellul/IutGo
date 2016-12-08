@@ -1,6 +1,11 @@
 package Data;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,6 +15,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+
+import com.maxmind.geoip.Location;
+import com.maxmind.geoip.LookupService;
 
 import Member.Member;
 import Utils.GPSData;
@@ -144,9 +152,25 @@ public class GPSManager implements Serializable {
 	    }
 
 	    public GPSData getCurrentPosition()
-	    {
-	        double lat = randomInRange(-90,90);
-	        double lon = randomInRange(-180,180);
+	    {	
+	    	LookupService ls = null;
+	    	URL whatismyip = null;
+	    	BufferedReader in = null;
+	    	String ip = null;
+	    	Location location = null;
+	    	
+			try {
+				whatismyip = new URL("http://checkip.amazonaws.com");
+				in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+				ip = in.readLine();
+				ls = new LookupService(getClass().getResource("../Resources/datagps.dat").getPath(),LookupService.GEOIP_MEMORY_CACHE | LookupService.GEOIP_CHECK_CACHE);
+				location = ls.getLocation(ip);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+	        double lat = location.latitude;
+	        double lon = location.longitude;
 	        Date d = new Date(getRandomTimeBetweenTwoDates());
 	        return new GPSData(new Coordinate(lat, lon), d);
 	    }
