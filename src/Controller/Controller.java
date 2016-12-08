@@ -1,0 +1,61 @@
+package Controller;
+
+import java.util.ArrayList;
+
+import Data.SerialManager;
+import Member.Member;
+import Ui.Application;
+import Ui.Form;
+
+public class Controller {
+	// ----------------------------------------- Modèle --------------------------------------
+	private Member m_currentMember;
+	private ArrayList<Member> m_members;
+	
+	// ---------------------------------------- Vues -----------------------------------------
+	private Form m_startScreen;
+	private Application m_appScreen;
+	
+	// ---------------------------------------- Singleton -----------------------------------
+	private static Controller m_controller = new Controller();
+	private Controller() {
+		this.m_members = SerialManager.getAllMembers();
+		this.m_startScreen = new Form();
+		this.m_appScreen = new Application();
+	}
+	public static Controller getInstance() { return m_controller; }
+	
+	// --------------------------------------- Accesseurs -----------------------------------
+	public ArrayList<Member> getMembers() { return this.m_members; }
+	
+	public void setCurrentMember(Member m) { this.m_currentMember = m; }
+	public Member getCurrentMember() { return this.m_currentMember; }
+	
+	// -------------------------------------- Méthode --------------------------------------
+	public void start() {
+		this.m_startScreen.setVisible(true);
+	}
+	
+	public void registerMember(String login, String pass, String lastname, String firstname) {
+		Member m = new Member();
+		m.setFirstname(firstname);
+		m.setLastname(lastname);
+		m.setLogin(login);
+		m.setPassword(pass);
+		SerialManager.save(m, m.getId()+".dat");
+		this.m_members.add(m);
+	}
+	
+	public boolean canLogMember(String login, String pass) {
+		Member memberTest = null;
+		
+		for(Member m : this.m_members) {
+			if(m.getLogin().equals(login) && m.getPassword().equals(pass)) {
+				memberTest = m;
+				break;
+			}
+		}
+		return memberTest != null;
+	}
+
+}
