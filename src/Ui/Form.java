@@ -93,6 +93,8 @@ public class Form extends JFrame {
 		
 		
 		btnCrerUnCompte = new JButton("Cr\u00E9er un compte");
+		btnCrerUnCompte.setFocusPainted(false);
+		btnCrerUnCompte.setBorder(null);
 		btnCrerUnCompte.setBounds(340, 298, 135, 23);
 		panelLogin.add(btnCrerUnCompte);
 		btnCrerUnCompte.addActionListener(new ActionListener() {

@@ -9,14 +9,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Path implements Serializable {
-	/**
-	* 
-	*/
+public class Path implements Serializable{
 	private static final long serialVersionUID = 5589306408607082862L;
+	
 	private static final File dir = new File("Export");
-	static float costTransport = 6f;
-	public List<InterestPoint> m_path;
+	    static float costTransport = 6f;
+	    public List<InterestPoint> m_path;
 
 	float coutItineraire;
 

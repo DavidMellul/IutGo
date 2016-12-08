@@ -11,9 +11,7 @@ import Utils.Mood;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class TravelManager implements Serializable {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -3370481895716548296L;
 
 	private ArrayList<Travel> m_travels = new ArrayList<Travel>();

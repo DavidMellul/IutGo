@@ -12,7 +12,6 @@ public class Application extends JFrame {
 	private static final long serialVersionUID = 773127820785648597L;
 
 	private MapInterfaceTree m_mapViewer;
-	
 	public Application() {
 		super("Iut Go");
 		

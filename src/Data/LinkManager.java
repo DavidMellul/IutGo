@@ -10,12 +10,10 @@ import java.util.List;
 import Links.CustomLink;
 import Links.Link;
 import Member.Member;
-
-public class LinkManager implements Serializable {
-	/**
-	 * 
-	 */
+public class LinkManager implements Serializable{
+	
 	private static final long serialVersionUID = 3024903980256506458L;
+	
 	private HashMap<String, String> relationToClass;
 	private static final LinkManager lm = new LinkManager();
 
