@@ -8,7 +8,9 @@ import Member.Member;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class Travel implements Serializable{
-    private Calendar m_date;
+	private static final long serialVersionUID = -2171317894391516495L;
+
+	private Calendar m_date;
     private Member m_driver;
     private ArrayList<Member> m_passengersList;
     private Coordinate m_coordinateStart;

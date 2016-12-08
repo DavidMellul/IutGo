@@ -18,6 +18,7 @@ public class Controller {
 	
 	// ---------------------------------------- Singleton -----------------------------------
 	private static Controller m_controller = new Controller();
+	
 	private Controller() {
 		this.m_members = SerialManager.getAllMembers();
 		this.m_startScreen = new Form();
@@ -48,7 +49,6 @@ public class Controller {
 	
 	public boolean canLogMember(String login, String pass) {
 		Member memberTest = null;
-		
 		for(Member m : this.m_members) {
 			if(m.getLogin().equals(login) && m.getPassword().equals(pass)) {
 				memberTest = m;
@@ -59,5 +59,16 @@ public class Controller {
 			this.m_currentMember = memberTest;
 		return memberTest != null;
 	}
+	
+	public String giveBackPassword(String firstname, String lastname) {
+		String passToGive = new String();
+		for(Member m : this.m_members) {
+			if(m.getFirstname().toUpperCase().equals(firstname.toUpperCase()))
+					if(m.getLastname().toUpperCase().equals(lastname.toUpperCase()))
+					{ passToGive = m.getPassword(); break; }
+		}
+		return passToGive;
+	}
+	
 
 }

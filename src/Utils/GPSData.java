@@ -12,9 +12,10 @@ import org.json.simple.parser.JSONParser;
 
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
-public class GPSData implements Comparable<Object>, Serializable
-{
-    private Coordinate m_coordinate;
+public class GPSData implements Comparable<Object>, Serializable {
+	private static final long serialVersionUID = 1710036580140276926L;
+
+	private Coordinate m_coordinate;
     private Date m_date;
     private String m_location = null;
 

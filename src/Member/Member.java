@@ -23,6 +23,8 @@ import Utils.Mood;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class Member implements Serializable{
+	private static final long serialVersionUID = -741883278053815891L;
+
 	private static int ID_MEMBER = 1; 
 	
 	// ---------------------------------------------- BASE -----------------------------------------
@@ -199,7 +201,6 @@ public class Member implements Serializable{
 	
 	// --------------------------------------------- PARTIE LINKED ------------------------------------
 	public ArrayList<Member> getRelations(String type) {
-        LinkManager lm = LinkManager.getInstance();
         ArrayList<Member> relations = new ArrayList<Member>();
         for (Link link : this.m_links) {
             if (link.getType().equals(type))

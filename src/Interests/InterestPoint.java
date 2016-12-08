@@ -7,6 +7,8 @@ import java.util.List;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class InterestPoint implements Serializable{
+	private static final long serialVersionUID = 5837365909344441417L;
+
 	private static ArrayList<InterestPoint> instances = new ArrayList<InterestPoint>();
 
     private String m_name=null;

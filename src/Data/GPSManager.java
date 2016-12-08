@@ -1,10 +1,8 @@
 package Data;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -24,6 +22,8 @@ import Utils.GPSData;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class GPSManager implements Serializable {
+	private static final long serialVersionUID = -3892867060303029823L;
+
 	public GPSManager() { }
 	
 	 public GPSData getLastPosition(Member p_member)

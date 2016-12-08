@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,8 +15,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
-import Member.Member;
 
+@SuppressWarnings("serial")
 public class LoginForm extends JPanel {
 
 	private JLabel lblIutGo;
@@ -86,8 +85,22 @@ public class LoginForm extends JPanel {
 		this.add(btnConnexion);
 		
 		btnMotDePasse = new JButton("Mot de passe oubli\u00E9 ?");
+		btnMotDePasse.setFocusPainted(false);
+		btnMotDePasse.setBorder(null);
 		btnMotDePasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String fullInput = JOptionPane.showInputDialog(LoginForm.this, "Veuillez saisir votre prénom et nom séparés par un espace");
+				
+				if(fullInput.isEmpty() == false) {
+					String firstName = fullInput.substring(0,fullInput.indexOf(' '));
+					String lastName = fullInput.substring(fullInput.indexOf(' ')+1,fullInput.length());
+
+					String passgivenBack = Controller.getInstance().giveBackPassword(firstName, lastName);
+					if(passgivenBack.isEmpty())
+						JOptionPane.showMessageDialog(LoginForm.this, "Les informations saisies ne correspondent à aucun utilisateur.");
+					else
+						JOptionPane.showMessageDialog(LoginForm.this, "<html>Mot de passe : <strong>"+passgivenBack+"</strong></html>");
+				}
 			}
 		});
 		btnMotDePasse.setCursor(new Cursor(Cursor.HAND_CURSOR));

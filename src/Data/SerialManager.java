@@ -63,7 +63,7 @@ public class SerialManager {
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(".dat")) {
                list.add(new Member());
-               retrieve(list.get(list.size()-1).getId()+".dat");
+               list.set(list.size()-1, (Member) retrieve(list.get(list.size()-1).getId()+".dat"));
             }
         }
         return list;

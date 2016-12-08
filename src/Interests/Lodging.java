@@ -3,6 +3,8 @@ package Interests;
 import java.io.Serializable;
 
 public class Lodging implements Serializable{
+	private static final long serialVersionUID = 4874444450197107783L;
+
 	public float m_nightCost;
     public String m_name;
 
