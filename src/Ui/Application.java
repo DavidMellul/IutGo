@@ -2,10 +2,9 @@ package Ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Menu;
 
 import javax.swing.JFrame;
-
-import Ui.SearchMenus.Menu;
 
 public class Application extends JFrame {
 
@@ -29,10 +28,10 @@ public class Application extends JFrame {
 		
 		Menu menu = new Menu();
 		Dimension menuDimensions = new Dimension(220, 600);
-		menu.setPreferredSize(menuDimensions);
+	//	menu.setPreferredSize(menuDimensions);
 		
 		getContentPane().add(m_mapViewer, BorderLayout.CENTER);
-		getContentPane().add(menu, BorderLayout.WEST);
+	//	getContentPane().add(menu, BorderLayout.WEST);
 	}
 	
 	public static void main(String[] args){

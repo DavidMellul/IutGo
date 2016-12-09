@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
+import javax.swing.JPasswordField;
 
 @SuppressWarnings("serial")
 public class LoginForm extends JPanel {
@@ -27,7 +28,7 @@ public class LoginForm extends JPanel {
 	private JLabel lblDescription;
 	
 	private JTextField fieldLogin;
-	private JTextField fieldPass;
+	private JPasswordField fieldPass;
 	
 	private JLabel lblNomDeCompte;
 	private JLabel lblMotDePasse;
@@ -49,12 +50,12 @@ public class LoginForm extends JPanel {
 		lblConnexion.setBounds(0, 0, 47, 440);
 		add(lblConnexion);
 		
-		lblNomDeCompte = new JLabel("Nom de compte");
+		lblNomDeCompte = new JLabel("Login");
 		lblNomDeCompte.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));
 		lblNomDeCompte.setBounds(180, 195, 105, 20);
 		this.add(lblNomDeCompte);
 		
-		lblMotDePasse = new JLabel("Mot de passe");
+		lblMotDePasse = new JLabel("Password");
 		lblMotDePasse.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));
 		lblMotDePasse.setBounds(180, 226, 105, 20);
 		this.add(lblMotDePasse);
@@ -65,35 +66,37 @@ public class LoginForm extends JPanel {
 		this.add(fieldLogin);
 		fieldLogin.setColumns(10);
 		
-		fieldPass = new JTextField();
+		fieldPass = new JPasswordField();
 		fieldPass.setToolTipText("");
 		fieldPass.setColumns(10);
 		fieldPass.setBounds(295, 227, 157, 20);
+		fieldPass.setEchoChar('*');
 		this.add(fieldPass);
 		
-		btnConnexion = new JButton("Connexion");
+		btnConnexion = new JButton("Connection");
 		btnConnexion.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 16));
 		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!fieldLogin.getText().isEmpty() && !fieldPass.getText().isEmpty()) {					
-					if(Controller.getInstance().canLogMember(fieldLogin.getText(),fieldPass.getText()))
+				String login = fieldLogin.getText(); String pass = String.valueOf(fieldPass.getPassword());
+				if(!login.isEmpty() && !pass.isEmpty()) {			
+					if(Controller.getInstance().canLogMember(login,pass))
 						JOptionPane.showMessageDialog(LoginForm.this, "Bienvenue dans votre espace.");	
 					else
-						JOptionPane.showMessageDialog(LoginForm.this, "Informations de connexion incorrectes.");			
+						JOptionPane.showMessageDialog(LoginForm.this, "Incorrect login or password.");			
 				}
 				else 
-					JOptionPane.showMessageDialog(LoginForm.this, "Informations de connexion incorrectes.");
+					JOptionPane.showMessageDialog(LoginForm.this, "Incorrect login or password.");
 		}});
 		btnConnexion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnConnexion.setBounds(180, 257, 272, 32);
 		this.add(btnConnexion);
 		
-		btnMotDePasse = new JButton("Mot de passe oubli\u00E9 ?");
+		btnMotDePasse = new JButton("Forgotten password ?");
 		btnMotDePasse.setFocusPainted(false);
 		btnMotDePasse.setBorder(null);
 		btnMotDePasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String fullInput = JOptionPane.showInputDialog(LoginForm.this, "Veuillez saisir votre prénom et nom séparés par un espace");
+				String fullInput = JOptionPane.showInputDialog(LoginForm.this, "Please type your firstname and lastname separated by a blank.");
 				
 				if(fullInput.isEmpty() == false) {
 					String firstName = fullInput.substring(0,fullInput.indexOf(' '));
@@ -101,9 +104,9 @@ public class LoginForm extends JPanel {
 
 					String passgivenBack = Controller.getInstance().giveBackPassword(firstName, lastName);
 					if(passgivenBack.isEmpty())
-						JOptionPane.showMessageDialog(LoginForm.this, "Les informations saisies ne correspondent à aucun utilisateur.");
+						JOptionPane.showMessageDialog(LoginForm.this, "Those informations do not correspond to any account.");
 					else
-						JOptionPane.showMessageDialog(LoginForm.this, "<html>Mot de passe : <strong>"+passgivenBack+"</strong></html>");
+						JOptionPane.showMessageDialog(LoginForm.this, "<html>Password : <strong>"+passgivenBack+"</strong></html>");
 				}
 			}
 		});

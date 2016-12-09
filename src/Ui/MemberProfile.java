@@ -12,12 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Controller.Controller;
+
 public class MemberProfile extends JPanel {
 
 	private static final long serialVersionUID = 1246643824073349692L;
 	private JLabel userIcon;
-	private JLabel lblName;
-	private JLabel lblSurname;
+	private JLabel lblLastname;
+	private JLabel lblFirstname;
 	private JPanel panel;
 	private JPanel panel_1;
 
@@ -53,16 +55,18 @@ public class MemberProfile extends JPanel {
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(2, 1, 10, 10));
 		
-		lblName = new JLabel("Mellul");
-		lblName.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel_1.add(lblName);
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLastname = new JLabel();
+		lblLastname.setText(Controller.getInstance().getCurrentMember().getLastname());
+		lblLastname.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel_1.add(lblLastname);
+		lblLastname.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLastname.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblSurname = new JLabel("David");
-		lblSurname.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel_1.add(lblSurname);
-		lblSurname.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFirstname = new JLabel("David");
+		lblFirstname.setText(Controller.getInstance().getCurrentMember().getLastname());
+		lblFirstname.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel_1.add(lblFirstname);
+		lblFirstname.setHorizontalAlignment(SwingConstants.CENTER);
 		setLayout(groupLayout);
 
 	}
