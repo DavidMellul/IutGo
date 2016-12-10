@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import Controller.Controller;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
 
 public class MemberProfile extends JPanel {
 
@@ -24,6 +26,7 @@ public class MemberProfile extends JPanel {
 	private JPanel panel_1;
 
 	public MemberProfile() {
+		setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		setSize(new Dimension(220, 80));
 		setMinimumSize(new Dimension(220, 80));
 		setMaximumSize(new Dimension(220, 80));
@@ -55,15 +58,15 @@ public class MemberProfile extends JPanel {
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(2, 1, 10, 10));
 		
-		lblLastname = new JLabel("Mellul");
-		//lblLastname.setText(Controller.getInstance().getCurrentMember().getLastname());
+		lblLastname = new JLabel();
+		lblLastname.setText(Controller.getInstance().getCurrentMember().getLastname());
 		lblLastname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblLastname);
 		lblLastname.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLastname.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblFirstname = new JLabel("David");
-		//lblFirstname.setText(Controller.getInstance().getCurrentMember().getLastname());
+		lblFirstname = new JLabel();
+		lblFirstname.setText(Controller.getInstance().getCurrentMember().getFirstname());
 		lblFirstname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblFirstname);
 		lblFirstname.setHorizontalAlignment(SwingConstants.CENTER);

@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 public class Menu extends JPanel {
 
 	private static final long serialVersionUID = 4022492925108809830L;
+	private RelationMenu relationMenu;
 	
 	public Menu() {
 		super();
@@ -32,19 +33,18 @@ public class Menu extends JPanel {
 		
 		JScrollPane searchMenu = new JScrollPane(searchMenuViewport);
 		
-		RelationMenu relationMenu = new RelationMenu();
-		BorderLayout borderLayout = (BorderLayout) relationMenu.getLayout();
-		borderLayout.setVgap(10);
-		borderLayout.setHgap(1);
+		relationMenu = new RelationMenu();
+		BorderLayout bl_relationMenu = (BorderLayout) relationMenu.getLayout();
+		bl_relationMenu.setVgap(10);
+		bl_relationMenu.setHgap(1);
+		
 		WrapLayout wl_searchMenuViewport = new WrapLayout();
 		wl_searchMenuViewport.setAlignment(FlowLayout.LEFT);
 		wl_searchMenuViewport.setVgap(0);
 		wl_searchMenuViewport.setHgap(0);
+		
 		searchMenuViewport.setLayout(wl_searchMenuViewport);
 		searchMenuViewport.add(relationMenu);
-		
-		RelationMenu relationMenu_1 = new RelationMenu();
-		searchMenuViewport.add(relationMenu_1);
 		
 		searchMenu.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		searchMenu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

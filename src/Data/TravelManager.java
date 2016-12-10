@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import Member.Member;
 import Travels.Travel;
 import Utils.Mood;
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
 
 public class TravelManager implements Serializable {
 	

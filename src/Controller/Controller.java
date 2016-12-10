@@ -25,7 +25,6 @@ public class Controller {
 	private Controller() {
 		this.m_members = SerialManager.getAllMembers();
 		this.m_startScreen = new Form();
-		this.m_appScreen = new Application();
 	}
 	public static Controller getInstance() { return m_controller; }
 	
@@ -58,8 +57,13 @@ public class Controller {
 				break;
 			}
 		}
-		if(memberTest != null)
+		if(memberTest != null) {
 			this.m_currentMember = memberTest;
+			this.m_currentMember.recordPosition();
+			this.m_startScreen.dispose();
+			this.m_appScreen = new Application();
+			this.m_appScreen.setVisible(true);
+		}
 		return memberTest != null;
 	}
 	
@@ -77,9 +81,8 @@ public class Controller {
 		this.m_currentMember.setNickname(nick);
 		this.m_currentMember.setFormation(new Formation(formation));
 		this.m_currentMember.setMood(m);
-		this.m_currentMember.setAddress(new Address(m_currentMember, add));
-		SerialManager.save(this.m_currentMember, this.m_currentMember+".dat");
-
+		this.m_currentMember.setAddress(new Address(add));
+		SerialManager.save(this.m_currentMember, this.m_currentMember.getId()+".dat");
 	}
 	
 

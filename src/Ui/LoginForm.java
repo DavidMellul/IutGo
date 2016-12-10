@@ -16,13 +16,11 @@ import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class LoginForm extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1424984070958388055L;
 	private JLabel lblIutGo;
 	private JLabel lblDescription;
@@ -35,16 +33,18 @@ public class LoginForm extends JPanel {
 	
 	JButton btnConnexion;
 	JButton btnMotDePasse;
+	private JLabel label;
 	
 	public LoginForm() {
 		setLayout(null);
-		this.setBackground(new Color(240, 240, 240));
 		this.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.setBounds(0, 40, 640, 440);
 		this.setLayout(null);
 		
-		JLabel lblConnexion = new JLabel("<html>\r\n\tC<br />\r\n\tO<br />\r\n\tN<br />\r\n\tN<br />\r\n\tE<br />\r\n\tC<br />\r\n\tT<br />\r\n</html>");
-		lblConnexion.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
+		JLabel lblConnexion = new JLabel("");
+		lblConnexion.setIcon(new ImageIcon(LoginForm.class.getResource("/Resources/connectSideBar.png")));
+		lblConnexion.setForeground(Color.BLACK);
+		lblConnexion.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		lblConnexion.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 23));
 		lblConnexion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConnexion.setBounds(0, 0, 47, 440);
@@ -74,13 +74,14 @@ public class LoginForm extends JPanel {
 		this.add(fieldPass);
 		
 		btnConnexion = new JButton("Connection");
+		btnConnexion.setBackground(new Color(0, 0, 0));
 		btnConnexion.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 16));
 		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String login = fieldLogin.getText(); String pass = String.valueOf(fieldPass.getPassword());
 				if(!login.isEmpty() && !pass.isEmpty()) {			
 					if(Controller.getInstance().canLogMember(login,pass))
-						JOptionPane.showMessageDialog(LoginForm.this, "Bienvenue dans votre espace.");	
+						JOptionPane.showMessageDialog(LoginForm.this, "Welcome to Iut Go.");	
 					else
 						JOptionPane.showMessageDialog(LoginForm.this, "Incorrect login or password.");			
 				}
@@ -96,7 +97,7 @@ public class LoginForm extends JPanel {
 		btnMotDePasse.setBorder(null);
 		btnMotDePasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String fullInput = JOptionPane.showInputDialog(LoginForm.this, "Please type your firstname and lastname separated by a blank.");
+				String fullInput = JOptionPane.showInputDialog(LoginForm.this, "Please type in your firstname and lastname separated by a blank.");
 				
 				if(fullInput.isEmpty() == false) {
 					String firstName = fullInput.substring(0,fullInput.indexOf(' '));
@@ -122,9 +123,14 @@ public class LoginForm extends JPanel {
 		lblIutGo.setBounds(180, 107, 105, 32);
 		this.add(lblIutGo);
 		
-		lblDescription = new JLabel("Social network based on a geolocated and interconnected world.");
-		lblDescription.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));
-		lblDescription.setBounds(180, 140, 381, 32);
+		lblDescription = new JLabel("A social network based on a geolocated and interconnected world.");
+		lblDescription.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 20));
+		lblDescription.setBounds(180, 140, 402, 32);
 		this.add(lblDescription);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon(LoginForm.class.getResource("/Resources/icone_iutgo.png")));
+		label.setBounds(144, 109, 32, 32);
+		add(label);
 	}
 }

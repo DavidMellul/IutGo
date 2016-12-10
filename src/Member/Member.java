@@ -20,7 +20,7 @@ import Utils.Address;
 import Utils.Formation;
 import Utils.GPSData;
 import Utils.Mood;
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
 
 public class Member implements Serializable{
 	

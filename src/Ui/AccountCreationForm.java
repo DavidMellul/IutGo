@@ -16,6 +16,7 @@ import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 public class AccountCreationForm extends JPanel{
 	private static final long serialVersionUID = -7826705477790848021L;
@@ -54,7 +55,8 @@ public class AccountCreationForm extends JPanel{
 		btnGoBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(btnGoBack);
 		
-		JLabel lblConnexion = new JLabel("<html>\r\n\tR<br />\r\n\tE<br />\r\n\tG<br />\r\n\tI<br />\r\n\tS<br />\r\n\tT<br />\r\n\tE<br />\r\n\tR<br />\r\n</html>");
+		JLabel lblConnexion = new JLabel("");
+		lblConnexion.setIcon(new ImageIcon(AccountCreationForm.class.getResource("/Resources/registerSideBar.png")));
 		lblConnexion.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		lblConnexion.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 23));
 		lblConnexion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -85,6 +87,7 @@ public class AccountCreationForm extends JPanel{
 		this.add(fieldPass);
 		
 		btnCreation = new JButton("Create my account");
+		btnCreation.setBackground(new Color(0, 0, 0));
 		btnCreation.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 16));
 		btnCreation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,7 +102,7 @@ public class AccountCreationForm extends JPanel{
 				}
 			}
 		});
-		btnCreation.setBounds(182, 299, 336, 32);
+		btnCreation.setBounds(252, 299, 223, 32);
 		btnCreation.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.add(btnCreation);
 		

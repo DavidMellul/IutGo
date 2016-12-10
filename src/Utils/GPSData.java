@@ -10,7 +10,7 @@ import java.util.Date;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
 
 public class GPSData implements Comparable<Object>, Serializable {
 	private static final long serialVersionUID = 1710036580140276926L;

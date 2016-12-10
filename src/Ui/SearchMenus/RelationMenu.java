@@ -27,9 +27,6 @@ public class RelationMenu extends JPanel {
 	private JCheckBox partyMood;
 	private JLabel lblMood;
 
-	/**
-	 * Create the panel.
-	 */
 	public RelationMenu() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -56,14 +53,15 @@ public class RelationMenu extends JPanel {
 				firePropertyChange("toto", false, false);
 			}
 		});
-		headerPanel.add(relationCheckbox);
 		
+		headerPanel.add(relationCheckbox);
+
 		searchFilters = new JPanel();
 		add(searchFilters, BorderLayout.CENTER);
 		searchFilters.setLayout(new BorderLayout(0, 0));
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Amis", "Parent", "Frères"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Friends", "Parents", "Brothers"}));
 		searchFilters.add(comboBox, BorderLayout.SOUTH);
 		
 		lblMood = new JLabel("Mood");
@@ -103,7 +101,8 @@ public class RelationMenu extends JPanel {
 		partyMood.setHorizontalTextPosition(SwingConstants.CENTER);
 		partyMood.setHorizontalAlignment(SwingConstants.CENTER);
 		moodPanel.add(partyMood);
-
+		
+		
 	}
 
 }

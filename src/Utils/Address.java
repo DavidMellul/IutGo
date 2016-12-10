@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import Member.Member;
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
 
 public class Address implements Serializable{
 	private static final long serialVersionUID = -7530102637176081952L;
@@ -28,7 +28,7 @@ public class Address implements Serializable{
         this.m_name = "undefined";
     }
     
-    public Address(Member m, String name) { this.m_member = m; this.m_name = name; }
+    public Address(String name) { this.m_name = name; }
 
     public  double distanceWith ( Address adress2) {
         Coordinate c1 = this.m_coordinateGps;

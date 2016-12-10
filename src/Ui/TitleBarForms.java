@@ -17,6 +17,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
 import javax.swing.SwingConstants;
+import java.awt.Cursor;
 
 public class TitleBarForms extends JPanel {
 	/**
@@ -55,12 +56,16 @@ public class TitleBarForms extends JPanel {
 		buttonPanel.add(minusPanel);
 		
 		labelMinus = new JLabel("\uF068");
+		labelMinus.setBackground(new Color(204, 255, 255));
+		labelMinus.setToolTipText("Iconify");
+		labelMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelMinus.setHorizontalAlignment(SwingConstants.CENTER);
 		labelMinus.setHorizontalTextPosition(SwingConstants.CENTER);
 		labelMinus.setFont(new Font("FontAwesome", Font.PLAIN, 22));
 		
 		
 		btnMinus = new JButton();
+		btnMinus.setBorder(null);
 		btnMinus.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnMinus.setContentAreaFilled(false);
 		btnMinus.setOpaque(false);
@@ -89,6 +94,10 @@ public class TitleBarForms extends JPanel {
 		labelCroix.setFont(new Font("FontAwesome", Font.BOLD, 24));
 		
 		btnClose = new JButton();
+		btnClose.setBorder(null);
+		btnClose.setBackground(new Color(204, 255, 255));
+		btnClose.setToolTipText("Quit");
+		btnClose.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClose.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnClose.setContentAreaFilled(false);
 		btnClose.setOpaque(false);

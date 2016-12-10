@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
 
 public class InterestPoint implements Serializable{
 	private static final long serialVersionUID = 5837365909344441417L;

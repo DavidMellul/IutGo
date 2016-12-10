@@ -17,7 +17,7 @@ import com.maxmind.geoip.LookupService;
 
 import Member.Member;
 import Utils.GPSData;
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
 
 public class GPSManager implements Serializable {
 	private static final long serialVersionUID = -3892867060303029823L;

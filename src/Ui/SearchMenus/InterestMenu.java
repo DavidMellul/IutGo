@@ -15,10 +15,8 @@ public class InterestMenu extends JPanel {
 
 	private static final long serialVersionUID = -102475531927956419L;
 	private JPanel searchFilters;
+ 
 
-	/**
-	 * Create the panel.
-	 */
 	public InterestMenu() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -40,6 +38,7 @@ public class InterestMenu extends JPanel {
 				}
 				repaint();
 				doLayout();
+				firePropertyChange("toto", false, false);
 			}
 		});
 		headerPanel.add(interestCheckbox);

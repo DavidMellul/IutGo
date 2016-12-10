@@ -71,7 +71,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(lblNickname);
 		
 		fieldNickname = new JTextField();
-		//fieldNickname.setText(Controller.getInstance().getCurrentMember().getNickname());
+		fieldNickname.setText(Controller.getInstance().getCurrentMember().getNickname());
 		fieldNickname.setBounds(76, 92, 110, 20);
 		add(fieldNickname);
 		fieldNickname.setColumns(10);
@@ -87,7 +87,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(lblAddress);
 		
 		fieldAddress = new JTextField();
-		//fieldAddress.setText(Controller.getInstance().getCurrentMember().getAddress().toString());
+		fieldAddress.setText(Controller.getInstance().getCurrentMember().getAddress().toString());
 		fieldAddress.setBounds(76, 128, 110, 20);
 		add(fieldAddress);
 		fieldAddress.setColumns(10);
@@ -98,7 +98,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(lblFormation);
 		
 		fieldFormation = new JTextField();
-		//fieldFormation.setText(Controller.getInstance().getCurrentMember().getFormation().toString());
+		fieldFormation.setText(Controller.getInstance().getCurrentMember().getFormation().toString());
 		fieldFormation.setBounds(293, 128, 128, 20);
 		add(fieldFormation);
 		fieldFormation.setColumns(10);
@@ -114,13 +114,14 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 				String address = fieldAddress.getText();
 				Mood m = moodSelected;
 				Controller.getInstance().fillInformationsForMember(nickname, formation, m, address);
+				btnQuit.doClick();
 			}
 		});
 		add(btnConfirm);
 		
 		this.panelProfile = new MemberProfile();
-		panelProfile.setBorder(null);
-		panelProfile.setBounds(1, 1, 448, 80);
+		panelProfile.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
+		panelProfile.setBounds(1, 1, 447, 80);
 		add(this.panelProfile);
 		
 		checkHappy = new JCheckBox("");

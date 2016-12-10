@@ -147,4 +147,8 @@ public class MapController extends JMapController implements MouseListener, Mous
         String os = System.getProperty("os.name");
         return os != null && os.toLowerCase(Locale.ENGLISH).startsWith("mac os x");
     }
+    
+    public void showAndFitOnCurrentPosition() {
+    	// A remplir avec le code présent dans Application.java
+    }
 }

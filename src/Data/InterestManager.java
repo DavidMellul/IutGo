@@ -5,7 +5,8 @@ import java.util.Iterator;
 
 import Interests.InterestPoint;
 import Interests.Lodging;
-import fr.unice.iut.info.methodo.maps.Coordinate;
+import Utils.Coordinate;
+
 
 public class InterestManager {
 	ArrayList<InterestPoint> m_piList;
