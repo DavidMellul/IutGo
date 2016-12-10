@@ -60,4 +60,19 @@ public class Util {
 			ic = new ImageIcon(bi);
 			return ic;
 	}
+	 
+	 public static Mood decodeMood(String s) {
+		 switch(s) {
+		 	case "HAPPY":
+		 		return Mood.HAPPY;
+		 	case "SAD":
+		 		return Mood.SAD;
+		 	case "PARTY":
+		 		return Mood.PARTY;
+		 	case "CALM":
+		 		return Mood.CALM;
+		 	default: break;
+		 }
+		 return Mood.NO_SPECIAL_MOOD;
+	 }
 }

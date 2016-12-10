@@ -13,18 +13,22 @@ public class Address implements Serializable{
     private Member m_member;
     private Formation m_formation;
     private ArrayList<Member> listAddress= new ArrayList<Member>();
+    private String m_name;
 
     public Address(Member member, Coordinate coordinateGps) {
         this.m_member = member;
         this.m_coordinateGps = coordinateGps;
         this.m_formation = new Formation();
-
+        this.m_name = "undefined";
     }
 
     public Address() {
         this.m_member=null;
         this.m_coordinateGps=null;
+        this.m_name = "undefined";
     }
+    
+    public Address(Member m, String name) { this.m_member = m; this.m_name = name; }
 
     public  double distanceWith ( Address adress2) {
         Coordinate c1 = this.m_coordinateGps;
@@ -87,4 +91,7 @@ public class Address implements Serializable{
     public void setFormation(Formation formation) {
         this.m_formation = formation;
     }
+    
+    @Override 
+    public String toString() { return this.m_name; }
 }

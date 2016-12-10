@@ -15,6 +15,8 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
+import Ui.EditMenus.AccountEditionForm;
+
 @SuppressWarnings("serial")
 public class Form extends JFrame {
 
@@ -92,7 +94,7 @@ public class Form extends JFrame {
 		getContentPane().add(panelCreation);
 		
 		
-		btnCrerUnCompte = new JButton("Cr\u00E9er un compte");
+		btnCrerUnCompte = new JButton("Create an account");
 		btnCrerUnCompte.setFocusPainted(false);
 		btnCrerUnCompte.setBorder(null);
 		btnCrerUnCompte.setBounds(340, 298, 135, 23);
