@@ -1,3 +1,5 @@
+package Ui.SearchMenus;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -21,78 +23,57 @@ public class RelationMenu extends AbstractMenu {
 	private JCheckBox m_partyMood;
 	private JLabel m_lblMood;
 
+	/**
+	 * Create the panel.
+	 */
 	public RelationMenu() {
 		super("Search for relations", false);
-		JPanel headerPanel = new JPanel();
-		add(headerPanel, BorderLayout.NORTH);
-		headerPanel.setLayout(new BorderLayout(0, 0));
 		
-		JCheckBox relationCheckbox = new JCheckBox("Search for relations");
-		relationCheckbox.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_checkbox_ticked.png")));
-		relationCheckbox.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_checkbox_untick.png")));
-		relationCheckbox.setAlignmentX(Component.CENTER_ALIGNMENT);
-		relationCheckbox.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
-		relationCheckbox.setHorizontalAlignment(SwingConstants.LEFT);
-		relationCheckbox.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if(relationCheckbox.isSelected()){
-					searchFilters.setVisible(true);
-				}else{
-					searchFilters.setVisible(false);
-				}
-				repaint();
-				doLayout();
-				firePropertyChange("toto", false, false);
-			}
-		});
-		
-		headerPanel.add(relationCheckbox);
+	}
 
-		searchFilters = new JPanel();
-		add(searchFilters, BorderLayout.CENTER);
-		searchFilters.setLayout(new BorderLayout(0, 0));
+	@Override
+	protected void initialize() {
+		m_comboBox = new JComboBox<String>();
+		m_comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Amis", "Parent", "Frères"}));
+		m_searchFilters.add(m_comboBox, BorderLayout.SOUTH);
 		
-		comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Friends", "Parents", "Brothers"}));
-		searchFilters.add(comboBox, BorderLayout.SOUTH);
+		m_lblMood = new JLabel("Mood");
+		m_lblMood.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		m_lblMood.setHorizontalTextPosition(SwingConstants.CENTER);
+		m_lblMood.setHorizontalAlignment(SwingConstants.CENTER);
+		m_searchFilters.add(m_lblMood, BorderLayout.NORTH);
 		
-		lblMood = new JLabel("Mood");
-		lblMood.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMood.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblMood.setHorizontalAlignment(SwingConstants.CENTER);
-		searchFilters.add(lblMood, BorderLayout.NORTH);
+		m_moodPanel = new JPanel();
+		m_searchFilters.add(m_moodPanel, BorderLayout.CENTER);
+		m_moodPanel.setLayout(new GridLayout(1, 4, 10, 10));
 		
-		moodPanel = new JPanel();
-		searchFilters.add(moodPanel, BorderLayout.CENTER);
-		moodPanel.setLayout(new GridLayout(1, 4, 10, 10));
+		m_calmMood = new JCheckBox("");
+		m_calmMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_calm.png")));
+		m_calmMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_calm_u.png")));
+		m_calmMood.setHorizontalTextPosition(SwingConstants.CENTER);
+		m_calmMood.setHorizontalAlignment(SwingConstants.CENTER);
+		m_moodPanel.add(m_calmMood);
 		
-		calmMood = new JCheckBox("");
-		calmMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_calm.png")));
-		calmMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_calm_u.png")));
-		calmMood.setHorizontalTextPosition(SwingConstants.CENTER);
-		calmMood.setHorizontalAlignment(SwingConstants.CENTER);
-		moodPanel.add(calmMood);
+		m_happyMood = new JCheckBox("");
+		m_happyMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_happy.png")));
+		m_happyMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_happy_u.png")));
+		m_happyMood.setHorizontalTextPosition(SwingConstants.CENTER);
+		m_happyMood.setHorizontalAlignment(SwingConstants.CENTER);
+		m_moodPanel.add(m_happyMood);
 		
-		happyMood = new JCheckBox("");
-		happyMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_happy.png")));
-		happyMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_happy_u.png")));
-		happyMood.setHorizontalTextPosition(SwingConstants.CENTER);
-		happyMood.setHorizontalAlignment(SwingConstants.CENTER);
-		moodPanel.add(happyMood);
+		m_sadMood = new JCheckBox("");
+		m_sadMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_sad.png")));
+		m_sadMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_sad_u.png")));
+		m_sadMood.setHorizontalTextPosition(SwingConstants.CENTER);
+		m_sadMood.setHorizontalAlignment(SwingConstants.CENTER);
+		m_moodPanel.add(m_sadMood);
 		
-		sadMood = new JCheckBox("");
-		sadMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_sad.png")));
-		sadMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_sad_u.png")));
-		sadMood.setHorizontalTextPosition(SwingConstants.CENTER);
-		sadMood.setHorizontalAlignment(SwingConstants.CENTER);
-		moodPanel.add(sadMood);
-		
-		partyMood = new JCheckBox("");
-		partyMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_party.png")));
-		partyMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_party_u.png")));
-		partyMood.setHorizontalTextPosition(SwingConstants.CENTER);
-		partyMood.setHorizontalAlignment(SwingConstants.CENTER);
-		moodPanel.add(partyMood);
-		
-		
+		m_partyMood = new JCheckBox("");
+		m_partyMood.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_party.png")));
+		m_partyMood.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_smiley_party_u.png")));
+		m_partyMood.setHorizontalTextPosition(SwingConstants.CENTER);
+		m_partyMood.setHorizontalAlignment(SwingConstants.CENTER);
+		m_moodPanel.add(m_partyMood);
+	}
+
+}

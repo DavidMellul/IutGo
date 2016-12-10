@@ -2,6 +2,7 @@ package Ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,25 +18,21 @@ import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
-import Controller.MapController;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.SearchMenus.Menu;
-<<<<<<< HEAD
-import Utils.Util;
 import Utils.Coordinate;
+import Utils.Util;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 import fr.unice.iut.info.methodo.maps.interfaces.ICoordinate;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
-=======
->>>>>>> refs/remotes/origin/master
+
 
 public class Application extends JFrame {
 
 	private static final long serialVersionUID = 773127820785648597L;
 
 	private MapInterfaceTree m_mapViewer;
-<<<<<<< HEAD
-	private Menu menu;
+	private Menu m_menu;
 	private AccountEditionForm m_editionPanel;
 	
 	JLabel lblFocusOnMember;
@@ -45,9 +42,6 @@ public class Application extends JFrame {
 	private JButton btnEditAccount;
 	private JLabel lblAddFriend;
 	private JButton btnAddFriend;
-=======
-	private Menu m_menu;
->>>>>>> refs/remotes/origin/master
 	
 	public Application() {
 		super("Iut Go");
@@ -59,36 +53,24 @@ public class Application extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-<<<<<<< HEAD
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-=======
->>>>>>> refs/remotes/origin/master
 		setResizable(false);
 		
 		
-<<<<<<< HEAD
-		menu = new Menu();
-		menu.setPreferredSize(new Dimension(195, 600));
-		menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
-=======
 		m_menu = new Menu();
 		m_menu.setPreferredSize(new Dimension(195, 600));
-		
-		getContentPane().add(m_mapViewer, BorderLayout.CENTER);
-		getContentPane().add(m_menu, BorderLayout.WEST);
->>>>>>> refs/remotes/origin/master
+		m_menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		
 		TitleBarForms titleBarForms = new TitleBarForms();
 		getContentPane().add(titleBarForms, BorderLayout.NORTH);
-<<<<<<< HEAD
 				
 		m_mapViewer = new MapInterfaceTree("Go");
 		
-		getContentPane().add(menu, BorderLayout.WEST);
+		getContentPane().add(m_menu, BorderLayout.WEST);
 		getContentPane().add(m_mapViewer, BorderLayout.CENTER);
 		
 		btnFocusCurrentLocation = new JButton("");
@@ -105,8 +87,8 @@ public class Application extends JFrame {
 				// Pas fait car je ne sais pas si tu aurais accepté que je transforme ton mapController en pattern singleton.
 				Coordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getCoordinate();
 				MapMarker markerCurrLocation = new MapMarkerDot(Color.BLUE, currLocation.getLat(), currLocation.getLon());
-				m_mapViewer.map.addMapMarker(markerCurrLocation);
-				m_mapViewer.map.setDisplayPosition((ICoordinate) currLocation, 19);
+				m_mapViewer.getViewer().addMapMarker(markerCurrLocation);
+				m_mapViewer.getViewer().setDisplayPosition((ICoordinate) currLocation, 19);
 			}
 		});
 		btnFocusCurrentLocation.addMouseListener(new MouseAdapter() {
@@ -163,21 +145,21 @@ public class Application extends JFrame {
 			public void mouseExited(MouseEvent me) { lblAddFriend.setIcon(Util.brighten(lblAddFriend.getIcon())); }	
 		});
 		
-		m_mapViewer.map.add(btnAddFriend);
+		m_mapViewer.getViewer().add(btnAddFriend);
 		
-		m_mapViewer.map.add(btnEditAccount);
-		m_mapViewer.map.add(btnFocusCurrentLocation);
+		m_mapViewer.getViewer().add(btnEditAccount);
+		m_mapViewer.getViewer().add(btnFocusCurrentLocation);
 		
 		lblFocusOnMember = new JLabel("");
 		lblFocusOnMember.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_currLocation.png")));
 		lblFocusOnMember.setFont(new Font("FontAwesome", Font.PLAIN, 19));
 		lblFocusOnMember.setBounds(10, 526, 32, 34);
-		m_mapViewer.map.add(lblFocusOnMember);
+		m_mapViewer.getViewer().add(lblFocusOnMember);
 		
 		lblEditAccount = new JLabel("");
 		lblEditAccount.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_editAccount.png")));
 		lblEditAccount.setBounds(741, 11, 32, 32);
-		m_mapViewer.map.add(lblEditAccount);
+		m_mapViewer.getViewer().add(lblEditAccount);
 		
 		m_editionPanel = new AccountEditionForm();
 		m_editionPanel.setLocation(m_mapViewer.getX()+this.getWidth(), m_mapViewer.getY());
@@ -197,30 +179,15 @@ public class Application extends JFrame {
 				}).start();	
 			}
 		});
-		m_mapViewer.map.add(m_editionPanel);
+		m_mapViewer.getViewer().add(m_editionPanel);
 		
 		lblAddFriend = new JLabel("");
 		lblAddFriend.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_addFriend.png")));
 		lblAddFriend.setBounds(741, 52, 32, 32);
-		m_mapViewer.map.add(lblAddFriend);
-=======
-	}
-	
-	public static void main(String[] args){
-		new Application().setVisible(true);
-	}
-	
-	public MapInterfaceTree getMapViewer(){
-		return m_mapViewer;
->>>>>>> refs/remotes/origin/master
+		m_mapViewer.getViewer().add(lblAddFriend);
 	}
 	
 	public Menu getMenu(){
 		return m_menu;
 	}
 }
-<<<<<<< HEAD
-
-	
-=======
->>>>>>> refs/remotes/origin/master
