@@ -6,6 +6,9 @@ import Data.SerialManager;
 import Member.Member;
 import Ui.Application;
 import Ui.Form;
+import Utils.Address;
+import Utils.Formation;
+import Utils.Mood;
 
 public class Controller {
 	// ----------------------------------------- Modèle --------------------------------------
@@ -68,6 +71,15 @@ public class Controller {
 					{ passToGive = m.getPassword(); break; }
 		}
 		return passToGive;
+	}
+	
+	public void fillInformationsForMember(String nick, String formation, Mood m, String add) {
+		this.m_currentMember.setNickname(nick);
+		this.m_currentMember.setFormation(new Formation(formation));
+		this.m_currentMember.setMood(m);
+		this.m_currentMember.setAddress(new Address(m_currentMember, add));
+		SerialManager.save(this.m_currentMember, this.m_currentMember+".dat");
+
 	}
 	
 

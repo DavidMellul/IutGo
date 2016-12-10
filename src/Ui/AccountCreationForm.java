@@ -29,9 +29,9 @@ public class AccountCreationForm extends JPanel{
 	private JButton btnCreation;
 	private JLabel lblConfirmationDuMot;
 	private JLabel lblNom;
-	private JTextField fieldNom;
+	private JTextField fieldLastname;
 	private JLabel lblPrenom;
-	private JTextField fieldPrenom;
+	private JTextField fieldFirstname;
 	private JLabel lblRegisterToIut;
 	private JLabel lblArrowBack;
 	private JLabel lblGoBack;
@@ -90,8 +90,9 @@ public class AccountCreationForm extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				String login = fieldLogin.getText(); String pass = String.valueOf(fieldPass.getPassword()); String confirm = String.valueOf(fieldConfirm.getPassword());
 				if(!login.isEmpty() && !pass.isEmpty() && confirm.equals(pass)) {
-					Controller.getInstance().registerMember(login,pass,fieldNom.getText(),fieldPrenom.getText());
+					Controller.getInstance().registerMember(login,pass,fieldLastname.getText(),fieldFirstname.getText());
 					btnGoBack.doClick();
+					fieldLogin.setText(""); fieldPass.setText(""); fieldConfirm.setText(""); fieldLastname.setText(""); fieldFirstname.setText("");
 				}
 				else {
 					JOptionPane.showMessageDialog(AccountCreationForm.this, "Please fill in all the required informations.");
@@ -119,22 +120,22 @@ public class AccountCreationForm extends JPanel{
 		lblNom.setBounds(180, 163, 74, 20);
 		add(lblNom);
 		
-		fieldNom = new JTextField();
-		fieldNom.setToolTipText("");
-		fieldNom.setColumns(10);
-		fieldNom.setBounds(252, 164, 84, 20);
-		add(fieldNom);
+		fieldLastname = new JTextField();
+		fieldLastname.setToolTipText("");
+		fieldLastname.setColumns(10);
+		fieldLastname.setBounds(252, 164, 84, 20);
+		add(fieldLastname);
 		
 		lblPrenom = new JLabel("First name");
 		lblPrenom.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));
 		lblPrenom.setBounds(346, 163, 62, 20);
 		add(lblPrenom);
 		
-		fieldPrenom = new JTextField();
-		fieldPrenom.setToolTipText("");
-		fieldPrenom.setColumns(10);
-		fieldPrenom.setBounds(414, 164, 61, 20);
-		add(fieldPrenom);
+		fieldFirstname = new JTextField();
+		fieldFirstname.setToolTipText("");
+		fieldFirstname.setColumns(10);
+		fieldFirstname.setBounds(414, 164, 61, 20);
+		add(fieldFirstname);
 		
 		lblRegisterToIut = new JLabel("Register to Iut Go and join all your friends, we can build something together.");
 		lblRegisterToIut.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));

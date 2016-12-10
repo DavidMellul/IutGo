@@ -13,7 +13,9 @@ public class Formation implements Serializable{
     private String m_formationName;
 
     public Formation() { this.m_listMembers = new ArrayList<Member>(); this.m_formationName = "undefined";}
-
+    
+    public Formation(String name) { this.m_formationName = name; this.m_listMembers = new ArrayList<Member>(); }
+    
     public Formation(ArrayList<Member> listMembers, String formationName) {
         this.m_listMembers = listMembers;
         this.m_formationName = formationName;
@@ -52,5 +54,7 @@ public class Formation implements Serializable{
     public void setFormationName(String formationName) {
         this.m_formationName = formationName;
     }
-
+    
+    @Override
+    public String toString() { return this.m_formationName; }
 }

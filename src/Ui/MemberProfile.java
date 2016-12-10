@@ -55,15 +55,15 @@ public class MemberProfile extends JPanel {
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(2, 1, 10, 10));
 		
-		lblLastname = new JLabel();
-		lblLastname.setText(Controller.getInstance().getCurrentMember().getLastname());
+		lblLastname = new JLabel("Mellul");
+		//lblLastname.setText(Controller.getInstance().getCurrentMember().getLastname());
 		lblLastname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblLastname);
 		lblLastname.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLastname.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		lblFirstname = new JLabel("David");
-		lblFirstname.setText(Controller.getInstance().getCurrentMember().getLastname());
+		//lblFirstname.setText(Controller.getInstance().getCurrentMember().getLastname());
 		lblFirstname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblFirstname);
 		lblFirstname.setHorizontalAlignment(SwingConstants.CENTER);

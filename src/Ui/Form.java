@@ -15,6 +15,8 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
+import Ui.EditMenus.AccountEditionForm;
+
 @SuppressWarnings("serial")
 public class Form extends JFrame {
 
