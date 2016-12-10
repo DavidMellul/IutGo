@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package Ui;
 
 import java.awt.BorderLayout;
@@ -21,17 +20,21 @@ import Controller.Controller;
 import Controller.MapController;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.SearchMenus.Menu;
+<<<<<<< HEAD
 import Utils.Util;
 import Utils.Coordinate;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 import fr.unice.iut.info.methodo.maps.interfaces.ICoordinate;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
+=======
+>>>>>>> refs/remotes/origin/master
 
 public class Application extends JFrame {
 
 	private static final long serialVersionUID = 773127820785648597L;
 
 	private MapInterfaceTree m_mapViewer;
+<<<<<<< HEAD
 	private Menu menu;
 	private AccountEditionForm m_editionPanel;
 	
@@ -42,10 +45,12 @@ public class Application extends JFrame {
 	private JButton btnEditAccount;
 	private JLabel lblAddFriend;
 	private JButton btnAddFriend;
+=======
+	private Menu m_menu;
+>>>>>>> refs/remotes/origin/master
 	
 	public Application() {
 		super("Iut Go");
-		
 		initialize();
 	}
 	
@@ -54,20 +59,32 @@ public class Application extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+<<<<<<< HEAD
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+=======
+>>>>>>> refs/remotes/origin/master
 		setResizable(false);
 		
 		
+<<<<<<< HEAD
 		menu = new Menu();
 		menu.setPreferredSize(new Dimension(195, 600));
 		menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
+=======
+		m_menu = new Menu();
+		m_menu.setPreferredSize(new Dimension(195, 600));
+		
+		getContentPane().add(m_mapViewer, BorderLayout.CENTER);
+		getContentPane().add(m_menu, BorderLayout.WEST);
+>>>>>>> refs/remotes/origin/master
 		
 		TitleBarForms titleBarForms = new TitleBarForms();
 		getContentPane().add(titleBarForms, BorderLayout.NORTH);
+<<<<<<< HEAD
 				
 		m_mapViewer = new MapInterfaceTree("Go");
 		
@@ -186,11 +203,24 @@ public class Application extends JFrame {
 		lblAddFriend.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_addFriend.png")));
 		lblAddFriend.setBounds(741, 52, 32, 32);
 		m_mapViewer.map.add(lblAddFriend);
+=======
+	}
+	
+	public static void main(String[] args){
+		new Application().setVisible(true);
+	}
+	
+	public MapInterfaceTree getMapViewer(){
+		return m_mapViewer;
+>>>>>>> refs/remotes/origin/master
 	}
 	
 	public Menu getMenu(){
 		return m_menu;
 	}
 }
+<<<<<<< HEAD
 
 	
+=======
+>>>>>>> refs/remotes/origin/master

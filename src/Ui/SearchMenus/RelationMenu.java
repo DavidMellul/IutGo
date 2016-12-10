@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -10,24 +9,20 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-public class RelationMenu extends JPanel {
+public class RelationMenu extends AbstractMenu {
 
-	private static final long serialVersionUID = -5164242424023505183L;
-	private JPanel searchFilters;
-	private JComboBox<String> comboBox;
-	private JPanel moodPanel;
-	private JCheckBox calmMood;
-	private JCheckBox happyMood;
-	private JCheckBox sadMood;
-	private JCheckBox partyMood;
-	private JLabel lblMood;
+	private static final long serialVersionUID = -2909777947917236544L;
+	private JComboBox<String> m_comboBox;
+	private JPanel m_moodPanel;
+	private JCheckBox m_calmMood;
+	private JCheckBox m_happyMood;
+	private JCheckBox m_sadMood;
+	private JCheckBox m_partyMood;
+	private JLabel m_lblMood;
 
 	public RelationMenu() {
-		setLayout(new BorderLayout(0, 0));
-		
+		super("Search for relations", false);
 		JPanel headerPanel = new JPanel();
 		add(headerPanel, BorderLayout.NORTH);
 		headerPanel.setLayout(new BorderLayout(0, 0));
@@ -101,6 +96,3 @@ public class RelationMenu extends JPanel {
 		moodPanel.add(partyMood);
 		
 		
-	}
-
-}
