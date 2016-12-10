@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package Ui;
 
 import java.awt.BorderLayout;
@@ -62,7 +63,11 @@ public class Application extends JFrame {
 		
 		
 		menu = new Menu();
+		menu.setPreferredSize(new Dimension(195, 600));
 		menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		
+		TitleBarForms titleBarForms = new TitleBarForms();
+		getContentPane().add(titleBarForms, BorderLayout.NORTH);
 				
 		m_mapViewer = new MapInterfaceTree("Go");
 		
@@ -182,4 +187,10 @@ public class Application extends JFrame {
 		lblAddFriend.setBounds(741, 52, 32, 32);
 		m_mapViewer.map.add(lblAddFriend);
 	}
+	
+	public Menu getMenu(){
+		return m_menu;
+	}
 }
+
+	
