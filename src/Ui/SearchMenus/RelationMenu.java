@@ -53,6 +53,7 @@ public class RelationMenu extends JPanel {
 				}
 				repaint();
 				doLayout();
+				firePropertyChange("toto", false, false);
 			}
 		});
 		headerPanel.add(relationCheckbox);

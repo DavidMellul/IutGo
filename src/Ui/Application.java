@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import Ui.SearchMenus.Menu;
+import java.awt.Dialog.ModalExclusionType;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class Application extends JFrame {
 
@@ -19,8 +22,9 @@ public class Application extends JFrame {
 	}
 	
 	private void initialize(){
+		setUndecorated(true);
 		setSize(1000,600);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 		setDefaultLookAndFeelDecorated(true);
 		setResizable(false);
@@ -28,11 +32,15 @@ public class Application extends JFrame {
 		m_mapViewer = new MapInterfaceTree("Go");
 		
 		Menu menu = new Menu();
-		Dimension menuDimensions = new Dimension(220, 600);
+		Dimension menuDimensions = new Dimension(195, 600);
 		menu.setPreferredSize(menuDimensions);
 		
 		getContentPane().add(m_mapViewer, BorderLayout.CENTER);
 		getContentPane().add(menu, BorderLayout.WEST);
+		
+		TitleBarForms titleBarForms = new TitleBarForms();
+		getContentPane().add(titleBarForms, BorderLayout.NORTH);
+		
 	}
 	
 	public static void main(String[] args){
