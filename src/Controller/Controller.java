@@ -79,8 +79,5 @@ public class Controller {
 		this.m_currentMember.setMood(m);
 		this.m_currentMember.setAddress(new Address(m_currentMember, add));
 		SerialManager.save(this.m_currentMember, this.m_currentMember+".dat");
-
 	}
-	
-
 }

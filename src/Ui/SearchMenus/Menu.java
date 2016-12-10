@@ -6,9 +6,9 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SpringLayout;
 
 import Ui.MemberProfile;
-import java.awt.FlowLayout;
 
 public class Menu extends JPanel {
 
@@ -16,6 +16,7 @@ public class Menu extends JPanel {
 	
 	public Menu() {
 		super();
+		setBorder(null);
 		initialize();
 	}
 	
@@ -26,25 +27,28 @@ public class Menu extends JPanel {
 		add(memberProfile, BorderLayout.NORTH);
 		
 		JPanel searchMenuViewport = new JPanel();
-		searchMenuViewport.setSize(new Dimension(220, 520));
-		searchMenuViewport.setMinimumSize(new Dimension(220, 520));
-		searchMenuViewport.setMaximumSize(new Dimension(220, 520));
+		searchMenuViewport.setBorder(null);
+		searchMenuViewport.setSize(new Dimension(195, 520));
+		searchMenuViewport.setMinimumSize(new Dimension(195, 520));
+		searchMenuViewport.setMaximumSize(new Dimension(195, 520));
 		
 		JScrollPane searchMenu = new JScrollPane(searchMenuViewport);
+		searchMenu.setViewportBorder(null);
+		SpringLayout sl_searchMenuViewport = new SpringLayout();
+		searchMenuViewport.setLayout(sl_searchMenuViewport);
 		
 		RelationMenu relationMenu = new RelationMenu();
-		BorderLayout borderLayout = (BorderLayout) relationMenu.getLayout();
-		borderLayout.setVgap(10);
-		borderLayout.setHgap(1);
-		WrapLayout wl_searchMenuViewport = new WrapLayout();
-		wl_searchMenuViewport.setAlignment(FlowLayout.LEFT);
-		wl_searchMenuViewport.setVgap(0);
-		wl_searchMenuViewport.setHgap(0);
-		searchMenuViewport.setLayout(wl_searchMenuViewport);
+		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, relationMenu, 0, SpringLayout.NORTH, searchMenuViewport);
+		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, relationMenu, 0, SpringLayout.WEST, searchMenuViewport);
+		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, relationMenu, 0, SpringLayout.EAST, searchMenuViewport);
 		searchMenuViewport.add(relationMenu);
 		
-		RelationMenu relationMenu_1 = new RelationMenu();
-		searchMenuViewport.add(relationMenu_1);
+		InterestMenu interestMenu = new InterestMenu();
+		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, interestMenu, 6, SpringLayout.SOUTH, relationMenu);
+		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, interestMenu, 0, SpringLayout.WEST, searchMenuViewport);
+		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, interestMenu, 0, SpringLayout.EAST, relationMenu);
+		searchMenuViewport.add(interestMenu);
+		
 		
 		searchMenu.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		searchMenu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
