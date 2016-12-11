@@ -71,10 +71,6 @@ public class Application extends JFrame {
 			e1.printStackTrace();
 		}
 		setResizable(false);
-		getRootPane().registerKeyboardAction(e -> {
-            Application.this.dispose();
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
-		
 		
 		m_menu = new Menu();
 		m_menu.setPreferredSize(new Dimension(195, 600));
@@ -117,7 +113,12 @@ public class Application extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Application.this.setState(ICONIFIED);
 			}
-		});		
+		});	
+		
+		getRootPane().registerKeyboardAction(e -> {
+            titleBarForms.getBtnClose().doClick();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+		
 		getContentPane().add(titleBarForms, BorderLayout.NORTH);
 				
 		m_mapViewer = new MapInterfaceTree("Go");

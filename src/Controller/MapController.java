@@ -1,8 +1,11 @@
 package Controller;
 
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -43,6 +46,11 @@ public class MapController extends JMapController implements MouseListener, Mous
 	private boolean wheelZoomEnabled = true;
 	
 	private Layer m_layerRelations;
+	
+	private static final Style m_relationStyle = new Style(Color.BLACK, Color.BLUE, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
+	private static final Style m_interestStyle = new Style(Color.BLACK, Color.RED, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
+	private static final Style m_carpoolingStyle = new Style(Color.BLACK, Color.GREEN, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
+	private static final Style m_formationStyle = new Style(Color.BLACK, Color.YELLOW, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
 
 	public MapController(JMapViewer map) {
 		super(map);
@@ -188,7 +196,7 @@ public class MapController extends JMapController implements MouseListener, Mous
     	for(Member m : myRelations) {
 	    		MyCoordinate mC = m.getLastPosition().getMyCoordinate();
 	    		Coordinate OSMC = new Coordinate(mC.getLat(),mC.getLon());
-	    		MapMarker relationMarker = new MapMarkerDot(m_layerRelations, m.getFirstname(), OSMC, new Style());
+	    		MapMarker relationMarker = new MapMarkerDot(m_layerRelations, m.getFirstname(), OSMC, m_relationStyle);
 	    		m_layerRelations.add(relationMarker);
     		}    
     	}
