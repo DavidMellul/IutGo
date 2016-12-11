@@ -106,7 +106,9 @@ public class MapController extends JMapController implements MouseListener, Mous
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (wheelZoomEnabled) {
 			int rotation = JMapViewer.zoomReverseWheel ? -e.getWheelRotation() : e.getWheelRotation();
-			map.setZoom(map.getZoom() - rotation, e.getPoint());
+			if(map.getZoom() - rotation >= 2){
+				map.setZoom(map.getZoom() - rotation, e.getPoint());
+			}
 		}
 	}
 	
