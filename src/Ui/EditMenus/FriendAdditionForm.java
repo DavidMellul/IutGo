@@ -20,6 +20,8 @@ import Controller.Controller;
 import Ui.LogBar;
 
 public class FriendAdditionForm extends JPanel {
+	
+	private static final long serialVersionUID = 5307060975053879750L;
 	private JTextField fieldMember;
 	private JComboBox<String> comboBox;
 	private JLabel lblMember;

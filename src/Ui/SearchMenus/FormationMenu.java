@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class FormationMenu extends AbstractMenu {
+	
+	private static final long serialVersionUID = 6299597706697062032L;
 	private JTextField m_name;
 	private JLabel m_lblName;
 

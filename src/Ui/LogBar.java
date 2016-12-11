@@ -1,14 +1,18 @@
 package Ui;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.border.MatteBorder;
-import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.MatteBorder;
 
 //Il s'agira d'une barre avec une seule ligne d'information qui indique briévement la dernière opération effectuée. Ça a vocation à donner un feedBack à l'utilisateur.
 public class LogBar extends JPanel {
+	
+	private static final long serialVersionUID = 3763564131554857958L;
+
 	private static LogBar instance = new LogBar();
 	
 	private JLabel lblInfo;

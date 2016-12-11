@@ -101,8 +101,6 @@ public class Path implements Serializable{
 		}
 
 		File file = new File(System.getProperty("user.dir") + "\\" + dir + "\\" + nomFichier + ".txt");
-		@SuppressWarnings("resource")
-		FileWriter fw = new FileWriter(file);
 		PrintWriter pw = new PrintWriter(new FileWriter(file, true));
 		pw.println("Liste des PI de l'm_path :" + newLine);
 		for (InterestPoint p : m_path) {

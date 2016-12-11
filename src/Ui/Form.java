@@ -16,11 +16,9 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 
-import Ui.EditMenus.AccountEditionForm;
-
-@SuppressWarnings("serial")
 public class Form extends JFrame {
 
+	private static final long serialVersionUID = 8884750905720029391L;
 	private TitleBarForms titleBar;
 	private LoginForm panelLogin;
 	private AccountCreationForm panelCreation;

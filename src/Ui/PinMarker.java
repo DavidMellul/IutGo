@@ -7,23 +7,32 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
+import Controller.MapController;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.Layer;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 
 public class PinMarker extends MapMarkerDot {
 
+	public static final ImageIcon GREEN = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_green.png"));
+	public static final ImageIcon RED = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_red.png"));
+	public static final ImageIcon YELLOW = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_yellow.png"));
+	public static final ImageIcon BLUE = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_blue.png"));
+	public static final ImageIcon CYAN = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_cyan.png"));
+	
 	private ImageIcon m_icon;
 	private Rectangle m_imageRect;
 	
 	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
 		super(name, coord);
 		m_icon = icon;
+		m_imageRect = new Rectangle(0, 0, 0, 0);
 	}
 
 	public PinMarker(Layer layer, String name, Coordinate coord, ImageIcon icon) {
 		super(layer, name, coord);
 		m_icon = icon;
+		m_imageRect = new Rectangle(0, 0, 0, 0);
 	}
 
 	@Override

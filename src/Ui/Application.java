@@ -3,6 +3,7 @@ package Ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -31,7 +32,6 @@ import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.SearchMenus.Menu;
 import Utils.Util;
-import java.awt.Cursor;
 
 
 public class Application extends JFrame {
@@ -142,7 +142,6 @@ public class Application extends JFrame {
 		btnFocusCurrentLocation.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MapController.init(m_mapViewer.getViewer());
 				MapController.getInstance().showAndFitOnCurrentPosition();
 			}
 		});

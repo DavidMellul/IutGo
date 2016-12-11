@@ -1,5 +1,4 @@
 package Ui.SearchMenus;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -12,7 +11,6 @@ public class CarpoolingMenu extends AbstractMenu {
 	private JTextField m_finish;
 	private JLabel m_lblFinish;
 	private JLabel m_lblStart;
-	private BorderLayout m_borderLayout;
 
 	public CarpoolingMenu() {
 		super("Search for carpooling", false);
@@ -20,7 +18,6 @@ public class CarpoolingMenu extends AbstractMenu {
 
 	@Override
 	protected void initialize() {
-		m_borderLayout = (BorderLayout) getLayout();
 		m_searchFilters.setLayout(new GridLayout(2, 2, 10, 10));
 		
 		m_lblStart = new JLabel("Start");
