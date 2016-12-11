@@ -202,10 +202,11 @@ public class MapController extends JMapController implements MouseListener, Mous
     public void showRelationMembers(String kindOfRelation, boolean visible) { 
     	if(visible) {
 	    	fillLayerRelations(kindOfRelation);
-	    	for(MapObject m : m_layerRelations.getElements()) {
-	    		MapMarker mm = (MapMarkerDot)m;
-	    		this.map.addMapMarker(mm);
-	    	}
+	    	if(m_layerRelations.getElements() != null)
+		    	for(MapObject m : m_layerRelations.getElements()) {
+		    		MapMarker mm = (MapMarkerDot)m;
+		    		this.map.addMapMarker(mm);
+		    	}
     	}
     	else {
     		this.m_layerRelations.setVisible(false);

@@ -26,7 +26,6 @@ public class TitleBarForms extends JPanel {
 	 */
 	private static final long serialVersionUID = 8792583867779037608L;
 	JLabel labelCroix;
-	JLabel labelMinus;
 	JLabel logo;
 	JLabel lblIutgo;
 	JButton btnClose;
@@ -56,16 +55,12 @@ public class TitleBarForms extends JPanel {
 		minusPanel.setPreferredSize(new Dimension(30, 30));
 		buttonPanel.add(minusPanel);
 		
-		labelMinus = new JLabel("\uF068");
-		labelMinus.setBackground(new Color(204, 255, 255));
-		labelMinus.setToolTipText("Iconify");
-		labelMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		labelMinus.setHorizontalAlignment(SwingConstants.CENTER);
-		labelMinus.setHorizontalTextPosition(SwingConstants.CENTER);
-		labelMinus.setFont(new Font("FontAwesome", Font.PLAIN, 22));
-		
 		
 		btnMinus = new JButton();
+		btnMinus.setToolTipText("Iconify");
+		btnMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnMinus.setFont(new Font("FontAwesome", Font.PLAIN, 18));
+		btnMinus.setText("\uF068");
 		btnMinus.setBorder(null);
 		btnMinus.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnMinus.setContentAreaFilled(false);
@@ -75,12 +70,10 @@ public class TitleBarForms extends JPanel {
 		GroupLayout gl_minusPanel = new GroupLayout(minusPanel);
 		gl_minusPanel.setHorizontalGroup(
 			gl_minusPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(labelMinus, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 				.addComponent(btnMinus, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 		);
 		gl_minusPanel.setVerticalGroup(
 			gl_minusPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(labelMinus, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 				.addComponent(btnMinus, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 		);
 		minusPanel.setLayout(gl_minusPanel);
