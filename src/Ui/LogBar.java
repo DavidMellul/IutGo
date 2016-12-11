@@ -30,7 +30,7 @@ public class LogBar extends JPanel {
 	}
 	
 	public void showCommonFeedBack(String msg) {
-		String toShow = "<html><font color=red>"+msg+"</font></html>";
+		String toShow = "<html><font color=black>"+msg+"</font></html>";
 		lblInfo.setText(toShow);
 	}
 

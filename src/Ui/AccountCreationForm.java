@@ -96,6 +96,7 @@ public class AccountCreationForm extends JPanel{
 				if(!login.isEmpty() && !pass.isEmpty() && confirm.equals(pass)) {
 					Controller.getInstance().registerMember(login,pass,fieldLastname.getText(),fieldFirstname.getText());
 					btnGoBack.doClick();
+					LogBar.getInstance().showPositiveFeedback("You've just updated your personal informations.");
 					fieldLogin.setText(""); fieldPass.setText(""); fieldConfirm.setText(""); fieldLastname.setText(""); fieldFirstname.setText("");
 				}
 				else {
