@@ -18,7 +18,7 @@ import com.maxmind.geoip.LookupService;
 
 import Member.Member;
 import Utils.GPSData;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class GPSManager implements Serializable {
 	private static final long serialVersionUID = -3892867060303029823L;
@@ -29,7 +29,7 @@ public class GPSManager implements Serializable {
 	    {
 	        @SuppressWarnings("deprecation")
 			Date lastDate = new Date(0,0,0,0,0,0);
-	        GPSData dataKept = new GPSData(new Coordinate(0,0), lastDate);
+	        GPSData dataKept = new GPSData(new MyCoordinate(0,0), lastDate);
 
 	        for(GPSData gdata : p_member.getGPSData())
 	        {
@@ -47,7 +47,7 @@ public class GPSManager implements Serializable {
 	        long differenceDate = 0;
 	        long maxDateDifference = 0;
 	        @SuppressWarnings("deprecation")
-			GPSData dataKept = new GPSData(new Coordinate(0,0), new Date(0,0,0,0,0,0));
+			GPSData dataKept = new GPSData(new MyCoordinate(0,0), new Date(0,0,0,0,0,0));
 
 	        for(GPSData gdata : p_member.getGPSData())
 	        {
@@ -131,7 +131,7 @@ public class GPSManager implements Serializable {
 	        ArrayList<Member> list = SerialManager.getAllMembers();
 	        list.remove(p_member);
 
-	        Coordinate p_coordinate = p_member.getLastPosition().getCoordinate();
+	        MyCoordinate p_coordinate = p_member.getLastPosition().getMyCoordinate();
 
 	        double x1 = 6371 * Math.cos(p_coordinate.getLat()) * Math.cos(p_coordinate.getLon());
 	        double y1 = 6371 * Math.cos(p_coordinate.getLat()) * Math.sin(p_coordinate.getLon());
@@ -140,8 +140,8 @@ public class GPSManager implements Serializable {
 	        while(it.hasNext())
 	        {
 	            Member m = it.next();
-	            double x2 = 6371 * Math.cos(m.getLastPosition().getCoordinate().getLat()) * Math.cos(m.getLastPosition().getCoordinate().getLon());
-	            double y2 = 6371 * Math.cos(m.getLastPosition().getCoordinate().getLat()) * Math.sin(m.getLastPosition().getCoordinate().getLon());
+	            double x2 = 6371 * Math.cos(m.getLastPosition().getMyCoordinate().getLat()) * Math.cos(m.getLastPosition().getMyCoordinate().getLon());
+	            double y2 = 6371 * Math.cos(m.getLastPosition().getMyCoordinate().getLat()) * Math.sin(m.getLastPosition().getMyCoordinate().getLon());
 	            double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
 
 	            if(Math.abs(d) > p_radius)
@@ -171,6 +171,6 @@ public class GPSManager implements Serializable {
 	        double lat = location.latitude;
 	        double lon = location.longitude;
 	        Date d = new Date();
-	        return new GPSData(new Coordinate(lat, lon), d);
+	        return new GPSData(new MyCoordinate(lat, lon), d);
 	    }
 }

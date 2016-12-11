@@ -20,7 +20,7 @@ import Utils.Address;
 import Utils.Formation;
 import Utils.GPSData;
 import Utils.Mood;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class Member implements Serializable{
 	
@@ -287,8 +287,8 @@ public class Member implements Serializable{
         myPosition = myPosition.substring(0,myPosition.indexOf(','));
 
         for(Travel t : tm.getTravelList()) {
-            Coordinate cStart = t.getCoordinateStart();
-            Coordinate cEnd = t.getCoordinateEnd();
+            MyCoordinate cStart = t.getMyCoordinateStart();
+            MyCoordinate cEnd = t.getMyCoordinateEnd();
 
             Calendar dTravel = t.getDate();
 

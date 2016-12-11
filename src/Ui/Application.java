@@ -21,10 +21,10 @@ import javax.swing.border.MatteBorder;
 import Controller.Controller;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.SearchMenus.Menu;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 import Utils.Util;
+import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
-import fr.unice.iut.info.methodo.maps.interfaces.ICoordinate;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 
 
@@ -50,7 +50,8 @@ public class Application extends JFrame {
 	}
 	
 	private void initialize(){
-		setSize(1000,600);
+		setSize(1000,650);
+		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -86,10 +87,10 @@ public class Application extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CE CODE EST A METTRE DANS LE MAP CONTROLLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				// Pas fait car je ne sais pas si tu aurais accepté que je transforme ton mapController en pattern singleton.
-				Coordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getCoordinate();
+				MyCoordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate();
 				MapMarker markerCurrLocation = new MapMarkerDot(Color.BLUE, currLocation.getLat(), currLocation.getLon());
 				m_mapViewer.getViewer().addMapMarker(markerCurrLocation);
-				m_mapViewer.getViewer().setDisplayPosition((ICoordinate) currLocation, 19);
+				m_mapViewer.getViewer().setDisplayPosition(new Coordinate(currLocation.getLat(),currLocation.getLon()), 19);
 			}
 		});
 		btnFocusCurrentLocation.addMouseListener(new MouseAdapter() {

@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import Member.Member;
 import Travels.Travel;
 import Utils.Mood;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class TravelManager implements Serializable {
 	
@@ -29,18 +29,18 @@ public class TravelManager implements Serializable {
 		return m_travels;
 	}
 
-	public ArrayList<Travel> searchByStart(Coordinate c) {
+	public ArrayList<Travel> searchByStart(MyCoordinate c) {
 		ArrayList<Travel> travelS = new ArrayList<Travel>();
 		for (Travel t : this.m_travels)
-			if (c.equals(t.getCoordinateStart()))
+			if (c.equals(t.getMyCoordinateStart()))
 				travelS.add(t);
 		return travelS;
 	}
 
-	public ArrayList<Travel> searchByDestination(Coordinate c) {
+	public ArrayList<Travel> searchByDestination(MyCoordinate c) {
 		ArrayList<Travel> travelD = new ArrayList<Travel>();
 		for (Travel t : this.m_travels)
-			if (c.equals(t.getCoordinateEnd()))
+			if (c.equals(t.getMyCoordinateEnd()))
 				travelD.add(t);
 		return travelD;
 	}

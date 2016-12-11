@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class InterestPoint implements Serializable{
 	private static final long serialVersionUID = 5837365909344441417L;
@@ -13,7 +13,7 @@ public class InterestPoint implements Serializable{
 
 	private String m_name = null;
 	private String m_description = null;
-	private Coordinate m_coordinate;
+	private MyCoordinate m_coordinate;
 	private List<Lodging> lodgings = new ArrayList<Lodging>();
 	private List<Integer> m_note = new ArrayList<Integer>();
 
@@ -30,13 +30,13 @@ public class InterestPoint implements Serializable{
 	public InterestPoint(String n, String d, double lat, double lon) {
 		m_name = n;
 		m_description = d;
-		m_coordinate = new Coordinate(lat, lon);
+		m_coordinate = new MyCoordinate(lat, lon);
 		instances.add(this);
 	}
 
 	public InterestPoint(String n, double lat, double lon) {
 		m_name = n;
-		m_coordinate = new Coordinate(lat, lon);
+		m_coordinate = new MyCoordinate(lat, lon);
 		instances.add(this);
 	}
 
@@ -52,7 +52,7 @@ public class InterestPoint implements Serializable{
 		return this.m_description;
 	}
 
-	public Coordinate getCoordinate() {
+	public MyCoordinate getMyCoordinate() {
 		return this.m_coordinate;
 	}
 
@@ -99,7 +99,7 @@ public class InterestPoint implements Serializable{
 		this.m_description = d;
 	}
 
-	public void setCoordinate(double lat, double lon) {
+	public void setMyCoordinate(double lat, double lon) {
 		this.m_coordinate.setLat(lat);
 		this.m_coordinate.setLon(lon);
 	}

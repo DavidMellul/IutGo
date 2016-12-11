@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import Interests.InterestPoint;
 import Interests.Lodging;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 
 public class InterestManager {
@@ -46,7 +46,7 @@ public class InterestManager {
 
     public int size(){ return m_piList.size(); }
 
-    public ArrayList<InterestPoint> getNearestPointOfInterest(Coordinate p_center, double p_radius, String nameFilter, float minPrice, float maxPrice, float minNote) throws IllegalArgumentException {
+    public ArrayList<InterestPoint> getNearestPointOfInterest(MyCoordinate p_center, double p_radius, String nameFilter, float minPrice, float maxPrice, float minNote) throws IllegalArgumentException {
         if(p_radius <= 0) throw new IllegalArgumentException("Radius is 0 or less");
 
         ArrayList<InterestPoint> list = new ArrayList<InterestPoint>();
@@ -58,8 +58,8 @@ public class InterestManager {
         while(it.hasNext())
         {
             InterestPoint i = it.next();
-            double x2 = 6371 * Math.cos(i.getCoordinate().getLat()) * Math.cos(i.getCoordinate().getLon());
-            double y2 = 6371 * Math.cos(i.getCoordinate().getLat()) * Math.sin(i.getCoordinate().getLon());
+            double x2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.cos(i.getMyCoordinate().getLon());
+            double y2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.sin(i.getMyCoordinate().getLon());
             double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
 
             float price = i.getCoutNuitee();

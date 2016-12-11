@@ -4,18 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import Member.Member;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class Address implements Serializable{
 	private static final long serialVersionUID = -7530102637176081952L;
 
-	private Coordinate m_coordinateGps;
+	private MyCoordinate m_coordinateGps;
     private Member m_member;
     private Formation m_formation;
     private ArrayList<Member> listAddress= new ArrayList<Member>();
     private String m_name;
 
-    public Address(Member member, Coordinate coordinateGps) {
+    public Address(Member member, MyCoordinate coordinateGps) {
         this.m_member = member;
         this.m_coordinateGps = coordinateGps;
         this.m_formation = new Formation();
@@ -31,8 +31,8 @@ public class Address implements Serializable{
     public Address(String name) { this.m_name = name; }
 
     public  double distanceWith ( Address adress2) {
-        Coordinate c1 = this.m_coordinateGps;
-        Coordinate c2 = adress2.getCoordinateGps();
+        MyCoordinate c1 = this.m_coordinateGps;
+        MyCoordinate c2 = adress2.getMyCoordinateGps();
         double theta = c1.getLon() - c2.getLon();
 
         double dist = Math.sin(deg2rad(c1.getLat())) * Math.sin(deg2rad(c2.getLat())) + Math.cos(deg2rad(c1.getLat())) * Math.cos(deg2rad(c2.getLat())) * Math.cos(deg2rad(theta));
@@ -53,11 +53,11 @@ public class Address implements Serializable{
     }
 
 
-    public Coordinate getCoordinateGps() {
+    public MyCoordinate getMyCoordinateGps() {
         return m_coordinateGps;
     }
 
-    public void setCoordinateGps(Coordinate coordinateGps) {
+    public void setMyCoordinateGps(MyCoordinate coordinateGps) {
         this.m_coordinateGps = coordinateGps;
     }
 

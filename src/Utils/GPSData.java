@@ -10,15 +10,15 @@ import java.util.Date;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class GPSData implements Comparable<Object>, Serializable {
 	private static final long serialVersionUID = 1710036580140276926L;
-	private Coordinate m_coordinate;
+	private MyCoordinate m_coordinate;
     private Date m_date;
     private String m_location = null;
 
-    public GPSData(Coordinate p_coordinate, Date p_date)
+    public GPSData(MyCoordinate p_coordinate, Date p_date)
     {
         m_coordinate = p_coordinate;
         m_date = p_date;
@@ -29,7 +29,7 @@ public class GPSData implements Comparable<Object>, Serializable {
         return this.m_date;
     }
 
-    public Coordinate getCoordinate()
+    public MyCoordinate getMyCoordinate()
     {
         return this.m_coordinate;
     }
@@ -68,6 +68,6 @@ public class GPSData implements Comparable<Object>, Serializable {
 
     public String toString()
     {
-        return this.getCoordinate()+" le "+new SimpleDateFormat("dd/MM/YYYY").format(this.getDate());
+        return this.getMyCoordinate()+" le "+new SimpleDateFormat("dd/MM/YYYY").format(this.getDate());
     }
 }

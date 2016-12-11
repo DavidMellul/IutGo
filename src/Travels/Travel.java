@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import Member.Member;
-import Utils.Coordinate;
+import Utils.MyCoordinate;
 
 public class Travel implements Serializable{
 	
@@ -14,12 +14,12 @@ public class Travel implements Serializable{
 	private Calendar m_date;
     private Member m_driver;
     private ArrayList<Member> m_passengersList;
-    private Coordinate m_coordinateStart;
-    private Coordinate m_coordinateEnd;
+    private MyCoordinate m_coordinateStart;
+    private MyCoordinate m_coordinateEnd;
     private int m_seats;
 
 
-    public Travel(Calendar date, Member driver,int seats, Coordinate cStart, Coordinate cEnd){
+    public Travel(Calendar date, Member driver,int seats, MyCoordinate cStart, MyCoordinate cEnd){
         this.m_driver = driver;
         this.m_seats = seats;
         this.m_passengersList = new ArrayList<Member>();
@@ -45,12 +45,12 @@ public class Travel implements Serializable{
     }
 
 
-    public Coordinate getCoordinateStart(){
+    public MyCoordinate getMyCoordinateStart(){
         return this.m_coordinateStart;
     }
 
  
-    public Coordinate getCoordinateEnd(){
+    public MyCoordinate getMyCoordinateEnd(){
         return this.m_coordinateEnd;
     }
 

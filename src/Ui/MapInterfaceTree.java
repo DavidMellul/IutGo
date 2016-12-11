@@ -56,7 +56,7 @@ public class MapInterfaceTree extends JPanel implements JMapViewerEventListener 
 		MapMarkerDot eberstadt = new MapMarkerDot(l, "Eberstadt", 49.814284999, 8.642065999);
 		l.add(eberstadt);
 		
-		add(tree, BorderLayout.EAST);
+	//	add(tree, BorderLayout.EAST);
 		add(map, BorderLayout.CENTER);
 	}
 
