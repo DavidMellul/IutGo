@@ -14,7 +14,11 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.swing.ImageIcon;
+
 import Member.Member;
+import Ui.Application;
+import Ui.PinMarker;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.JMapController;
@@ -47,10 +51,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 	
 	private Layer m_layerRelations;
 	
-	private static final Style m_relationStyle = new Style(Color.BLACK, Color.BLUE, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
-	private static final Style m_interestStyle = new Style(Color.BLACK, Color.RED, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
-	private static final Style m_carpoolingStyle = new Style(Color.BLACK, Color.GREEN, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
-	private static final Style m_formationStyle = new Style(Color.BLACK, Color.YELLOW, new BasicStroke(2), new Font("Arial", Font.BOLD, 15));
+	private static final ImageIcon m_relationStyle = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_green.png"));
 
 	public MapController(JMapViewer map) {
 		super(map);
@@ -196,7 +197,7 @@ public class MapController extends JMapController implements MouseListener, Mous
     	for(Member m : myRelations) {
 	    		MyCoordinate mC = m.getLastPosition().getMyCoordinate();
 	    		Coordinate OSMC = new Coordinate(mC.getLat(),mC.getLon());
-	    		MapMarker relationMarker = new MapMarkerDot(m_layerRelations, m.getFirstname(), OSMC, m_relationStyle);
+	    		MapMarker relationMarker = new PinMarker(m_layerRelations, m.getFirstname(), OSMC, m_relationStyle);
 	    		m_layerRelations.add(relationMarker);
     		}    
     	}
