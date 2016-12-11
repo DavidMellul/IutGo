@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import Controller.Controller;
+import Member.Member;
+
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
 
@@ -60,18 +62,27 @@ public class MemberProfile extends JPanel {
 		panel_1.setLayout(new GridLayout(2, 1, 10, 10));
 		
 		lblLastname = new JLabel();
-		lblLastname.setText(Controller.getInstance().getCurrentMember().getLastname());
 		lblLastname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblLastname);
 		lblLastname.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLastname.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		lblFirstname = new JLabel();
-		lblFirstname.setText(Controller.getInstance().getCurrentMember().getFirstname());
 		lblFirstname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblFirstname);
 		lblFirstname.setHorizontalAlignment(SwingConstants.CENTER);
 		setLayout(groupLayout);
-
+		
+		updateProfile(Controller.getInstance().getCurrentMember());
+	}
+	
+	public void updateProfile(Member p_member){
+		if(p_member != null){
+			lblLastname.setText(p_member.getLastname());
+			lblFirstname.setText(p_member.getFirstname());
+		}else{
+			lblLastname.setText("UNDEFINED");
+			lblFirstname.setText("UNDEFINED");
+		}
 	}
 }

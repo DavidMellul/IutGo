@@ -50,6 +50,18 @@ public class Menu extends JPanel {
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, interestMenu, 0, SpringLayout.EAST, relationMenu);
 		searchMenuViewport.add(interestMenu);
 		
+		CarpoolingMenu carpoolingMenu = new CarpoolingMenu();
+		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, carpoolingMenu, 6, SpringLayout.SOUTH, interestMenu);
+		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, carpoolingMenu, 0, SpringLayout.WEST, searchMenuViewport);
+		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, carpoolingMenu, 0, SpringLayout.EAST, relationMenu);
+		searchMenuViewport.add(carpoolingMenu);
+		
+		FormationMenu formationMenu = new FormationMenu();
+		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, formationMenu, 6, SpringLayout.SOUTH, carpoolingMenu);
+		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, formationMenu, 0, SpringLayout.WEST, relationMenu);
+		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, formationMenu, 0, SpringLayout.EAST, relationMenu);
+		searchMenuViewport.add(formationMenu);
+		
 		
 		searchMenu.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		searchMenu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

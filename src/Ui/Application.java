@@ -18,15 +18,10 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
-import Controller.Controller;
 import Controller.MapController;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.SearchMenus.Menu;
-import Utils.MyCoordinate;
 import Utils.Util;
-import fr.unice.iut.info.methodo.maps.Coordinate;
-import fr.unice.iut.info.methodo.maps.MapMarkerDot;
-import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 
 
 public class Application extends JFrame {
@@ -82,7 +77,7 @@ public class Application extends JFrame {
 		btnFocusCurrentLocation.setFocusPainted(false);
 		btnFocusCurrentLocation.setContentAreaFilled(false);
 		btnFocusCurrentLocation.setBorder(null);
-		btnFocusCurrentLocation.setBounds(10, 526, 32, 32);
+		btnFocusCurrentLocation.setBounds(10, 565, 32, 34);
 		btnFocusCurrentLocation.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,7 +98,7 @@ public class Application extends JFrame {
 		btnEditAccount.setBorder(null);
 		btnEditAccount.setBorderPainted(false);
 		btnEditAccount.setFocusPainted(false);
-		btnEditAccount.setBounds(741, 11, 32, 32);
+		btnEditAccount.setBounds(763, 9, 32, 32);
 		btnEditAccount.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -112,7 +107,7 @@ public class Application extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						m_editionPanel.setLocation(m_editionPanel.getX()-1, m_editionPanel.getY());
-						if(m_editionPanel.getX() < getWidth()-800) ((Timer) e.getSource()).stop();
+						if(m_editionPanel.getX() < getWidth()-650) ((Timer) e.getSource()).stop();
 					}
 				}).start();
 			}
@@ -130,7 +125,7 @@ public class Application extends JFrame {
 		btnAddFriend.setContentAreaFilled(false);
 		btnAddFriend.setBorder(null);
 		btnAddFriend.setBorderPainted(false);
-		btnAddFriend.setBounds(741, 52, 32, 32);
+		btnAddFriend.setBounds(763, 52, 32, 32);
 		btnAddFriend.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -152,12 +147,12 @@ public class Application extends JFrame {
 		lblFocusOnMember = new JLabel("");
 		lblFocusOnMember.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_currLocation.png")));
 		lblFocusOnMember.setFont(new Font("FontAwesome", Font.PLAIN, 19));
-		lblFocusOnMember.setBounds(10, 526, 32, 34);
+		lblFocusOnMember.setBounds(10, 565, 32, 34);
 		m_mapViewer.getViewer().add(lblFocusOnMember);
 		
 		lblEditAccount = new JLabel("");
 		lblEditAccount.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_editAccount.png")));
-		lblEditAccount.setBounds(741, 11, 32, 32);
+		lblEditAccount.setBounds(763, 9, 32, 32);
 		m_mapViewer.getViewer().add(lblEditAccount);
 		
 		m_editionPanel = new AccountEditionForm();
@@ -182,7 +177,7 @@ public class Application extends JFrame {
 		
 		lblAddFriend = new JLabel("");
 		lblAddFriend.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_addFriend.png")));
-		lblAddFriend.setBounds(741, 52, 32, 32);
+		lblAddFriend.setBounds(763, 52, 32, 32);
 		m_mapViewer.getViewer().add(lblAddFriend);
 	}
 	
