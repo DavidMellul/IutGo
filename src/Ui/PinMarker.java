@@ -1,10 +1,9 @@
 package Ui;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -15,6 +14,7 @@ import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 public class PinMarker extends MapMarkerDot {
 
 	private ImageIcon m_icon;
+	private Rectangle m_imageRect;
 	
 	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
 		super(name, coord);
@@ -33,7 +33,10 @@ public class PinMarker extends MapMarkerDot {
 	        int sizeW = m_icon.getIconWidth();
 
 	        if (g instanceof Graphics2D) {
-	        	g.drawImage(m_icon.getImage(), position.x - sizeW/2, position.y - sizeH, null);
+	        	m_imageRect.setLocation(position.x - sizeW/2, position.y - sizeH);
+	        	m_imageRect.setSize(m_icon.getIconWidth(), m_icon.getIconHeight());
+	        	
+	        	g.drawImage(m_icon.getImage(),m_imageRect.x ,m_imageRect.y, null);
 	        }
 		}
 
@@ -42,5 +45,7 @@ public class PinMarker extends MapMarkerDot {
         }
 	}
 	
-	
+	public boolean contains(Point position){
+		return m_imageRect.contains(position);
+	}
 }

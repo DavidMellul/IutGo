@@ -32,25 +32,27 @@ public class MapController extends JMapController implements MouseListener, Mous
 			| MouseEvent.BUTTON2_DOWN_MASK;
 
 	private static final int MAC_MOUSE_BUTTON1_MASK = MouseEvent.BUTTON1_DOWN_MASK;
+	private int movementMouseButton = MouseEvent.BUTTON1;
+	private int movementMouseButtonMask = MouseEvent.BUTTON1_DOWN_MASK;
+	
+	private static final ImageIcon m_relationStyle = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_green.png"));
 
 	private Point lastDragPoint;
 
 	private boolean isMoving;
-
 	private boolean movementEnabled = true;
-
-	private int movementMouseButton = MouseEvent.BUTTON1;
-	private int movementMouseButtonMask = MouseEvent.BUTTON1_DOWN_MASK;
 
 	private boolean wheelZoomEnabled = true;
 	
+	private ArrayList<PinMarker> m_drawnMarkers;
+	
 	private Layer m_layerRelations;
 	
-	private static final ImageIcon m_relationStyle = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_green.png"));
 
 	public MapController(JMapViewer map) {
 		super(map);
 		m_layerRelations = new Layer("");
+		m_drawnMarkers = new ArrayList<>();
 	}
 	
 	public static MapController getInstance(){
