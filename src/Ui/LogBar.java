@@ -16,7 +16,7 @@ public class LogBar extends JPanel {
 	public static LogBar getInstance() { return instance; }
 	private LogBar() {
 		setBackground(new Color(255, 255, 255));
-		setBorder(new MatteBorder(1, 0, 0, 1, (Color) new Color(0, 0, 0)));
+		setBorder(new MatteBorder(1, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
 		lblInfo = new JLabel("Here you can see the latest operation you've done.");
 		lblInfo.setBackground(new Color(255, 255, 255));

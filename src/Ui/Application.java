@@ -31,6 +31,7 @@ import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.SearchMenus.Menu;
 import Utils.Util;
+import java.awt.Cursor;
 
 
 public class Application extends JFrame {
@@ -83,7 +84,6 @@ public class Application extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				boolean visible = ((JCheckBox)e.getSource()).isSelected();
-			//	MapController.init(m_mapViewer.getViewer());
 				MapController.getInstance().showRelationMembers((String)m_menu.getRelationMenu().getComboBox().getSelectedItem(), visible);
 			}
 		});
@@ -126,11 +126,13 @@ public class Application extends JFrame {
 		getContentPane().add(titleBarForms, BorderLayout.NORTH);
 				
 		m_mapViewer = new MapInterfaceTree("Go");
+		m_mapViewer.getViewer().setBorder(new MatteBorder(0, 0, 1, 1, (Color) new Color(0, 0, 0)));
 		
 		getContentPane().add(m_menu, BorderLayout.WEST);
 		getContentPane().add(m_mapViewer, BorderLayout.CENTER);
 		
 		btnFocusCurrentLocation = new JButton("");
+		btnFocusCurrentLocation.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFocusCurrentLocation.setToolTipText("Display current location");
 		btnFocusCurrentLocation.setOpaque(false);
 		btnFocusCurrentLocation.setFocusPainted(false);
@@ -152,6 +154,7 @@ public class Application extends JFrame {
 		});
 		
 		btnEditAccount = new JButton("");
+		btnEditAccount.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEditAccount.setToolTipText("Edit account");
 		btnEditAccount.setContentAreaFilled(false);
 		btnEditAccount.setOpaque(false);
@@ -180,6 +183,7 @@ public class Application extends JFrame {
 		});
 		
 		btnAddFriend = new JButton("");
+		btnAddFriend.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAddFriend.setToolTipText("Add relation");
 		btnAddFriend.setOpaque(false);
 		btnAddFriend.setFocusPainted(false);
@@ -209,6 +213,7 @@ public class Application extends JFrame {
 		});
 		
 		btnUnzoom = new JButton("");
+		btnUnzoom.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUnzoom.setToolTipText("Unzoom");
 		btnUnzoom.setBorderPainted(false);
 		btnUnzoom.setBorder(null);
@@ -230,6 +235,7 @@ public class Application extends JFrame {
 		});
 		
 		btnHome = new JButton("");
+		btnHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnHome.setToolTipText("Disconnect");
 		btnHome.setFocusPainted(false);
 		btnHome.setContentAreaFilled(false);
