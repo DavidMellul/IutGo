@@ -1,11 +1,8 @@
 package Controller;
 
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Point;
-import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -17,7 +14,6 @@ import java.util.Locale;
 import javax.swing.ImageIcon;
 
 import Member.Member;
-import Ui.Application;
 import Ui.PinMarker;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
@@ -25,7 +21,6 @@ import fr.unice.iut.info.methodo.maps.JMapController;
 import fr.unice.iut.info.methodo.maps.JMapViewer;
 import fr.unice.iut.info.methodo.maps.Layer;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
-import fr.unice.iut.info.methodo.maps.Style;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 import fr.unice.iut.info.methodo.maps.interfaces.MapObject;
 

@@ -53,6 +53,8 @@ public class Application extends JFrame {
 	private Point coords;
 	
 	private LogBar feedBar;
+	private JLabel lblUnzoom;
+	private JButton btnUnzoom;
 	
 	public Application() {
 		super("Iut Go");
@@ -202,6 +204,26 @@ public class Application extends JFrame {
 			public void mouseExited(MouseEvent me) { lblAddFriend.setIcon(Util.brighten(lblAddFriend.getIcon())); }	
 		});
 		
+		btnUnzoom = new JButton("");
+		btnUnzoom.setBorderPainted(false);
+		btnUnzoom.setBorder(null);
+		btnUnzoom.setContentAreaFilled(false);
+		btnUnzoom.setFocusPainted(false);
+		btnUnzoom.setBounds(763, 565, 32, 32);
+		btnUnzoom.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				m_mapViewer.getViewer().setZoom(2);
+			}
+		});
+		btnUnzoom.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { lblUnzoom.setIcon(Util.darken(lblUnzoom.getIcon())); }
+			@Override
+			public void mouseExited(MouseEvent me) { lblUnzoom.setIcon(Util.brighten(lblUnzoom.getIcon())); }
+		});
+		m_mapViewer.getViewer().add(btnUnzoom);
+		
 		m_mapViewer.getViewer().add(btnAddFriend);
 		
 		m_mapViewer.getViewer().add(btnEditAccount);
@@ -262,6 +284,11 @@ public class Application extends JFrame {
 		feedBar = LogBar.getInstance();
 		feedBar.setBounds(0,610,350,25);
 		m_mapViewer.getViewer().add(feedBar);
+		
+		lblUnzoom = new JLabel("");
+		lblUnzoom.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_maxUnzoom.png")));
+		lblUnzoom.setBounds(763, 565, 32, 32);
+		m_mapViewer.getViewer().add(lblUnzoom);
 	}
 	
 	public Menu getMenu(){
