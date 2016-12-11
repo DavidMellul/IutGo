@@ -19,6 +19,7 @@ import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
+import Controller.MapController;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.SearchMenus.Menu;
 import Utils.MyCoordinate;
@@ -85,12 +86,8 @@ public class Application extends JFrame {
 		btnFocusCurrentLocation.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CE CODE EST A METTRE DANS LE MAP CONTROLLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				// Pas fait car je ne sais pas si tu aurais accepté que je transforme ton mapController en pattern singleton.
-				MyCoordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate();
-				MapMarker markerCurrLocation = new MapMarkerDot(Color.BLUE, currLocation.getLat(), currLocation.getLon());
-				m_mapViewer.getViewer().addMapMarker(markerCurrLocation);
-				m_mapViewer.getViewer().setDisplayPosition(new Coordinate(currLocation.getLat(),currLocation.getLon()), 19);
+				MapController.init(m_mapViewer.getViewer());
+				MapController.getInstance().showAndFitOnCurrentPosition();
 			}
 		});
 		btnFocusCurrentLocation.addMouseListener(new MouseAdapter() {

@@ -1,6 +1,7 @@
 package Controller;
 
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,8 +10,12 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.Locale;
 
+import Utils.MyCoordinate;
+import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.JMapController;
 import fr.unice.iut.info.methodo.maps.JMapViewer;
+import fr.unice.iut.info.methodo.maps.MapMarkerDot;
+import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 
 public class MapController extends JMapController implements MouseListener, MouseMotionListener, MouseWheelListener {
 
@@ -163,6 +168,9 @@ public class MapController extends JMapController implements MouseListener, Mous
     }
     
     public void showAndFitOnCurrentPosition() {
-    	// A remplir avec le code présent dans Application.java
+    	MyCoordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate();
+		MapMarker markerCurrLocation = new MapMarkerDot(Color.BLUE, currLocation.getLat(), currLocation.getLon());
+		this.map.addMapMarker(markerCurrLocation);
+		this.map.setDisplayPosition(new Coordinate(currLocation.getLat(),currLocation.getLon()), 19);
     }
 }
