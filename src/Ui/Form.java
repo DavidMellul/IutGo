@@ -81,9 +81,9 @@ public class Form extends JFrame {
 		panelCreation = new AccountCreationForm();
 		panelCreation.getBtnGoBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Timer(1,new ActionListener() {
+				new Timer(0,new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						panelLogin.setLocation(panelLogin.getX()+2, panelLogin.getY());
+						panelLogin.setLocation(panelLogin.getX()+1, panelLogin.getY());
 						panelCreation.setLocation(panelLogin.getX()+panelLogin.getWidth(), panelLogin.getY());
 						if(panelLogin.getX() == 0)
 							((Timer)e.getSource()).stop();
@@ -102,9 +102,9 @@ public class Form extends JFrame {
 		panelLogin.add(btnCrerUnCompte);
 		btnCrerUnCompte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Timer(1, new ActionListener() {		
+				new Timer(0, new ActionListener() {		
 					public void actionPerformed(ActionEvent e) {
-						panelLogin.setLocation(panelLogin.getX() - 2,panelLogin.getY());
+						panelLogin.setLocation(panelLogin.getX() - 1,panelLogin.getY());
 						panelCreation.setLocation(panelLogin.getX()+panelLogin.getWidth(), panelLogin.getY());
 						if(panelLogin.getX()+panelLogin.getWidth() == 0) 
 							((Timer) e.getSource()).stop();

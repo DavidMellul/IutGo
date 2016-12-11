@@ -120,11 +120,6 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		});
 		add(btnConfirm);
 		
-		this.panelProfile = new MemberProfile();
-		panelProfile.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
-		panelProfile.setBounds(1, 1, 447, 80);
-		add(this.panelProfile);
-		
 		checkHappy = new JCheckBox("");
 		checkHappy.setToolTipText("Happy");
 		checkHappy.setIcon(new ImageIcon(AccountEditionForm.class.getResource("/Resources/_smiley_happy_u.png")));
@@ -173,6 +168,11 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 			}
 		});
 		add(btnEraseMood);
+		
+		this.panelProfile = new MemberProfile();
+		panelProfile.setBorder(new MatteBorder(0, 0, 1, 0, (Color) Color.BLACK));
+		panelProfile.setBounds(1, 1, 438, 80);
+		add(this.panelProfile);
 	}
 
 	public JButton getBtnQuit() { return this.btnQuit; }

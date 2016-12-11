@@ -111,11 +111,11 @@ public class Application extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				lblEditAccount.setVisible(false); btnEditAccount.setVisible(false);
-				new Timer(1, new ActionListener() {					
+				new Timer(0, new ActionListener() {					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						m_editionPanel.setLocation(m_editionPanel.getX()-1, m_editionPanel.getY());
-						if(m_editionPanel.getX() < getWidth()-650) ((Timer) e.getSource()).stop();
+						if(m_editionPanel.getX() < getWidth()-800) ((Timer) e.getSource()).stop();
 					}
 				}).start();
 			}
@@ -169,7 +169,7 @@ public class Application extends JFrame {
 		m_editionPanel.getBtnQuit().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Timer(1, new ActionListener() {					
+				new Timer(0, new ActionListener() {					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						m_editionPanel.setLocation(m_editionPanel.getX()+1, m_editionPanel.getY());
