@@ -61,12 +61,14 @@ public class LoginForm extends JPanel {
 		this.add(lblMotDePasse);
 		
 		fieldLogin = new JTextField();
+		fieldLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldLogin.setToolTipText("");
 		fieldLogin.setBounds(295, 196, 157, 20);
 		this.add(fieldLogin);
 		fieldLogin.setColumns(10);
 		
 		fieldPass = new JPasswordField();
+		fieldPass.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldPass.setToolTipText("");
 		fieldPass.setColumns(10);
 		fieldPass.setBounds(295, 227, 157, 20);

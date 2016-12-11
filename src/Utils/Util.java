@@ -62,7 +62,7 @@ public class Util {
 	}
 	 
 	 public static Mood decodeMood(String s) {
-		 switch(s) {
+		 switch(s.toUpperCase()) {
 		 	case "HAPPY":
 		 		return Mood.HAPPY;
 		 	case "SAD":
@@ -74,5 +74,18 @@ public class Util {
 		 	default: break;
 		 }
 		 return Mood.NO_SPECIAL_MOOD;
+	 }
+	 
+	 public static Icon retrieveMoodIcon(Mood m) {
+		 ImageIcon iconToReturn = null;
+		 switch(m) {
+		 	case HAPPY: iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_happy.png")); break;
+		 	case CALM:	iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_calm.png"));  break;
+		 	case SAD:   iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_sad.png"));	  break;
+		 	case PARTY: iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_party.png")); break;
+		 	case NO_SPECIAL_MOOD: iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_indifferent.png")); break;
+		 	default: break;
+		 }
+		 return iconToReturn;
 	 }
 }

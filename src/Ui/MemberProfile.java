@@ -65,15 +65,16 @@ public class MemberProfile extends JPanel {
 		lblLastname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblLastname);
 		lblLastname.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblLastname.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLastname.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		lblFirstname = new JLabel();
 		lblFirstname.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(lblFirstname);
-		lblFirstname.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFirstname.setHorizontalAlignment(SwingConstants.LEFT);
 		setLayout(groupLayout);
 		
 		updateProfile(Controller.getInstance().getCurrentMember());
+		repaint();
 	}
 	
 	public void updateProfile(Member p_member){

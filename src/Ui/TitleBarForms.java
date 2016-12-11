@@ -9,9 +9,12 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,7 +44,8 @@ public class TitleBarForms extends JPanel {
 		
 		titlePanel = new JPanel();
 		
-		logo = new JLabel("\uF279 ");
+		logo = new JLabel("");
+		logo.setIcon(new ImageIcon(TitleBarForms.class.getResource("/Resources/icone_iutgo_reduced.png")));
 		logo.setFont(new Font("FontAwesome", Font.PLAIN, 21));
 		
 		lblIutgo = new JLabel("IutGo");
@@ -66,6 +70,12 @@ public class TitleBarForms extends JPanel {
 		btnMinus.setOpaque(false);
 		btnMinus.setFocusPainted(false);
 		btnMinus.setBorderPainted(false);
+		btnMinus.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { btnMinus.setForeground(Color.GRAY); }
+			@Override
+			public void mouseExited(MouseEvent me) { btnMinus.setForeground(Color.BLACK); }
+		});
 		GroupLayout gl_minusPanel = new GroupLayout(minusPanel);
 		gl_minusPanel.setHorizontalGroup(
 			gl_minusPanel.createParallelGroup(Alignment.LEADING)
@@ -86,6 +96,7 @@ public class TitleBarForms extends JPanel {
 		labelCroix.setHorizontalAlignment(SwingConstants.CENTER);
 		labelCroix.setFont(new Font("FontAwesome", Font.BOLD, 24));
 		
+		
 		btnClose = new JButton();
 		btnClose.setBorder(null);
 		btnClose.setBackground(new Color(204, 255, 255));
@@ -102,6 +113,13 @@ public class TitleBarForms extends JPanel {
 				System.exit(0);
 			}
 		});
+		btnClose.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { labelCroix.setForeground(Color.GRAY); }
+			@Override
+			public void mouseExited(MouseEvent me) { labelCroix.setForeground(Color.BLACK); }
+		});
+		
 		GroupLayout gl_closePanel = new GroupLayout(closePanel);
 		gl_closePanel.setHorizontalGroup(
 			gl_closePanel.createParallelGroup(Alignment.LEADING)
@@ -117,21 +135,19 @@ public class TitleBarForms extends JPanel {
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addGap(4)
 					.addComponent(titlePanel, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
 					.addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(4)
-					.addComponent(titlePanel, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-					.addGap(4))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(4)
-					.addComponent(buttonPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(titlePanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+						.addComponent(buttonPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGap(4))
 		);
 		GroupLayout gl_titlePanel = new GroupLayout(titlePanel);
@@ -150,7 +166,7 @@ public class TitleBarForms extends JPanel {
 					.addGap(2)
 					.addGroup(gl_titlePanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblIutgo, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(logo, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(logo)))
 		);
 		titlePanel.setLayout(gl_titlePanel);
 		setLayout(groupLayout);

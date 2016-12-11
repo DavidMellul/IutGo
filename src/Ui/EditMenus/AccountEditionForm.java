@@ -20,6 +20,7 @@ import Ui.LogBar;
 import Ui.MemberProfile;
 import Utils.Mood;
 import Utils.Util;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AccountEditionForm extends JPanel implements ActionListener{
@@ -73,6 +74,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(lblNickname);
 		
 		fieldNickname = new JTextField();
+		fieldNickname.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldNickname.setText(Controller.getInstance().getCurrentMember().getNickname());
 		fieldNickname.setBounds(76, 92, 110, 20);
 		add(fieldNickname);
@@ -89,6 +91,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(lblAddress);
 		
 		fieldAddress = new JTextField();
+		fieldAddress.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldAddress.setText(Controller.getInstance().getCurrentMember().getAddress().toString());
 		fieldAddress.setBounds(76, 128, 110, 20);
 		add(fieldAddress);
@@ -100,6 +103,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(lblFormation);
 		
 		fieldFormation = new JTextField();
+		fieldFormation.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldFormation.setText(Controller.getInstance().getCurrentMember().getFormation().toString());
 		fieldFormation.setBounds(293, 128, 128, 20);
 		add(fieldFormation);
@@ -116,7 +120,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 				String address = fieldAddress.getText();
 				Mood m = moodSelected;
 				Controller.getInstance().fillInformationsForMember(nickname, formation, m, address);
-				LogBar.getInstance().showPositiveFeedback("Your account informations were saved.");
+				LogBar.getInstance().showPositiveFeedback("You've just updated your personal informations.");
 				btnQuit.doClick();
 			}
 		});
@@ -151,10 +155,10 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		add(checkParty);
 		
 		checkGroup = new ButtonGroup();
-		checkGroup.add(checkHappy);
-		checkGroup.add(checkCalm);
-		checkGroup.add(checkSad);
-		checkGroup.add(checkParty);
+		checkGroup.add(checkHappy); checkHappy.addActionListener(this);
+		checkGroup.add(checkCalm); checkCalm.addActionListener(this);
+		checkGroup.add(checkSad); checkSad.addActionListener(this);
+		checkGroup.add(checkParty); checkParty.addActionListener(this);
 		
 		btnEraseMood = new JButton();
 		btnEraseMood.setFocusPainted(false);

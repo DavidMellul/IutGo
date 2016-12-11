@@ -13,6 +13,7 @@ import java.util.Observer;
 
 import Member.Member;
 import Ui.PinMarker;
+import Ui.InfoCards.UserCard;
 import Utils.MarkerCollection;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
@@ -89,7 +90,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 		PinMarker p = isOnMarker(e.getPoint());
 		if (p != null) {
-			System.out.println(p.getName());
+			map.add(p.getCard());
 		}
 	}
 
@@ -148,8 +149,10 @@ public class MapController extends JMapController implements MouseListener, Mous
 	public void showAndFitOnCurrentPosition() {
 		Coordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate()
 				.toOSMCoordinate();
-		MapMarker markerCurrLocation = new PinMarker("You", currLocation, PinMarker.GREEN);
+		PinMarker markerCurrLocation = new PinMarker("You", currLocation, PinMarker.GREEN);
+		markerCurrLocation.setCard(new UserCard(Controller.getInstance().getCurrentMember()));
 		m_listMarkers.add(markerCurrLocation);
+		
 		map.setDisplayPosition(new Coordinate(currLocation.getLat(), currLocation.getLon()), 18);
 	}
 
@@ -160,7 +163,8 @@ public class MapController extends JMapController implements MouseListener, Mous
 		for(Member m : Controller.getInstance().getCurrentMember().getRelations(kindOfRelation)) {
 			MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
 			Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
-			MapMarker relation = new PinMarker(m.toString(), osmcMember, PinMarker.BLUE);
+			PinMarker relation = new PinMarker(m.toString(), osmcMember, PinMarker.BLUE);
+			relation.setCard(new UserCard(m));
 			toChange.add(relation);
 		}
 		

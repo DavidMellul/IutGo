@@ -32,6 +32,7 @@ import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.SearchMenus.Menu;
 import Utils.Util;
+import java.awt.Toolkit;
 
 
 public class Application extends JFrame {
@@ -69,6 +70,7 @@ public class Application extends JFrame {
 		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Application.class.getResource("/Resources/icone_iutgo.png")));
 		getContentPane().setLayout(new BorderLayout());
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

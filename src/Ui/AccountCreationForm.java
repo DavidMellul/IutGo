@@ -75,12 +75,14 @@ public class AccountCreationForm extends JPanel{
 		this.add(lblMotDePasse);
 		
 		fieldLogin = new JTextField();
+		fieldLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldLogin.setToolTipText("");
 		fieldLogin.setBounds(252, 196, 223, 20);
 		this.add(fieldLogin);
 		fieldLogin.setColumns(10);
 		
 		fieldPass = new JPasswordField();
+		fieldPass.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldPass.setToolTipText("");
 		fieldPass.setColumns(10);
 		fieldPass.setBounds(252, 226, 222, 20);
@@ -96,7 +98,6 @@ public class AccountCreationForm extends JPanel{
 				if(!login.isEmpty() && !pass.isEmpty() && confirm.equals(pass)) {
 					Controller.getInstance().registerMember(login,pass,fieldLastname.getText(),fieldFirstname.getText());
 					btnGoBack.doClick();
-					LogBar.getInstance().showPositiveFeedback("You've just updated your personal informations.");
 					fieldLogin.setText(""); fieldPass.setText(""); fieldConfirm.setText(""); fieldLastname.setText(""); fieldFirstname.setText("");
 				}
 				else {
@@ -114,6 +115,7 @@ public class AccountCreationForm extends JPanel{
 		add(lblConfirmationDuMot);
 		
 		fieldConfirm = new JPasswordField();
+		fieldConfirm.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldConfirm.setToolTipText("");
 		fieldConfirm.setColumns(10);
 		fieldConfirm.setBounds(252, 257, 221, 20);
@@ -126,6 +128,7 @@ public class AccountCreationForm extends JPanel{
 		add(lblNom);
 		
 		fieldLastname = new JTextField();
+		fieldLastname.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldLastname.setToolTipText("");
 		fieldLastname.setColumns(10);
 		fieldLastname.setBounds(252, 164, 84, 20);
@@ -137,6 +140,7 @@ public class AccountCreationForm extends JPanel{
 		add(lblPrenom);
 		
 		fieldFirstname = new JTextField();
+		fieldFirstname.setHorizontalAlignment(SwingConstants.CENTER);
 		fieldFirstname.setToolTipText("");
 		fieldFirstname.setColumns(10);
 		fieldFirstname.setBounds(414, 164, 61, 20);

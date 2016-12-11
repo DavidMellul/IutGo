@@ -58,7 +58,7 @@ public class FriendAdditionForm extends JPanel {
 		comboBox = new JComboBox<String>();
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"friends", "family"}));
 		comboBox.setFont(new Font("Tw Cen MT", Font.PLAIN, 12));
-		comboBox.setBounds(206, 25, 55, 20);
+		comboBox.setBounds(206, 25, 64, 20);
 		add(comboBox);
 		
 		btnConfirm = new JButton("\uF05D");

@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 import Controller.MapController;
+import Ui.InfoCards.Card;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.Layer;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
@@ -22,6 +23,8 @@ public class PinMarker extends MapMarkerDot {
 	
 	private ImageIcon m_icon;
 	private Rectangle m_imageRect;
+	
+	private Card m_associatedCard;
 	
 	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
 		super(name, coord);
@@ -57,4 +60,7 @@ public class PinMarker extends MapMarkerDot {
 	public boolean contains(Point position){
 		return m_imageRect.contains(position);
 	}
+	
+	public void setCard(Card c) { this.m_associatedCard = c;  this.m_associatedCard.setBounds((int)this.getLat(), (int)this.getLon(), 320, 175);}
+	public Card getCard() { return this.m_associatedCard; }
 }
