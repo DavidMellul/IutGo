@@ -150,7 +150,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 		MapMarker markerCurrLocation = new PinMarker(m_layerUser, "You", currLocation, PinMarker.GREEN);
 		m_layerUser.add(markerCurrLocation);
 		m_drawnMarkers.add(markerCurrLocation);
-		
+		map.addMapMarker(markerCurrLocation);
 		map.setDisplayPosition(new Coordinate(currLocation.getLat(), currLocation.getLon()), 18);
 	}
 
