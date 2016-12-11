@@ -17,6 +17,12 @@ import Ui.MemberProfile;
 public class Menu extends JPanel {
 
 	private static final long serialVersionUID = 4022492925108809830L;
+	JPanel searchMenuViewport;
+	JScrollPane searchMenu;
+	RelationMenu relationMenu;
+	InterestMenu interestMenu;
+	CarpoolingMenu carpoolingMenu;
+	FormationMenu formationMenu;
 	
 	public Menu() {
 		super();
@@ -30,41 +36,36 @@ public class Menu extends JPanel {
 		MemberProfile memberProfile = new MemberProfile();
 		add(memberProfile, BorderLayout.NORTH);
 		
-		JPanel searchMenuViewport = new JPanel();
+		searchMenuViewport = new JPanel();
 		searchMenuViewport.setBorder(null);
 		searchMenuViewport.setSize(new Dimension(195, 520));
 		searchMenuViewport.setMinimumSize(new Dimension(195, 520));
 		searchMenuViewport.setMaximumSize(new Dimension(195, 520));
 		
-		JScrollPane searchMenu = new JScrollPane(searchMenuViewport);
+		searchMenu = new JScrollPane(searchMenuViewport);
 		searchMenu.setViewportBorder(null);
 		SpringLayout sl_searchMenuViewport = new SpringLayout();
 		searchMenuViewport.setLayout(sl_searchMenuViewport);
 		
-		RelationMenu relationMenu = new RelationMenu();
+		relationMenu = new RelationMenu();
 		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, relationMenu, 0, SpringLayout.NORTH, searchMenuViewport);
 		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, relationMenu, 0, SpringLayout.WEST, searchMenuViewport);
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, relationMenu, 0, SpringLayout.EAST, searchMenuViewport);
-		relationMenu.m_checkbox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MapController.getInstance().showRelationMembers("friend");
-			}
-		});
 		searchMenuViewport.add(relationMenu);
 		
-		InterestMenu interestMenu = new InterestMenu();
+		interestMenu = new InterestMenu();
 		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, interestMenu, 6, SpringLayout.SOUTH, relationMenu);
 		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, interestMenu, 0, SpringLayout.WEST, searchMenuViewport);
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, interestMenu, 0, SpringLayout.EAST, relationMenu);
 		searchMenuViewport.add(interestMenu);
 		
-		CarpoolingMenu carpoolingMenu = new CarpoolingMenu();
+		carpoolingMenu = new CarpoolingMenu();
 		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, carpoolingMenu, 6, SpringLayout.SOUTH, interestMenu);
 		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, carpoolingMenu, 0, SpringLayout.WEST, searchMenuViewport);
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, carpoolingMenu, 0, SpringLayout.EAST, relationMenu);
 		searchMenuViewport.add(carpoolingMenu);
 		
-		FormationMenu formationMenu = new FormationMenu();
+		formationMenu = new FormationMenu();
 		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, formationMenu, 6, SpringLayout.SOUTH, carpoolingMenu);
 		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, formationMenu, 0, SpringLayout.WEST, relationMenu);
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, formationMenu, 0, SpringLayout.EAST, relationMenu);
@@ -75,4 +76,6 @@ public class Menu extends JPanel {
 		searchMenu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(searchMenu, BorderLayout.CENTER);
 	}
+	
+	public RelationMenu getRelationMenu() { return this.relationMenu; }
 }

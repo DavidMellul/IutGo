@@ -29,13 +29,12 @@ public class RelationMenu extends AbstractMenu {
 	 */
 	public RelationMenu() {
 		super("Search for relations", false);
-		
 	}
 
 	@Override
 	protected void initialize() {
 		m_comboBox = new JComboBox<String>();
-		m_comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Amis", "Parent", "Frères"}));
+		m_comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"friends", "family"}));
 		m_searchFilters.add(m_comboBox, BorderLayout.SOUTH);
 		
 		m_lblMood = new JLabel("Mood");
@@ -76,5 +75,7 @@ public class RelationMenu extends AbstractMenu {
 		m_partyMood.setHorizontalAlignment(SwingConstants.CENTER);
 		m_moodPanel.add(m_partyMood);
 	}
+	
+	public JComboBox<String> getComboBox() { return this.m_comboBox; }
 
 }

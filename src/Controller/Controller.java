@@ -103,4 +103,10 @@ public class Controller {
 		this.m_currentMember.setAddress(new Address(add));
 		SerialManager.save(this.m_currentMember, this.m_currentMember.getId()+".dat");
 	}
+	
+	public void serializeAllBeforeClose() {
+		for(Member m : this.m_members) {
+			SerialManager.save(m, m.getId()+".dat");
+		}
+	}
 }

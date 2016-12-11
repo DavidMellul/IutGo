@@ -62,5 +62,6 @@ public abstract class AbstractMenu extends JPanel {
 		initialize();
 	}
 	
+	public JCheckBox getCheckbox() { return this.m_checkbox; }
 	protected abstract void initialize();
 }

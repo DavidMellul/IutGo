@@ -20,6 +20,7 @@ import fr.unice.iut.info.methodo.maps.Layer;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 import fr.unice.iut.info.methodo.maps.Style;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
+import fr.unice.iut.info.methodo.maps.interfaces.MapObject;
 
 public class MapController extends JMapController implements MouseListener, MouseMotionListener, MouseWheelListener {
 
@@ -45,9 +46,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	public MapController(JMapViewer map) {
 		super(map);
-		
-		m_layerRelations = new Layer("Relations");
-		fillLayers();
+		m_layerRelations = new Layer("");
 	}
 	
 	public static MapController getInstance(){
@@ -183,17 +182,27 @@ public class MapController extends JMapController implements MouseListener, Mous
 		this.map.setDisplayPosition(new Coordinate(currLocation.getLat(),currLocation.getLon()), 19);
     }
     
-    private void fillLayers() {
-    	ArrayList<Member> myRelations = Controller.getInstance().getCurrentMember().getAllRelations();
-    	
+    private void fillLayerRelations(String kindOfRelation) {
+    	this.m_layerRelations = new Layer(kindOfRelation);
+    	ArrayList<Member> myRelations = Controller.getInstance().getCurrentMember().getRelations(kindOfRelation);	
     	for(Member m : myRelations) {
-    		MyCoordinate mC = m.getLastPosition().getMyCoordinate();
-    		Coordinate OSMC = new Coordinate(mC.getLat(),mC.getLon());
-    		MapMarker relationMarker = new MapMarkerDot(m_layerRelations, m.getFirstname(), OSMC, new Style());
+	    		MyCoordinate mC = m.getLastPosition().getMyCoordinate();
+	    		Coordinate OSMC = new Coordinate(mC.getLat(),mC.getLon());
+	    		MapMarker relationMarker = new MapMarkerDot(m_layerRelations, m.getFirstname(), OSMC, new Style());
+	    		m_layerRelations.add(relationMarker);
     		}    
     	}
     
-    public void showRelationMembers(String kindOfRelation) {
-    	m_layerRelations.setVisible(true);
+    public void showRelationMembers(String kindOfRelation, boolean visible) { 
+    	if(visible) {
+	    	fillLayerRelations(kindOfRelation);
+	    	for(MapObject m : m_layerRelations.getElements()) {
+	    		MapMarker mm = (MapMarkerDot)m;
+	    		this.map.addMapMarker(mm);
+	    	}
+    	}
+    	else {
+    		this.m_layerRelations.setVisible(false);
+    	}
     }
 }

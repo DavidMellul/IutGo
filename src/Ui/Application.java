@@ -5,19 +5,27 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import Controller.Controller;
 import Controller.MapController;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
@@ -34,7 +42,7 @@ public class Application extends JFrame {
 	private AccountEditionForm m_editionPanel;
 	private FriendAdditionForm m_additionPanel;
 	
-	JLabel lblFocusOnMember;
+	private JLabel lblFocusOnMember;
 	private JButton btnFocusCurrentLocation;
 	
 	private JLabel lblEditAccount;
@@ -42,13 +50,17 @@ public class Application extends JFrame {
 	private JLabel lblAddFriend;
 	private JButton btnAddFriend;
 	
+	private Point coords;
+	
+	private LogBar feedBar;
+	
 	public Application() {
 		super("Iut Go");
 		initialize();
 	}
 	
 	private void initialize(){
-		setSize(1000,650);
+		setSize(1000,675);
 		setUndecorated(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -59,13 +71,53 @@ public class Application extends JFrame {
 			e1.printStackTrace();
 		}
 		setResizable(false);
+		getRootPane().registerKeyboardAction(e -> {
+            Application.this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
 		
 		
 		m_menu = new Menu();
 		m_menu.setPreferredSize(new Dimension(195, 600));
 		m_menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		m_menu.getRelationMenu().getCheckbox().addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				boolean visible = ((JCheckBox)e.getSource()).isSelected();
+			//	MapController.init(m_mapViewer.getViewer());
+				MapController.getInstance().showRelationMembers((String)m_menu.getRelationMenu().getComboBox().getSelectedItem(), visible);
+			}
+		});
 		
 		TitleBarForms titleBarForms = new TitleBarForms();
+		titleBarForms.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mousePressed(MouseEvent e) {
+                coords = e.getPoint();
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                coords = null;  	
+            }
+		});
+		titleBarForms.addMouseMotionListener(new MouseAdapter() {
+			@Override
+            public void mouseDragged(MouseEvent e) {
+                Point p = e.getLocationOnScreen();
+                Application.this.setLocation((int)(p.getX()-coords.getX()),(int)(p.getY()-coords.getY()));
+            }
+		});
+		titleBarForms.getBtnClose().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller.getInstance().serializeAllBeforeClose();
+				Application.this.dispose();
+			}
+		});
+		titleBarForms.getBtnMinus().addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				Application.this.setState(ICONIFIED);
+			}
+		});		
 		getContentPane().add(titleBarForms, BorderLayout.NORTH);
 				
 		m_mapViewer = new MapInterfaceTree("Go");
@@ -205,6 +257,10 @@ public class Application extends JFrame {
 			}
 		});
 		m_mapViewer.getViewer().add(m_additionPanel);
+		
+		feedBar = LogBar.getInstance();
+		feedBar.setBounds(0,610,350,25);
+		m_mapViewer.getViewer().add(feedBar);
 	}
 	
 	public Menu getMenu(){

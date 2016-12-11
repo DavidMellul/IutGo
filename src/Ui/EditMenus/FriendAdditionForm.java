@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
+import Ui.LogBar;
 
 public class FriendAdditionForm extends JPanel {
 	private JTextField fieldMember;
@@ -53,7 +54,7 @@ public class FriendAdditionForm extends JPanel {
 		add(fieldMember);
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"friend", "family"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"friends", "family"}));
 		comboBox.setFont(new Font("Tw Cen MT", Font.PLAIN, 12));
 		comboBox.setBounds(206, 25, 55, 20);
 		add(comboBox);
@@ -77,6 +78,7 @@ public class FriendAdditionForm extends JPanel {
 					String kind = (String)comboBox.getSelectedItem();
 					if(fName.isEmpty() == false & lName.isEmpty() == false) {
 						if(Controller.getInstance().canAddRelation(fName, lName, kind) == true) {
+							LogBar.getInstance().showPositiveFeedback(fName+" "+lName+" has been added to your relations. :)");
 							btnReduce.doClick();
 							fieldMember.setText("");
 						}

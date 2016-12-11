@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
+import Ui.LogBar;
 import Ui.MemberProfile;
 import Utils.Mood;
 import Utils.Util;
@@ -115,6 +116,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 				String address = fieldAddress.getText();
 				Mood m = moodSelected;
 				Controller.getInstance().fillInformationsForMember(nickname, formation, m, address);
+				LogBar.getInstance().showPositiveFeedback("Your account informations were saved.");
 				btnQuit.doClick();
 			}
 		});
