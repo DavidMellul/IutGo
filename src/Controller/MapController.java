@@ -14,6 +14,8 @@ import fr.unice.iut.info.methodo.maps.JMapViewer;
 
 public class MapController extends JMapController implements MouseListener, MouseMotionListener, MouseWheelListener {
 
+	private static MapController m_instance;
+	
 	private static final int MOUSE_BUTTONS_MASK = MouseEvent.BUTTON3_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK
 			| MouseEvent.BUTTON2_DOWN_MASK;
 
@@ -32,6 +34,17 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	public MapController(JMapViewer map) {
 		super(map);
+	}
+	
+	public static MapController getInstance(){
+		return m_instance;
+	}
+	
+	/*
+	 * A appeller AVANT getInstance, pour initialiser le controller
+	 */
+	public static void init(JMapViewer p_map){
+		m_instance = new MapController(p_map);
 	}
 
 	@Override
