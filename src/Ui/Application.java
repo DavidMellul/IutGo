@@ -55,6 +55,8 @@ public class Application extends JFrame {
 	private LogBar feedBar;
 	private JLabel lblUnzoom;
 	private JButton btnUnzoom;
+	private JLabel lblHome;
+	private JButton btnHome;
 	
 	public Application() {
 		super("Iut Go");
@@ -150,6 +152,7 @@ public class Application extends JFrame {
 		});
 		
 		btnEditAccount = new JButton("");
+		btnEditAccount.setToolTipText("Edit account");
 		btnEditAccount.setContentAreaFilled(false);
 		btnEditAccount.setOpaque(false);
 		btnEditAccount.setBorder(null);
@@ -177,6 +180,7 @@ public class Application extends JFrame {
 		});
 		
 		btnAddFriend = new JButton("");
+		btnAddFriend.setToolTipText("Add relation");
 		btnAddFriend.setOpaque(false);
 		btnAddFriend.setFocusPainted(false);
 		btnAddFriend.setContentAreaFilled(false);
@@ -205,6 +209,7 @@ public class Application extends JFrame {
 		});
 		
 		btnUnzoom = new JButton("");
+		btnUnzoom.setToolTipText("Unzoom");
 		btnUnzoom.setBorderPainted(false);
 		btnUnzoom.setBorder(null);
 		btnUnzoom.setContentAreaFilled(false);
@@ -213,6 +218,7 @@ public class Application extends JFrame {
 		btnUnzoom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				LogBar.getInstance().showCommonFeedBack("You've juste unzoomed the map.");
 				m_mapViewer.getViewer().setZoom(2);
 			}
 		});
@@ -222,6 +228,27 @@ public class Application extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent me) { lblUnzoom.setIcon(Util.brighten(lblUnzoom.getIcon())); }
 		});
+		
+		btnHome = new JButton("");
+		btnHome.setToolTipText("Disconnect");
+		btnHome.setFocusPainted(false);
+		btnHome.setContentAreaFilled(false);
+		btnHome.setBorder(null);
+		btnHome.setBorderPainted(false);
+		btnHome.setBounds(52, 565, 32, 32);
+		btnHome.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Controller.getInstance().disconnectUser();
+			}
+		});
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { lblHome.setIcon(Util.darken(lblHome.getIcon())); }
+			@Override
+			public void mouseExited(MouseEvent me) { lblHome.setIcon(Util.brighten(lblHome.getIcon())); }
+		});
+		m_mapViewer.getViewer().add(btnHome);
 		m_mapViewer.getViewer().add(btnUnzoom);
 		
 		m_mapViewer.getViewer().add(btnAddFriend);
@@ -289,6 +316,11 @@ public class Application extends JFrame {
 		lblUnzoom.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_maxUnzoom.png")));
 		lblUnzoom.setBounds(763, 565, 32, 32);
 		m_mapViewer.getViewer().add(lblUnzoom);
+		
+		lblHome = new JLabel("");
+		lblHome.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_disconnect.png")));
+		lblHome.setBounds(52, 565, 32, 32);
+		m_mapViewer.getViewer().add(lblHome);
 	}
 	
 	public Menu getMenu(){

@@ -108,4 +108,10 @@ public class Controller {
 			SerialManager.save(m, m.getId()+".dat");
 		}
 	}
+	public void disconnectUser() {
+		this.m_appScreen.dispose();
+		this.m_currentMember = null;
+		this.m_startScreen = new Form();
+		this.m_startScreen.setVisible(true);
+	}
 }
