@@ -3,12 +3,15 @@ package Ui.SearchMenus;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 
+import Controller.MapController;
 import Ui.MemberProfile;
 
 public class Menu extends JPanel {
@@ -42,6 +45,11 @@ public class Menu extends JPanel {
 		sl_searchMenuViewport.putConstraint(SpringLayout.NORTH, relationMenu, 0, SpringLayout.NORTH, searchMenuViewport);
 		sl_searchMenuViewport.putConstraint(SpringLayout.WEST, relationMenu, 0, SpringLayout.WEST, searchMenuViewport);
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, relationMenu, 0, SpringLayout.EAST, searchMenuViewport);
+		relationMenu.m_checkbox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MapController.getInstance().showRelationMembers("friend");
+			}
+		});
 		searchMenuViewport.add(relationMenu);
 		
 		InterestMenu interestMenu = new InterestMenu();

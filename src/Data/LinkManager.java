@@ -15,7 +15,7 @@ public class LinkManager implements Serializable{
 	
 	private static final long serialVersionUID = 3024903980256506458L;
 	
-	private HashMap<String, String> relationToClass;
+	private HashMap<String, String> relationToClass = new HashMap<String, String>();
 	private static final LinkManager lm = new LinkManager();
 
 	public static LinkManager getInstance() {
@@ -36,7 +36,7 @@ public class LinkManager implements Serializable{
 		}
 	}
 
-	private List<String> pLink = new ArrayList<String>(Arrays.asList("brother", "sister", "mother", "father", "cousin",
+	private List<String> pLink = new ArrayList<String>(Arrays.asList("family","brother", "sister", "mother", "father", "cousin",
 			"uncle", "aunt", "grandfather", "grandmother", "nephew", "niece", "daughter", "son", "married"));
 	private List<String> oLink = new ArrayList<String>(
 			Arrays.asList("friend", "mate", "classmate", "boyfriend", "girlfriend", "lover"));

@@ -20,6 +20,7 @@ import javax.swing.border.MatteBorder;
 
 import Controller.MapController;
 import Ui.EditMenus.AccountEditionForm;
+import Ui.EditMenus.FriendAdditionForm;
 import Ui.SearchMenus.Menu;
 import Utils.Util;
 
@@ -31,6 +32,7 @@ public class Application extends JFrame {
 	private MapInterfaceTree m_mapViewer;
 	private Menu m_menu;
 	private AccountEditionForm m_editionPanel;
+	private FriendAdditionForm m_additionPanel;
 	
 	JLabel lblFocusOnMember;
 	private JButton btnFocusCurrentLocation;
@@ -129,7 +131,15 @@ public class Application extends JFrame {
 		btnAddFriend.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Ici interface d'ajout d'amis, très simple avec input et sélecteur de relation à 3 niveaux, ballec des cousins et tout le bordel, on va dire amis/famille	
+				btnAddFriend.setVisible(false);
+				lblAddFriend.setVisible(false);
+				new Timer(5,new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						m_additionPanel.setLocation(m_additionPanel.getX(), m_additionPanel.getY()+1);
+						if(m_additionPanel.getY() > 15) ((Timer)e.getSource()).stop();
+					}
+				}).start();
 			}
 		});
 		btnAddFriend.addMouseListener(new MouseAdapter() {
@@ -166,7 +176,7 @@ public class Application extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						m_editionPanel.setLocation(m_editionPanel.getX()+1, m_editionPanel.getY());
 						if(m_editionPanel.getX() > getWidth()) {
-							lblEditAccount.setVisible(true); btnEditAccount.setVisible(true);
+							lblEditAccount.setVisible(true); btnEditAccount.setVisible(true); lblEditAccount.setVisible(true);
 							((Timer) e.getSource()).stop();
 						}
 					}
@@ -179,6 +189,22 @@ public class Application extends JFrame {
 		lblAddFriend.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_addFriend.png")));
 		lblAddFriend.setBounds(763, 52, 32, 32);
 		m_mapViewer.getViewer().add(lblAddFriend);
+		
+		m_additionPanel = new FriendAdditionForm();
+		m_additionPanel.setBounds(m_mapViewer.getX()+this.getWidth()/5, -80, 340, 65);
+		m_additionPanel.getBtnReduce().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Timer(2,new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						m_additionPanel.setLocation(m_additionPanel.getX(), m_additionPanel.getY() -1);
+						if(m_additionPanel.getY() == -80) { ((Timer)e.getSource()).stop(); btnAddFriend.setVisible(true); lblAddFriend.setVisible(true);}
+					}
+				}).start();
+			}
+		});
+		m_mapViewer.getViewer().add(m_additionPanel);
 	}
 	
 	public Menu getMenu(){

@@ -3,6 +3,7 @@ package Controller;
 
 import java.util.ArrayList;
 
+import Data.LinkManager;
 import Data.SerialManager;
 import Member.Member;
 import Ui.Application;
@@ -66,6 +67,23 @@ public class Controller {
 			this.m_appScreen.setVisible(true);
 		}
 		return memberTest != null;
+	}
+	
+	public boolean canAddRelation(String firstname, String lastname, String kindOfRelation) {
+		Member relationToAdd = null;
+		String fnCompared = firstname.toUpperCase();
+		String lnCompared = lastname.toUpperCase();
+		for(Member m : this.m_members) {
+			String fnToCompare = m.getFirstname().toUpperCase(); 
+			String lnToCompare = m.getLastname().toUpperCase(); 
+			if(fnToCompare.equals(fnCompared) && lnToCompare.equals(lnCompared) && m != this.m_currentMember) {
+				relationToAdd = m;
+				LinkManager lm = LinkManager.getInstance();
+				lm.createLink(this.m_currentMember, m, kindOfRelation);
+				break;
+			}
+		}
+		return relationToAdd != null;
 	}
 	
 	public String giveBackPassword(String firstname, String lastname) {

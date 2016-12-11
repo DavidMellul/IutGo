@@ -8,13 +8,17 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
 import java.util.Locale;
 
+import Member.Member;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.JMapController;
 import fr.unice.iut.info.methodo.maps.JMapViewer;
+import fr.unice.iut.info.methodo.maps.Layer;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
+import fr.unice.iut.info.methodo.maps.Style;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 
 public class MapController extends JMapController implements MouseListener, MouseMotionListener, MouseWheelListener {
@@ -36,9 +40,14 @@ public class MapController extends JMapController implements MouseListener, Mous
 	private int movementMouseButtonMask = MouseEvent.BUTTON1_DOWN_MASK;
 
 	private boolean wheelZoomEnabled = true;
+	
+	private Layer m_layerRelations;
 
 	public MapController(JMapViewer map) {
 		super(map);
+		
+		m_layerRelations = new Layer("Relations");
+		fillLayers();
 	}
 	
 	public static MapController getInstance(){
@@ -172,5 +181,19 @@ public class MapController extends JMapController implements MouseListener, Mous
 		MapMarker markerCurrLocation = new MapMarkerDot(Color.BLUE, currLocation.getLat(), currLocation.getLon());
 		this.map.addMapMarker(markerCurrLocation);
 		this.map.setDisplayPosition(new Coordinate(currLocation.getLat(),currLocation.getLon()), 19);
+    }
+    
+    private void fillLayers() {
+    	ArrayList<Member> myRelations = Controller.getInstance().getCurrentMember().getAllRelations();
+    	
+    	for(Member m : myRelations) {
+    		MyCoordinate mC = m.getLastPosition().getMyCoordinate();
+    		Coordinate OSMC = new Coordinate(mC.getLat(),mC.getLon());
+    		MapMarker relationMarker = new MapMarkerDot(m_layerRelations, m.getFirstname(), OSMC, new Style());
+    		}    
+    	}
+    
+    public void showRelationMembers(String kindOfRelation) {
+    	m_layerRelations.setVisible(true);
     }
 }
