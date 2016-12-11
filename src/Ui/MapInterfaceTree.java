@@ -42,7 +42,7 @@ public class MapInterfaceTree extends JPanel implements JMapViewerEventListener 
 			public void valueChanged(TreeSelectionEvent e) {
 			}
 		});
-		new MapController(map);
+		MapController.init(map);
 		
 		map.setVisible(true);
 		map.addJMVListener(this);
