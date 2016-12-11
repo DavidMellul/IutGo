@@ -188,6 +188,6 @@ public class MapController extends JMapController implements MouseListener, Mous
 		MarkerCollection mc = (MarkerCollection)o;
 		for(MapMarker m : mc.getMarkers())
 			map.addMapMarker(m);
-		map.repaint();
+		map.validate();
 	}
 }
