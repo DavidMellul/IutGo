@@ -107,12 +107,7 @@ public class TitleBarForms extends JPanel {
 		btnClose.setOpaque(false);
 		btnClose.setFocusPainted(false);
 		btnClose.setBorderPainted(false);
-		btnClose.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+
 		btnClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent me) { labelCroix.setForeground(Color.GRAY); }

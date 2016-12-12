@@ -67,6 +67,7 @@ public class Form extends JFrame {
 		titleBar.getBtnClose().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Form.this.dispose();
+				System.exit(0);
 			}
 		});
 		titleBar.getBtnMinus().addActionListener(new ActionListener() {	

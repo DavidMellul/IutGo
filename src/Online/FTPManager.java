@@ -93,4 +93,12 @@ public class FTPManager {
 		for(Member m : list)
 			uploadMember(m);
 	}
+	
+	public static void closeConnection() {
+		try {
+			client.disconnect();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
