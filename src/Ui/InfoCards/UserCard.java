@@ -20,27 +20,15 @@ import java.awt.Cursor;
 public class UserCard extends Card {
 	
 	private MemberProfile m_profile;
-	private JButton btnMinus;
-	JLabel lblMood;
-	JLabel lblNickname;
-	JLabel lblFormation;
-	JLabel lblAddress;
+	private JLabel lblMood;
+	private JLabel lblNickname;
+	private JLabel lblFormation;
+	private JLabel lblAddress;
 	
 	public UserCard(Member m) {
 		setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		setLayout(null);
 		setVisible(true);
-				
-		m_profile = new MemberProfile();
-		m_profile.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		m_profile.setBounds(0, 0, 335, 83);
-		m_profile.setVisible(true);
-		m_profile.updateProfile(m);
-		
-		lblMood = new JLabel("");
-		lblMood.setBounds(250, 94, 32, 32);
-		lblMood.setIcon(Util.retrieveMoodIcon(m.getMood()));
-		add(lblMood);
 		
 		btnMinus = new JButton("\uF068");
 		btnMinus.setOpaque(false);
@@ -49,7 +37,7 @@ public class UserCard extends Card {
 		btnMinus.setContentAreaFilled(false);
 		btnMinus.setBorder(null);
 		btnMinus.setBorderPainted(false);
-		btnMinus.setBounds(293, 0, 42, 24);
+		btnMinus.setBounds(240, 0, 42, 24);
 		btnMinus.setFont(new Font("FontAwesome", Font.PLAIN, 12));
 		btnMinus.addMouseListener(new MouseAdapter() {
 			@Override
@@ -66,8 +54,10 @@ public class UserCard extends Card {
 		
 		add(btnMinus);
 		
-		this.add(m_profile);
-		m_profile.setVisible(true); m_profile.repaint();
+		lblMood = new JLabel("");
+		lblMood.setBounds(242, 35, 32, 32);
+		lblMood.setIcon(Util.retrieveMoodIcon(m.getMood()));
+		add(lblMood);
 		
 		lblNickname = new JLabel("");
 		lblNickname.setText(m.getNickname());
@@ -87,7 +77,17 @@ public class UserCard extends Card {
 		lblFormation.setBounds(10, 144, 184, 14);
 		add(lblFormation);
 		
-		repaint();
+		m_profile = new MemberProfile();
+		m_profile.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		m_profile.setBounds(0, 0, 280, 83);
+		m_profile.setVisible(true);
+		m_profile.updateProfile(m);
+		
+		this.add(m_profile);
+		m_profile.setVisible(true); 
+		m_profile.repaint();
 	}
+	
+	public JButton getBtnMinus() { return this.btnMinus; }
 
 }

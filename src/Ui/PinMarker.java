@@ -61,6 +61,6 @@ public class PinMarker extends MapMarkerDot {
 		return m_imageRect.contains(position);
 	}
 	
-	public void setCard(Card c) { this.m_associatedCard = c;  this.m_associatedCard.setBounds((int)this.getLat(), (int)this.getLon(), 320, 175);}
+	public void setCard(Card c) { this.m_associatedCard = c;}
 	public Card getCard() { return this.m_associatedCard; }
 }

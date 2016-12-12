@@ -4,6 +4,8 @@ package Ui.SearchMenus;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -19,9 +21,6 @@ public abstract class AbstractMenu extends JPanel {
 	protected JCheckBox m_checkbox;
 	protected JPanel m_headerPanel;
 
-	/**
-	 * Create the panel.
-	 */
 	public AbstractMenu(String p_header, boolean p_startsOpen) {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -36,9 +35,9 @@ public abstract class AbstractMenu extends JPanel {
 		m_checkbox.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
 		m_checkbox.setHorizontalAlignment(SwingConstants.LEFT);
 		m_checkbox.setSelected(p_startsOpen);
-		m_checkbox.addChangeListener(new ChangeListener() {
+		m_checkbox.addActionListener(new ActionListener() {		
 			@Override
-			public void stateChanged(ChangeEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				if(m_checkbox.isSelected()){
 					m_searchFilters.setVisible(true);
 				}else{

@@ -1,6 +1,8 @@
 package Controller;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -39,6 +41,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 	private boolean wheelZoomEnabled = true;
 
 	private MarkerCollection m_listMarkers;
+	private boolean m_isACardShown;
 	
 	// ----------------------------------------------------------------- SINGLETON -------------------------------------------------
 	private static MapController m_instance;
@@ -61,7 +64,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 	// ----------------------------------------------------------------- LISTENERS -------------------------------------------------
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (!movementEnabled || !isMoving)
+		if (!movementEnabled || !isMoving || m_isACardShown)
 			return;
 		// Is only the selected mouse button pressed?
 		if ((e.getModifiersEx() & MOUSE_BUTTONS_MASK) == movementMouseButtonMask
@@ -78,7 +81,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// Do nothing
+		
 	}
 
 	@Override
@@ -90,8 +93,19 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 		PinMarker p = isOnMarker(e.getPoint());
 		if (p != null) {
+			p.getCard().setSize(280, 195);
+			p.getCard().setLocation(map.getMapPosition(p.getCoordinate())); p.getCard().setLocation(p.getCard().getX()-p.getCard().getWidth()/2, p.getCard().getY()-p.getCard().getHeight()/2);
+			p.getCard().getBtnMinus().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					m_isACardShown = false;
+				}
+			});
 			map.add(p.getCard());
+			map.updateUI();
+			this.m_isACardShown = true;
 		}
+
 	}
 
 	@Override
@@ -192,6 +206,6 @@ public class MapController extends JMapController implements MouseListener, Mous
 		MarkerCollection mc = (MarkerCollection)o;
 		for(MapMarker m : mc.getMarkers())
 			map.addMapMarker(m);
-		map.validate();
+		map.updateUI();
 	}
 }
