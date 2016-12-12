@@ -96,7 +96,6 @@ public class FTPManager {
 	
 	public static void closeConnection() {
 		try {
-			client.logout();
 			client.disconnect();
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -120,8 +120,7 @@ public class Application extends JFrame {
 		});
 		titleBarForms.getBtnClose().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controller.getInstance().serializeAllBeforeClose();
-				Application.this.dispose();
+				btnHome.doClick();
 			}
 		});
 		titleBarForms.getBtnMinus().addActionListener(new ActionListener() {	
