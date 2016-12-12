@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+import java.awt.Toolkit;
 
 public class Form extends JFrame {
 
@@ -26,6 +27,7 @@ public class Form extends JFrame {
 	private JButton btnCrerUnCompte;
 	
 	public Form() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Form.class.getResource("/Resources/icone_iutgo_reduced.png")));
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {

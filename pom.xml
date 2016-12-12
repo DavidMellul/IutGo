@@ -40,5 +40,10 @@
     	<artifactId>geoip-api</artifactId>
     	<version>1.2.11</version>
 	</dependency>
+	<dependency>
+    	<groupId>commons-net</groupId>
+    	<artifactId>commons-net</artifactId>
+    	<version>3.3</version>
+	</dependency>
   </dependencies>
 </project>
