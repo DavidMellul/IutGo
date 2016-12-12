@@ -11,7 +11,7 @@ public class FormationMenu extends AbstractMenu {
 	private JLabel m_lblName;
 
 	public FormationMenu() {
-		super("Search for formation", true);
+		super("Search for formation", false);
 	}
 
 	@Override

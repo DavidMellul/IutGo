@@ -19,7 +19,6 @@ import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
 import Member.Member;
-import Utils.Util;
 
 public class MemberProfile extends JPanel {
 
