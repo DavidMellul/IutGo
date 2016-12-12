@@ -57,4 +57,12 @@ public class SQLManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void closeConnection() {
+		try {
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

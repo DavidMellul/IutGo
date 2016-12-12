@@ -136,6 +136,8 @@ public class Controller {
 			SerialManager.save(m, Util.getAndCreateAppdataPath()+File.separator+m.getId()+".dat");
 			FTPManager.uploadMember(m);
 		}
+		FTPManager.closeConnection();
+		SQLManager.closeConnection();
 	}
 	public void disconnectUser() {
 		this.serializeAllBeforeClose();
