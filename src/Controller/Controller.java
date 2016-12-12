@@ -1,16 +1,20 @@
 package Controller;
 
 
+import java.io.File;
 import java.util.ArrayList;
 
 import Data.LinkManager;
 import Data.SerialManager;
 import Member.Member;
+import Online.FTPManager;
+import Online.SQLManager;
 import Ui.Application;
 import Ui.Form;
 import Utils.Address;
 import Utils.Formation;
 import Utils.Mood;
+import Utils.Util;
 
 public class Controller {
 	// ----------------------------------------- Modèle --------------------------------------
@@ -25,6 +29,8 @@ public class Controller {
 	private static Controller m_controller = new Controller();
 	
 	private Controller() {
+		FTPManager.initConnection();
+		SQLManager.initConnection();
 		this.m_members = SerialManager.getAllMembers();
 		this.m_startScreen = new Form();
 	}
@@ -41,14 +47,28 @@ public class Controller {
 		this.m_startScreen.setVisible(true);
 	}
 	
-	public void registerMember(String login, String pass, String lastname, String firstname) {
+	public boolean registerMember(String login, String pass, String lastname, String firstname) {
+		boolean loginAlreadyUsed = false;
+		for(Member m : this.m_members)
+			if(m.getLogin().equals(login)) {
+				loginAlreadyUsed = true;
+				break;
+			}
+		
+		if(loginAlreadyUsed) return false;
+		
 		Member m = new Member();
 		m.setFirstname(firstname);
 		m.setLastname(lastname);
 		m.setLogin(login);
 		m.setPassword(pass);
-		SerialManager.save(m, m.getId()+".dat");
+		
+		SQLManager.insertMember(m);
+		SerialManager.save(m, Util.getAndCreateAppdataPath()+File.separator+m.getId()+".dat");
+		FTPManager.uploadMember(m);
+
 		this.m_members.add(m);
+		return true;
 	}
 	
 	public boolean canLogMember(String login, String pass) {

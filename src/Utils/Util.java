@@ -3,8 +3,10 @@ package Utils;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.Icon;
@@ -87,5 +89,26 @@ public class Util {
 		 	default: break;
 		 }
 		 return iconToReturn;
+	 }
+	 
+	 public static String getAndCreateAppdataPath() {
+		 String appdataPath = getPlatformDependantAppdata()+File.separator+"IutGo";
+		 File tryer = new File(appdataPath);
+		 if(tryer.exists() == false || tryer.isDirectory() == false)
+			 tryer.mkdirs();
+		 return appdataPath;
+	 }
+	 
+	 public static String getPlatformDependantAppdata()
+	 {
+	     String OS = System.getProperty("os.name").toUpperCase();
+	     if (OS.contains("WIN"))
+	         return System.getenv("APPDATA");
+	     else if (OS.contains("MAC"))
+	         return System.getProperty("user.home") + "/Library/Application "
+	                 + "Support";
+	     else if (OS.contains("NUX"))
+	         return System.getProperty("user.home");
+	     return System.getProperty("user.dir");
 	 }
 }

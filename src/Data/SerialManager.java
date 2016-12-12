@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import Member.Member;
+import Online.FTPManager;
+import Utils.Util;
 
 public class SerialManager {
 	public  static void save (Object o, String fileName){
@@ -58,12 +60,13 @@ public class SerialManager {
         return o;
     }
     public static ArrayList<Member> getAllMembers() {
-        File[] listOfFiles = new File(".").listFiles();
+    	FTPManager.retrieveAllMembers();
+        File[] listOfFiles = new File(Util.getAndCreateAppdataPath()).listFiles();
         ArrayList<Member> list = new ArrayList<Member>();
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(".dat")) {
                list.add(new Member());
-               list.set(list.size()-1, (Member) retrieve(list.get(list.size()-1).getId()+".dat"));
+               list.set(list.size()-1, (Member) retrieve(listOfFiles[i].getPath()));
             }
         }
         return list;

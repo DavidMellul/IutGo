@@ -66,7 +66,7 @@ public class AccountCreationForm extends JPanel{
 		
 		lblNomDeCompte = new JLabel("Login");
 		lblNomDeCompte.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));
-		lblNomDeCompte.setBounds(180, 195, 105, 20);
+		lblNomDeCompte.setBounds(180, 195, 47, 20);
 		this.add(lblNomDeCompte);
 		
 		lblMotDePasse = new JLabel("Password");
@@ -96,9 +96,12 @@ public class AccountCreationForm extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				String login = fieldLogin.getText(); String pass = String.valueOf(fieldPass.getPassword()); String confirm = String.valueOf(fieldConfirm.getPassword());
 				if(!login.isEmpty() && !pass.isEmpty() && confirm.equals(pass)) {
-					Controller.getInstance().registerMember(login,pass,fieldLastname.getText(),fieldFirstname.getText());
-					btnGoBack.doClick();
-					fieldLogin.setText(""); fieldPass.setText(""); fieldConfirm.setText(""); fieldLastname.setText(""); fieldFirstname.setText("");
+						if(Controller.getInstance().registerMember(login,pass,fieldLastname.getText(),fieldFirstname.getText())) {
+							btnGoBack.doClick();
+							fieldLogin.setText(""); fieldPass.setText(""); fieldConfirm.setText(""); fieldLastname.setText(""); fieldFirstname.setText("");
+						}
+						else	
+							JOptionPane.showMessageDialog(AccountCreationForm.this, "The login you typed is already taken by someone else. Please change.");
 				}
 				else {
 					JOptionPane.showMessageDialog(AccountCreationForm.this, "Please fill in all the required informations.");
@@ -124,7 +127,7 @@ public class AccountCreationForm extends JPanel{
 		
 		lblNom = new JLabel("Last name");
 		lblNom.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 18));
-		lblNom.setBounds(180, 163, 74, 20);
+		lblNom.setBounds(180, 163, 62, 20);
 		add(lblNom);
 		
 		fieldLastname = new JTextField();
