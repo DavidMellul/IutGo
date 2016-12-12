@@ -43,7 +43,6 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	private MarkerCollection m_listMarkers;
 	private UserCard m_userCard;
-//	private boolean m_isACardShown;
 	
 	// ----------------------------------------------------------------- SINGLETON -------------------------------------------------
 	private static MapController m_instance;
@@ -91,14 +90,6 @@ public class MapController extends JMapController implements MouseListener, Mous
 	public void mouseClicked(MouseEvent e) {
 		PinMarker p = isOnMarker(e.getPoint());
 		if (p != null) {
-//			p.getCard().setSize(280, 195);
-//			p.getCard().setLocation(map.getMapPosition(p.getCoordinate())); p.getCard().setLocation(p.getCard().getX()-p.getCard().getWidth()/2, p.getCard().getY()-p.getCard().getHeight()/2);
-//			p.getCard().getBtnMinus().addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					m_isACardShown = false;
-//				}
-//			});
 			if(p instanceof MemberPinMarker){
 				Point position = map.getMapPosition(p.getCoordinate()); 
 				position.setLocation(position.getX() - m_userCard.getWidth()/2, position.getY() - m_userCard.getHeight()/2);
@@ -106,9 +97,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 				m_userCard.setVisible(true);
 				map.add(m_userCard);
 			}
-			
 			map.updateUI();
-//			this.m_isACardShown = true;
 		}
 	}
 
@@ -131,7 +120,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		if (wheelZoomEnabled) {
+		if (wheelZoomEnabled && canMoveMap()) {
 			int rotation = JMapViewer.zoomReverseWheel ? -e.getWheelRotation() : e.getWheelRotation();
 			if (map.getZoom() - rotation >= 2) {
 				map.setZoom(map.getZoom() - rotation, e.getPoint());
@@ -177,7 +166,6 @@ public class MapController extends JMapController implements MouseListener, Mous
 		Coordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate()
 				.toOSMCoordinate();
 		PinMarker markerCurrLocation = new MemberPinMarker("You", currLocation, PinMarker.GREEN, Controller.getInstance().getCurrentMember());
-//		markerCurrLocation.setCard(new UserCard(Controller.getInstance().getCurrentMember()));
 		m_listMarkers.add(markerCurrLocation);
 		
 		map.setDisplayPosition(new Coordinate(currLocation.getLat(), currLocation.getLon()), 18);
@@ -191,7 +179,6 @@ public class MapController extends JMapController implements MouseListener, Mous
 			MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
 			Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
 			PinMarker relation = new MemberPinMarker(m.toString(), osmcMember, PinMarker.BLUE, m);
-//			relation.setCard(new UserCard(m));
 			toChange.add(relation);
 		}
 		
