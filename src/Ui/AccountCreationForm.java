@@ -6,18 +6,20 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
-import javax.swing.JPasswordField;
-import javax.swing.ImageIcon;
 
 public class AccountCreationForm extends JPanel{
 	private static final long serialVersionUID = -7826705477790848021L;
@@ -54,6 +56,12 @@ public class AccountCreationForm extends JPanel{
 		btnGoBack.setOpaque(false);
 		btnGoBack.setBounds(57, 11, 28, 32);
 		btnGoBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnGoBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { lblArrowBack.setForeground(Color.BLUE); lblGoBack.setForeground(Color.BLUE); }
+			@Override
+			public void mouseExited(MouseEvent me) { lblArrowBack.setForeground(Color.BLACK); lblGoBack.setForeground(Color.BLACK); }
+		});
 		add(btnGoBack);
 		
 		JLabel lblConnexion = new JLabel("");

@@ -6,6 +6,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -112,6 +114,12 @@ public class LoginForm extends JPanel {
 						JOptionPane.showMessageDialog(LoginForm.this, "<html>Password : <strong>"+passgivenBack+"</strong></html>");
 				}
 			}
+		});
+		btnMotDePasse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { btnMotDePasse.setForeground(Color.BLUE); }
+			@Override
+			public void mouseExited(MouseEvent me) { btnMotDePasse.setForeground(Color.BLACK); }
 		});
 		btnMotDePasse.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnMotDePasse.setDefaultCapable(false);

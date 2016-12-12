@@ -78,7 +78,7 @@ public class Application extends JFrame {
 		setResizable(false);
 		
 		m_menu = new Menu();
-		m_menu.setPreferredSize(new Dimension(195, 600));
+		m_menu.setPreferredSize(new Dimension(190, 600));
 		m_menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		m_menu.getRelationMenu().getCheckbox().addActionListener(new ActionListener() {
 			@Override

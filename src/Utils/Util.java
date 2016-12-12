@@ -6,15 +6,18 @@ import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import Member.Member;
 
 public class Util {
 	 public static List<String> getProhibitedWords(){
@@ -110,5 +113,15 @@ public class Util {
 	     else if (OS.contains("NUX"))
 	         return System.getProperty("user.home");
 	     return System.getProperty("user.dir");
+	 }
+	 
+	 public static Member[] memberListToArray(ArrayList<Member> list) {
+		 Member[] array = new Member[list.size()];
+		 list.toArray(array);
+		 return array;
+	 }
+	 
+	 public static void showBrutalErrorAndQuit(String msg) {
+		 JOptionPane.showMessageDialog(null, "<html><font color=red>"+msg+"</font></html>", "Iut Go - Error", JOptionPane.ERROR_MESSAGE, null);
 	 }
 }

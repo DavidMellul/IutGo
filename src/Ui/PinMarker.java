@@ -22,7 +22,6 @@ public abstract class PinMarker extends MapMarkerDot {
 	private ImageIcon m_icon;
 	private Rectangle m_imageRect;
 	
-//	private Card m_associatedCard;
 	
 	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
 		super(name, coord);
@@ -53,6 +52,4 @@ public abstract class PinMarker extends MapMarkerDot {
 		return m_imageRect.contains(position);
 	}
 	
-//	public void setCard(Card c) { this.m_associatedCard = c;}
-//	public Card getCard() { return this.m_associatedCard; }
 }

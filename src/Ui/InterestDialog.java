@@ -27,9 +27,11 @@ public class InterestDialog extends JDialog {
 	private JTextField m_txtDesc;
 
 	private JButton m_btnAddPI;
+	private JButton m_btnMinus;
 
 	public InterestDialog() {
 		super();
+		setUndecorated(true);
 		initialize();
 	}
 
@@ -69,12 +71,43 @@ public class InterestDialog extends JDialog {
 		getContentPane().add(m_txtDesc);
 
 		m_btnAddPI = new JButton("\uf067");
+		m_btnAddPI.setForeground(Color.DARK_GRAY);
+		m_btnAddPI.setBorderPainted(false);
 		m_btnAddPI.setFont(new Font("FontAwesome", Font.PLAIN, 20));
 		m_btnAddPI.setContentAreaFilled(false);
 		m_btnAddPI.setBorder(null);
-		m_btnAddPI.setBounds(404, 13, 30, 30);
+		m_btnAddPI.setBounds(375, 11, 30, 30);
+		m_btnAddPI.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { m_btnAddPI.setForeground(Color.BLACK); }
+			@Override
+			public void mouseExited(MouseEvent me) { m_btnAddPI.setForeground(Color.DARK_GRAY); }
+		});
 
 		getContentPane().add(m_btnAddPI);
+		
+		m_btnMinus = new JButton("\uF068");
+		m_btnMinus.setFont(new Font("FontAwesome", Font.PLAIN, 18));
+		m_btnMinus.setContentAreaFilled(false);
+		m_btnMinus.setOpaque(false);
+		m_btnMinus.setForeground(Color.DARK_GRAY);
+		m_btnMinus.setFocusPainted(false);
+		m_btnMinus.setBorder(null);
+		m_btnMinus.setBorderPainted(false);
+		m_btnMinus.setBounds(404, 15, 30, 23);
+		m_btnMinus.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { m_btnMinus.setForeground(Color.BLACK); }
+			@Override
+			public void mouseExited(MouseEvent me) { m_btnMinus.setForeground(Color.DARK_GRAY); }
+		});
+		m_btnMinus.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		getContentPane().add(m_btnMinus);
 	}
 	
 	public JButton getAddBtn(){

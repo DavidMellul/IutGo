@@ -1,8 +1,10 @@
 package Controller;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.border.MatteBorder;
 
 import Interests.InterestPoint;
 import Member.Member;
@@ -120,11 +124,9 @@ public class MapController extends JMapController implements MouseListener, Mous
 					m_interestCard.setVisible(true);
 					map.add(m_interestCard);
 				}
-				
-				map.updateUI();
 			}
 		}
-		else if(e.getButton() == interestMouseButton){
+		else if(e.getButton() == interestMouseButton) {
 			Coordinate c = (Coordinate) map.getPosition(e.getPoint());
 			InterestDialog d = new InterestDialog();
 			d.setLocation(e.getLocationOnScreen());
@@ -137,9 +139,11 @@ public class MapController extends JMapController implements MouseListener, Mous
 						d.dispose();
 					}
 				}
-			});
+			}); 
 		}
+		map.updateUI();
 	}
+	
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -170,12 +174,12 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// do nothing
+		map.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// do nothing
+		map.setBorder(null);
 	}
 
 	@Override
@@ -245,9 +249,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 	}
 	
 	public boolean canMoveMap(){
-		if(m_userCard.isVisible()) return false;
-		
-		return true;
+		return !(m_userCard.isVisible() || m_interestCard.isVisible());
 	}
 
 	public PinMarker isOnMarker(Point position) {

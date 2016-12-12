@@ -16,6 +16,8 @@ import com.javaswingcomponents.rater.JSCRater;
 import Controller.Controller;
 import Interests.InterestPoint;
 import Member.Member;
+import Utils.Util;
+import javax.swing.border.MatteBorder;
 
 public class InterestCard extends Card {
 
@@ -28,6 +30,7 @@ public class InterestCard extends Card {
 
 	public InterestCard() {
 		super();
+		setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		m_btnMinus.setBounds(240, 0, 42, 24);
 		getBtnMinus().setBounds(240, 0, 42, 24);
 		setSize(280, 403);
@@ -96,6 +99,6 @@ public class InterestCard extends Card {
 				toKeep.add(m);
 			}
 		}
-		listMember.setListData((Member[]) toKeep.toArray());
+		listMember.setListData(Util.memberListToArray(toKeep));
 	}
 }

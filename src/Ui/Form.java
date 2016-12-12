@@ -1,8 +1,10 @@
 package Ui;
 
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
-import java.awt.Toolkit;
 
 public class Form extends JFrame {
 
@@ -67,6 +68,7 @@ public class Form extends JFrame {
 		titleBar.getBtnClose().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Form.this.dispose();
+				System.exit(0);
 			}
 		});
 		titleBar.getBtnMinus().addActionListener(new ActionListener() {	
@@ -112,6 +114,12 @@ public class Form extends JFrame {
 					}
 				}).start();
 			}
+		});
+		btnCrerUnCompte.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { btnCrerUnCompte.setForeground(Color.BLUE); }
+			@Override
+			public void mouseExited(MouseEvent me) { btnCrerUnCompte.setForeground(Color.BLACK); }
 		});
 		btnCrerUnCompte.setContentAreaFilled(false);
 		btnCrerUnCompte.setBorderPainted(false);
