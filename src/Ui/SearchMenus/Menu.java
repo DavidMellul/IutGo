@@ -3,9 +3,12 @@ package Ui.SearchMenus;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Label;
+import java.awt.Panel;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 
@@ -20,6 +23,7 @@ public class Menu extends JPanel {
 	InterestMenu interestMenu;
 	CarpoolingMenu carpoolingMenu;
 	FormationMenu formationMenu;
+	private JSlider slider;
 	
 	public Menu() {
 		super();
@@ -72,8 +76,28 @@ public class Menu extends JPanel {
 		searchMenu.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		searchMenu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(searchMenu, BorderLayout.CENTER);
+		
+		Panel panel = new Panel();
+		add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		slider = new JSlider();
+		slider.setPaintLabels(true);
+		slider.setPaintTicks(true);
+		slider.setSnapToTicks(true);
+		slider.setMinimum(10);
+		panel.add(slider);
+		slider.setValue(1);
+		slider.setMaximum(5000);
+		
+		Label label = new Label("1m");
+		panel.add(label, BorderLayout.WEST);
+		
+		Label label_1 = new Label("5000m");
+		panel.add(label_1, BorderLayout.EAST);
 	}
 	
 	public RelationMenu getRelationMenu() { return this.relationMenu; }
 	public InterestMenu getInterestMenu() { return this.interestMenu; }
+	public JSlider getRadiusSlider() { return this.slider; }
 }

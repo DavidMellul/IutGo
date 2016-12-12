@@ -92,10 +92,10 @@ public class Application extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean visible = ((JCheckBox)e.getSource()).isSelected();
-				float p_radius = 10;
-				String nameFilter = "";
-				float minNote = 0;
-				MapController.getInstance().showPointOfInterest(10, "", 0, visible);
+				float p_radius = ((float)m_menu.getRadiusSlider().getValue())/1000f;
+				String nameFilter = m_menu.getInterestMenu().getNameFilter().getText();
+				float note = Float.parseFloat(m_menu.getInterestMenu().getRater().getRating().toString());
+				MapController.getInstance().showPointOfInterest(p_radius, nameFilter, note, visible);
 			}
 		});
 		
