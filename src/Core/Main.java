@@ -4,7 +4,7 @@ package Core;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import Controller.Controller;
+import Controllers.Controller;
 import Utils.LockerMultipleInstances;
 
 public class Main {

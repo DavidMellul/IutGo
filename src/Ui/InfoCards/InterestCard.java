@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 
 import com.javaswingcomponents.rater.JSCRater;
 
-import Controller.Controller;
+import Controllers.Controller;
 import Interests.InterestPoint;
 import Member.Member;
 import Utils.Util;

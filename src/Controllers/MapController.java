@@ -1,4 +1,4 @@
-package Controller;
+package Controllers;
 
 import java.awt.Color;
 import java.awt.Point;

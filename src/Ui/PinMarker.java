@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-import Controller.MapController;
+import Controllers.MapController;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 

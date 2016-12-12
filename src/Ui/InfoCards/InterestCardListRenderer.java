@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import Controller.MapController;
+import Controllers.MapController;
 import Member.Member;
 
 public class InterestCardListRenderer implements ListCellRenderer<Member> {

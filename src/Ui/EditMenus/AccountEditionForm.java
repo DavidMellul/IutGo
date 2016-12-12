@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
-import Controller.Controller;
+import Controllers.Controller;
 import Ui.LogBar;
 import Ui.MemberProfile;
 import Utils.Mood;

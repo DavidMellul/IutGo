@@ -17,8 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
-import Controller.Controller;
+import Controllers.Controller;
 import Member.Member;
+
 
 public class MemberProfile extends JPanel {
 

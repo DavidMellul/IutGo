@@ -25,8 +25,8 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
-import Controller.Controller;
-import Controller.MapController;
+import Controllers.Controller;
+import Controllers.MapController;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.SearchMenus.Menu;

@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
-import Controller.MapController;
+import Controllers.MapController;
 import fr.unice.iut.info.methodo.maps.JMapViewer;
 import fr.unice.iut.info.methodo.maps.Layer;
 import fr.unice.iut.info.methodo.maps.MemoryTileCache;

@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
-import Controller.Controller;
+import Controllers.Controller;
 
 public class LoginForm extends JPanel {
 

@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
-import Controller.Controller;
+import Controllers.Controller;
 
 public class AccountCreationForm extends JPanel{
 	private static final long serialVersionUID = -7826705477790848021L;
