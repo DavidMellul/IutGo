@@ -2,8 +2,6 @@ package Core;
 
 
 import Controller.Controller;
-import Online.FTPManager;
-import Online.SQLManager;
 
 public class Main {
 	public static void main(String args[]) {

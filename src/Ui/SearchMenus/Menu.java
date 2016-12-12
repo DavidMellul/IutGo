@@ -75,4 +75,5 @@ public class Menu extends JPanel {
 	}
 	
 	public RelationMenu getRelationMenu() { return this.relationMenu; }
+	public InterestMenu getInterestMenu() { return this.interestMenu; }
 }

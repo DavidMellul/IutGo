@@ -16,7 +16,6 @@ public class InterestPoint implements Serializable{
 	private MyCoordinate m_coordinate;
 	private List<Lodging> lodgings = new ArrayList<Lodging>();
 	private List<Integer> m_note = new ArrayList<Integer>();
-	private List<Integer> m_visits = new ArrayList<Integer>();
 
 	public InterestPoint(String n) {
 		setNom(n);

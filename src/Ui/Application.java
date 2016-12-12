@@ -87,6 +87,17 @@ public class Application extends JFrame {
 				MapController.getInstance().showRelationMembers((String)m_menu.getRelationMenu().getComboBox().getSelectedItem(), visible);
 			}
 		});
+		m_menu.getInterestMenu().getCheckbox().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean visible = ((JCheckBox)e.getSource()).isSelected();
+				float p_radius = 10;
+				String nameFilter = "";
+				float minNote = 0;
+				MapController.getInstance().showPointOfInterest(10, "", 0, visible);
+			}
+		});
 		
 		TitleBarForms titleBarForms = new TitleBarForms();
 		titleBarForms.addMouseListener(new MouseAdapter() {

@@ -13,9 +13,13 @@ import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
+import Interests.InterestPoint;
 import Member.Member;
+import Ui.InterestDialog;
+import Ui.InterestPinMarker;
 import Ui.MemberPinMarker;
 import Ui.PinMarker;
+import Ui.InfoCards.InterestCard;
 import Ui.InfoCards.UserCard;
 import Utils.MarkerCollection;
 import Utils.MyCoordinate;
@@ -33,6 +37,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 	private static final int MAC_MOUSE_BUTTON1_MASK = MouseEvent.BUTTON1_DOWN_MASK;
 	private int movementMouseButton = MouseEvent.BUTTON1;
 	private int movementMouseButtonMask = MouseEvent.BUTTON1_DOWN_MASK;
+	private int interestMouseButton = MouseEvent.BUTTON3;
 
 	private Point lastDragPoint;
 
@@ -43,6 +48,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	private MarkerCollection m_listMarkers;
 	private UserCard m_userCard;
+	private InterestCard m_interestCard;
 //	private boolean m_isACardShown;
 	
 	// ----------------------------------------------------------------- SINGLETON -------------------------------------------------
@@ -59,6 +65,16 @@ public class MapController extends JMapController implements MouseListener, Mous
 			}
 		});
 		m_userCard.setVisible(false);
+		
+		m_interestCard = new InterestCard();
+		m_interestCard.getBtnMinus().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				m_interestCard.setVisible(false);
+				map.remove(m_interestCard);
+			}
+		});
+		m_interestCard.setVisible(false);
 	}
 
 	public static MapController getInstance() {
@@ -89,26 +105,40 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		PinMarker p = isOnMarker(e.getPoint());
-		if (p != null) {
-//			p.getCard().setSize(280, 195);
-//			p.getCard().setLocation(map.getMapPosition(p.getCoordinate())); p.getCard().setLocation(p.getCard().getX()-p.getCard().getWidth()/2, p.getCard().getY()-p.getCard().getHeight()/2);
-//			p.getCard().getBtnMinus().addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					m_isACardShown = false;
-//				}
-//			});
-			if(p instanceof MemberPinMarker){
-				Point position = map.getMapPosition(p.getCoordinate()); 
-				position.setLocation(position.getX() - m_userCard.getWidth()/2, position.getY() - m_userCard.getHeight()/2);
-				m_userCard.showMember(((MemberPinMarker) p).getMember(), position);
-				m_userCard.setVisible(true);
-				map.add(m_userCard);
+		if(e.getButton() == movementMouseButton){
+			PinMarker p = isOnMarker(e.getPoint());
+			if (p != null) {
+				if(p instanceof MemberPinMarker){
+					Point position = map.getMapPosition(p.getCoordinate()); 
+					position.setLocation(position.getX() - m_userCard.getWidth()/2, position.getY() - m_userCard.getHeight()/2);
+					m_userCard.showMember(((MemberPinMarker) p).getMember(), position);
+					m_userCard.setVisible(true);
+					map.add(m_userCard);
+				}else if(p instanceof InterestPinMarker){
+					Point position = map.getMapPosition(p.getCoordinate()); 
+					position.setLocation(position.getX() - m_interestCard.getWidth()/2, position.getY() - m_interestCard.getHeight()/2);
+					m_interestCard.showInterestPoint(((InterestPinMarker) p).getInterestPoint(), position);
+					m_interestCard.setVisible(true);
+					map.add(m_interestCard);
+				}
+				
+				map.updateUI();
 			}
-			
-			map.updateUI();
-//			this.m_isACardShown = true;
+		}
+		else if(e.getButton() == interestMouseButton){
+			Coordinate c = (Coordinate) map.getPosition(e.getPoint());
+			InterestDialog d = new InterestDialog();
+			d.setLocation(e.getLocationOnScreen());
+			d.setVisible(true);
+			d.getAddBtn().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(!d.getTxtDesc().getText().isEmpty() && !d.getTxtName().getText().isEmpty()){
+						Controller.getInstance().addPointOfInterest(d.getTxtName().getText(), d.getTxtDesc().getText(), c);
+						d.dispose();
+					}
+				}
+			});
 		}
 	}
 
@@ -192,6 +222,21 @@ public class MapController extends JMapController implements MouseListener, Mous
 			Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
 			PinMarker relation = new MemberPinMarker(m.toString(), osmcMember, PinMarker.BLUE, m);
 //			relation.setCard(new UserCard(m));
+			toChange.add(relation);
+		}
+		
+		if (visible) {
+			this.m_listMarkers.addAll(toChange);
+		} else {
+			this.m_listMarkers.removeAll(toChange);
+		}
+	}
+	
+	public void showPointOfInterest(double p_radius, String nameFilter, float minNote, boolean visible){
+		ArrayList<InterestPoint> pIs = Controller.getInstance().getInterestManager().getNearestPointOfInterest(Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate(), p_radius, nameFilter, minNote);
+		ArrayList<MapMarker> toChange = new ArrayList<MapMarker>();
+		for(InterestPoint p : pIs) {
+			PinMarker relation = new InterestPinMarker(p.getName(), p.getMyCoordinate().toOSMCoordinate(), PinMarker.RED, p);
 			toChange.add(relation);
 		}
 		

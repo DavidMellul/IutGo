@@ -54,7 +54,6 @@ public class FTPManager {
 			}
             e.printStackTrace();
         }
-		
 	}
 	
 	public static void uploadMember(Member m) {

@@ -4,6 +4,7 @@ package Controller;
 import java.io.File;
 import java.util.ArrayList;
 
+import Data.InterestManager;
 import Data.LinkManager;
 import Data.SerialManager;
 import Member.Member;
@@ -15,11 +16,13 @@ import Utils.Address;
 import Utils.Formation;
 import Utils.Mood;
 import Utils.Util;
+import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class Controller {
 	// ----------------------------------------- Modèle --------------------------------------
 	private Member m_currentMember;
 	private ArrayList<Member> m_members;
+	private InterestManager m_interests;
 	
 	// ---------------------------------------- Vues -----------------------------------------
 	private Form m_startScreen;
@@ -29,6 +32,7 @@ public class Controller {
 	private static Controller m_controller = new Controller();
 	
 	private Controller() {
+		m_interests = new InterestManager();
 		FTPManager.initConnection();
 		SQLManager.initConnection();
 		this.m_members = SerialManager.getAllMembers();
@@ -41,6 +45,7 @@ public class Controller {
 	
 	public void setCurrentMember(Member m) { this.m_currentMember = m; }
 	public Member getCurrentMember() { return this.m_currentMember; }
+	public InterestManager getInterestManager() { return this.m_interests; }
 	
 	// -------------------------------------- Méthode --------------------------------------
 	public void start() {
@@ -48,6 +53,7 @@ public class Controller {
 	}
 	
 	public boolean registerMember(String login, String pass, String lastname, String firstname) {
+		
 		boolean loginAlreadyUsed = false;
 		for(Member m : this.m_members)
 			if(m.getLogin().equals(login)) {
@@ -135,5 +141,9 @@ public class Controller {
 		this.m_currentMember = null;
 		this.m_startScreen = new Form();
 		this.m_startScreen.setVisible(true);
+	}
+	
+	public void addPointOfInterest(String name, String desc, Coordinate c){
+		m_interests.createInterestPoint(name, desc, c.getLat(), c.getLon());
 	}
 }

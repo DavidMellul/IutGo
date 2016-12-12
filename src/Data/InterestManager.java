@@ -49,7 +49,7 @@ public class InterestManager implements Serializable {
 
     public int size(){ return m_piList.size(); }
 
-    public ArrayList<InterestPoint> getNearestPointOfInterest(MyCoordinate p_center, double p_radius, String nameFilter, float minPrice, float maxPrice, float minNote) throws IllegalArgumentException {
+    public ArrayList<InterestPoint> getNearestPointOfInterest(MyCoordinate p_center, double p_radius, String nameFilter, float minNote) throws IllegalArgumentException {
         if(p_radius <= 0) throw new IllegalArgumentException("Radius is 0 or less");
 
         ArrayList<InterestPoint> list = new ArrayList<InterestPoint>();
@@ -66,7 +66,7 @@ public class InterestManager implements Serializable {
             double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
 
             float price = i.getCoutNuitee();
-            if (Math.abs(d) <= p_radius && i.getName().contains(nameFilter) && price >= minPrice && price <= maxPrice && i.getNoteMoyenne() >= minNote) {
+            if (Math.abs(d) <= p_radius && i.getName().contains(nameFilter) && i.getNoteMoyenne() >= minNote) {
                 list.add(i);
             }
         }
