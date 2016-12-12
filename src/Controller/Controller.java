@@ -126,9 +126,11 @@ public class Controller {
 	public void serializeAllBeforeClose() {
 		for(Member m : this.m_members) {
 			SerialManager.save(m, m.getId()+".dat");
+			FTPManager.uploadMember(m);
 		}
 	}
 	public void disconnectUser() {
+		this.serializeAllBeforeClose();
 		this.m_appScreen.dispose();
 		this.m_currentMember = null;
 		this.m_startScreen = new Form();
