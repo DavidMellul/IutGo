@@ -2,22 +2,24 @@ package Ui;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
 import Member.Member;
-
-import javax.swing.border.MatteBorder;
-import java.awt.Color;
+import Utils.Util;
 
 public class MemberProfile extends JPanel {
 
@@ -38,9 +40,16 @@ public class MemberProfile extends JPanel {
 		panel.setLayout(new BorderLayout(10, 10));
 		
 		userIcon = new JLabel("\uF2BE");
+		userIcon.setForeground(Color.DARK_GRAY);
 		panel.add(userIcon, BorderLayout.WEST);
 		userIcon.setHorizontalAlignment(SwingConstants.CENTER);
 		userIcon.setFont(new Font("FontAwesome", Font.PLAIN, 60));
+		userIcon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { userIcon.setForeground(Color.BLACK);}
+			@Override
+			public void mouseExited(MouseEvent me) {  userIcon.setForeground(Color.DARK_GRAY);}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

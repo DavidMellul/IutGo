@@ -12,6 +12,7 @@ import Online.FTPManager;
 import Online.SQLManager;
 import Ui.Application;
 import Ui.Form;
+import Ui.Commons.SplashScreen;
 import Utils.Address;
 import Utils.Formation;
 import Utils.Mood;
@@ -35,6 +36,7 @@ public class Controller {
 		m_interests = new InterestManager();
 		FTPManager.initConnection();
 		SQLManager.initConnection();
+		SplashScreen.getInstance().setVisible(true);
 		this.m_members = SerialManager.getAllMembers();
 		this.m_startScreen = new Form();
 	}
@@ -131,7 +133,7 @@ public class Controller {
 	
 	public void serializeAllBeforeClose() {
 		for(Member m : this.m_members) {
-			SerialManager.save(m, m.getId()+".dat");
+			SerialManager.save(m, Util.getAndCreateAppdataPath()+File.separator+m.getId()+".dat");
 			FTPManager.uploadMember(m);
 		}
 	}

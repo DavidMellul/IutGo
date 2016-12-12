@@ -36,6 +36,7 @@ public class Form extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(640,480);
+		setTitle("Iut Go");
 		setLocationRelativeTo(null);
 		setUndecorated(true);
 		getContentPane().setLayout(null);

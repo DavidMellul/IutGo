@@ -14,6 +14,7 @@ import org.apache.commons.net.ftp.FTPFile;
 
 import Data.SerialManager;
 import Member.Member;
+import Ui.Commons.SplashScreen;
 import Utils.Util;
 
 public class FTPManager {
@@ -75,10 +76,13 @@ public class FTPManager {
 		try {
 			listOfFile = client.listFiles("/members/");
 			if(listOfFile != null)
-				for( FTPFile f : listOfFile) {
+				for( int i = 0; i< listOfFile.length; i++) {
+					FTPFile f = listOfFile[i];
 					if(!f.isDirectory() && f.getName().contains(".dat")) {
 						retrieveMember(Character.getNumericValue(f.getName().charAt(0)));
 					}
+					Double percent = new Double((float)i/(float)listOfFile.length)*100.0;
+					SplashScreen.getInstance().displayPercentage(percent);
 				}
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import Member.Member;
 import Online.FTPManager;
+import Ui.Commons.SplashScreen;
 import Utils.Util;
 
 public class SerialManager {
@@ -69,6 +70,7 @@ public class SerialManager {
                list.set(list.size()-1, (Member) retrieve(listOfFiles[i].getPath()));
             }
         }
+		SplashScreen.getInstance().dispose();
         return list;
     }
 }
