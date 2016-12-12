@@ -7,6 +7,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -23,8 +24,6 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import Controller.Controller;
 import Controller.MapController;
@@ -32,7 +31,6 @@ import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.SearchMenus.Menu;
 import Utils.Util;
-import java.awt.Toolkit;
 
 
 public class Application extends JFrame {

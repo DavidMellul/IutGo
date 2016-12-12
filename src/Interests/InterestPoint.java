@@ -16,6 +16,7 @@ public class InterestPoint implements Serializable{
 	private MyCoordinate m_coordinate;
 	private List<Lodging> lodgings = new ArrayList<Lodging>();
 	private List<Integer> m_note = new ArrayList<Integer>();
+	private List<Integer> m_visits = new ArrayList<Integer>();
 
 	public InterestPoint(String n) {
 		setNom(n);
@@ -82,13 +83,11 @@ public class InterestPoint implements Serializable{
 			return Integer.MAX_VALUE;
 
 		float moy = 0;
-		int j = 0;
 		for (float i : this.m_note) {
-			j++;
 			moy += i;
 		}
 
-		return (float) (Math.round(moy / j * 2) / 2.0);
+		return (float) (Math.round(moy / m_note.size() * 2) / 2.0);
 	}
 
 	public void setNom(String n) {

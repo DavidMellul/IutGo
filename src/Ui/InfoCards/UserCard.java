@@ -2,11 +2,7 @@ package Ui.InfoCards;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.Point;
 
 import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
@@ -14,80 +10,56 @@ import javax.swing.border.MatteBorder;
 import Member.Member;
 import Ui.MemberProfile;
 import Utils.Util;
-import javax.swing.JButton;
-import java.awt.Cursor;
 
 public class UserCard extends Card {
-	
+
+	private static final long serialVersionUID = 3857208498235487680L;
 	private MemberProfile m_profile;
-	private JLabel lblMood;
-	private JLabel lblNickname;
-	private JLabel lblFormation;
-	private JLabel lblAddress;
-	
-	public UserCard(Member m) {
-		setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		setLayout(null);
-		setVisible(true);
-		
-		btnMinus = new JButton("\uF068");
-		btnMinus.setOpaque(false);
-		btnMinus.setFocusPainted(false);
-		btnMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnMinus.setContentAreaFilled(false);
-		btnMinus.setBorder(null);
-		btnMinus.setBorderPainted(false);
-		btnMinus.setBounds(240, 0, 42, 24);
-		btnMinus.setFont(new Font("FontAwesome", Font.PLAIN, 12));
-		btnMinus.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent me) { btnMinus.setForeground(Color.GRAY); }
-			@Override
-			public void mouseExited(MouseEvent me) { btnMinus.setForeground(Color.BLACK); }
-		});
-		btnMinus.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserCard.this.setVisible(false);
-			}
-		});
-		
-		add(btnMinus);
-		
-		lblMood = new JLabel("");
-		lblMood.setBounds(242, 35, 32, 32);
-		lblMood.setIcon(Util.retrieveMoodIcon(m.getMood()));
-		add(lblMood);
-		
-		lblNickname = new JLabel("");
-		lblNickname.setText(m.getNickname());
-		lblNickname.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
-		lblNickname.setBounds(10, 94, 184, 14);
-		add(lblNickname);
-		
-		lblAddress = new JLabel("Address");
-		lblAddress.setText(m.getAddress().toString());
-		lblAddress.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
-		lblAddress.setBounds(10, 119, 190, 14);
-		add(lblAddress);
-		
-		lblFormation = new JLabel("Formation");
-		lblFormation.setText(m.getFormation().toString());
-		lblFormation.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
-		lblFormation.setBounds(10, 144, 184, 14);
-		add(lblFormation);
-		
+	private JLabel m_lblMood;
+	private JLabel m_lblNickname;
+	private JLabel m_lblFormation;
+	private JLabel m_lblAddress;
+
+	public UserCard() {
+		super();
+		m_lblMood = new JLabel("");
+		m_lblMood.setBounds(242, 35, 32, 32);
+		add(m_lblMood);
+
+		m_lblNickname = new JLabel("");
+		m_lblNickname.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
+		m_lblNickname.setBounds(10, 94, 184, 14);
+		add(m_lblNickname);
+
+		m_lblAddress = new JLabel("Address");
+		m_lblAddress.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
+		m_lblAddress.setBounds(10, 119, 190, 14);
+		add(m_lblAddress);
+
+		m_lblFormation = new JLabel("Formation");
+		m_lblFormation.setFont(new Font("Tw Cen MT", Font.PLAIN, 18));
+		m_lblFormation.setBounds(10, 144, 184, 14);
+		add(m_lblFormation);
+
 		m_profile = new MemberProfile();
 		m_profile.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		m_profile.setBounds(0, 0, 280, 83);
 		m_profile.setVisible(true);
-		m_profile.updateProfile(m);
-		
+		// m_profile.updateProfile(m);
+
 		this.add(m_profile);
-		m_profile.setVisible(true); 
+		m_profile.setVisible(true);
 		m_profile.repaint();
 	}
-	
-	public JButton getBtnMinus() { return this.btnMinus; }
+
+	public void showMember(Member p_member, Point p_position) {
+		setLocation(p_position);
+		m_lblMood.setIcon(Util.retrieveMoodIcon(p_member.getMood()));
+		m_lblNickname.setText(p_member.getNickname());
+		m_lblAddress.setText(p_member.getAddress().toString());
+		m_lblFormation.setText(p_member.getFormation().toString());
+		m_profile.updateProfile(p_member);
+		m_profile.repaint();
+	}
 
 }

@@ -1,6 +1,7 @@
 package Data;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,7 +10,9 @@ import Interests.Lodging;
 import Utils.MyCoordinate;
 
 
-public class InterestManager {
+public class InterestManager implements Serializable {
+	
+	private static final long serialVersionUID = -7398633576499773357L;
 	ArrayList<InterestPoint> m_piList;
 
     public InterestManager(){
