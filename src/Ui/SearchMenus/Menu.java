@@ -12,7 +12,7 @@ import javax.swing.JSlider;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 
-import Ui.MemberProfile;
+import Ui.Commons.MemberProfile;
 
 public class Menu extends JPanel {
 

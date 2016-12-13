@@ -1,4 +1,4 @@
-package Ui;
+package Ui.Commons;
 
 
 import java.awt.BorderLayout;

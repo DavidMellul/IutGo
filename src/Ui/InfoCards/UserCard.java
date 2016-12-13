@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.border.MatteBorder;
 
 import Member.Member;
-import Ui.MemberProfile;
+import Ui.Commons.MemberProfile;
 import Utils.Util;
 
 public class UserCard extends Card {

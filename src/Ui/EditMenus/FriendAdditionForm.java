@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
 import Controllers.Controller;
-import Ui.LogBar;
+import Ui.Commons.LogBar;
 
 public class FriendAdditionForm extends JPanel {
 	

@@ -27,8 +27,10 @@ import javax.swing.border.MatteBorder;
 
 import Controllers.Controller;
 import Controllers.MapController;
+import Ui.Commons.LogBar;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
+import Ui.Forms.TitleBarForms;
 import Ui.SearchMenus.Menu;
 import Utils.Util;
 

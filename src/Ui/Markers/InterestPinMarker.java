@@ -1,4 +1,4 @@
-package Ui;
+package Ui.Markers;
 
 import javax.swing.ImageIcon;
 

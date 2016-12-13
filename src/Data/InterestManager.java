@@ -56,17 +56,26 @@ public class InterestManager implements Serializable {
 
         double x1 = 6371 * Math.cos(p_center.getLat()) * Math.cos(p_center.getLon());
         double y1 = 6371 * Math.cos(p_center.getLat()) * Math.sin(p_center.getLon());
-
+        
+        
         Iterator<InterestPoint> it = m_piList.iterator();
         while(it.hasNext())
         {
             InterestPoint i = it.next();
-            double x2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.cos(i.getMyCoordinate().getLon());
-            double y2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.sin(i.getMyCoordinate().getLon());
-            double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+            double dLat = Math.toRadians(p_center.getLat()- i.getLat());
+            double dLon = Math.toRadians(p_center.getLon()- i.getLon());
+            double lat1 = Math.toRadians(p_center.getLat());
+            double lat2 = Math.toRadians(i.getLat());
+            
+            double a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1)*Math.cos(lat2);
+            double c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            double d = 6371 * c;
+            
+//            double x2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.cos(i.getMyCoordinate().getLon());
+//            double y2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.sin(i.getMyCoordinate().getLon());
+//            double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
 
-            float price = i.getCoutNuitee();
-            if (Math.abs(d) <= p_radius && i.getName().contains(nameFilter) && i.getNoteMoyenne() >= minNote) {
+            if (Math.abs(d) <= p_radius && i.getName().toLowerCase().contains(nameFilter.toLowerCase()) && i.getNoteMoyenne() >= minNote) {
                 list.add(i);
             }
         }

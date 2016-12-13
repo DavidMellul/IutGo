@@ -54,6 +54,18 @@ public class Util {
 			return ic;
 	 }
 	 
+	 public static Icon applyFilter(Icon ic, float r, float g, float b) {
+			float scales[] = {r,g,b,1f};
+			BufferedImage bi = new BufferedImage(ic.getIconWidth(), ic.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+			Graphics gr = bi.createGraphics();
+			ic.paintIcon(null, gr, 0, 0);
+			
+			RescaleOp rsop = new RescaleOp(scales, new float[4], null);
+			bi = rsop.filter(bi, null);
+			ic = new ImageIcon(bi);
+			return ic;
+	 }
+	 
 	 public static Icon brighten(Icon ic) {
 			float scales[] = {2f,2f,2f,1f};
 			BufferedImage bi = new BufferedImage(ic.getIconWidth(), ic.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);

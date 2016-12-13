@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
 import Controllers.Controller;
-import Ui.LogBar;
-import Ui.MemberProfile;
+import Ui.Commons.LogBar;
+import Ui.Commons.MemberProfile;
 import Utils.Mood;
 import Utils.Util;
 import javax.swing.SwingConstants;

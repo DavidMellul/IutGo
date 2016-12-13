@@ -11,8 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public abstract class AbstractMenu extends JPanel {
 
@@ -29,9 +27,12 @@ public abstract class AbstractMenu extends JPanel {
 		m_headerPanel.setLayout(new BorderLayout(0, 0));
 		
 		m_checkbox = new JCheckBox(p_header);
-		m_checkbox.setSelectedIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_checkbox_ticked.png")));
-		m_checkbox.setIcon(new ImageIcon(RelationMenu.class.getResource("/Resources/_checkbox_untick.png")));
+		m_checkbox.setAlignmentY(Component.CENTER_ALIGNMENT);
 		m_checkbox.setAlignmentX(Component.CENTER_ALIGNMENT);
+		ImageIcon checkBox = new ImageIcon(RelationMenu.class.getResource("/Resources/_checkbox_ticked.png"));
+		ImageIcon checkBoxUnticked = new ImageIcon(RelationMenu.class.getResource("/Resources/_checkbox_untick.png"));
+		m_checkbox.setSelectedIcon(checkBox);
+		m_checkbox.setIcon(checkBoxUnticked);
 		m_checkbox.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
 		m_checkbox.setHorizontalAlignment(SwingConstants.LEFT);
 		m_checkbox.setSelected(p_startsOpen);

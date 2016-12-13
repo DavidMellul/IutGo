@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -19,12 +18,12 @@ import javax.swing.border.MatteBorder;
 
 import Interests.InterestPoint;
 import Member.Member;
-import Ui.InterestDialog;
-import Ui.InterestPinMarker;
-import Ui.MemberPinMarker;
-import Ui.PinMarker;
+import Ui.Forms.InterestForm;
 import Ui.InfoCards.InterestCard;
 import Ui.InfoCards.UserCard;
+import Ui.Markers.InterestPinMarker;
+import Ui.Markers.MemberPinMarker;
+import Ui.Markers.PinMarker;
 import Utils.MarkerCollection;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
@@ -32,8 +31,8 @@ import fr.unice.iut.info.methodo.maps.JMapController;
 import fr.unice.iut.info.methodo.maps.JMapViewer;
 import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 
-public class MapController extends JMapController implements MouseListener, MouseMotionListener, MouseWheelListener, Observer {
-
+public class MapController extends JMapController
+		implements MouseListener, MouseMotionListener, MouseWheelListener, Observer {
 
 	private static final int MOUSE_BUTTONS_MASK = MouseEvent.BUTTON3_DOWN_MASK | MouseEvent.BUTTON1_DOWN_MASK
 			| MouseEvent.BUTTON2_DOWN_MASK;
@@ -53,12 +52,15 @@ public class MapController extends JMapController implements MouseListener, Mous
 	private MarkerCollection m_listMarkers;
 	private UserCard m_userCard;
 	private InterestCard m_interestCard;
-	
-	// ----------------------------------------------------------------- SINGLETON -------------------------------------------------
+
+	// -----------------------------------------------------------------
+	// SINGLETON -------------------------------------------------
 	private static MapController m_instance;
+
 	private MapController(JMapViewer map) {
 		super(map);
-		m_listMarkers = new MarkerCollection(); m_listMarkers.addObserver(this);
+		m_listMarkers = new MarkerCollection();
+		m_listMarkers.addObserver(this);
 		m_userCard = new UserCard();
 		m_userCard.getBtnMinus().addActionListener(new ActionListener() {
 			@Override
@@ -68,7 +70,7 @@ public class MapController extends JMapController implements MouseListener, Mous
 			}
 		});
 		m_userCard.setVisible(false);
-		
+
 		m_interestCard = new InterestCard();
 		m_interestCard.getBtnMinus().addActionListener(new ActionListener() {
 			@Override
@@ -83,12 +85,13 @@ public class MapController extends JMapController implements MouseListener, Mous
 	public static MapController getInstance() {
 		return m_instance;
 	}
-	
+
 	public static void init(JMapViewer p_map) {
 		m_instance = new MapController(p_map);
 	}
-	
-	// ----------------------------------------------------------------- LISTENERS -------------------------------------------------
+
+	// -----------------------------------------------------------------
+	// LISTENERS -------------------------------------------------
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (!movementEnabled || !isMoving || !canMoveMap())
@@ -108,42 +111,43 @@ public class MapController extends JMapController implements MouseListener, Mous
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == movementMouseButton){
+		if (e.getButton() == movementMouseButton) {
 			PinMarker p = isOnMarker(e.getPoint());
 			if (p != null) {
-				if(p instanceof MemberPinMarker){
-					Point position = map.getMapPosition(p.getCoordinate()); 
-					position.setLocation(position.getX() - m_userCard.getWidth()/2, position.getY() - m_userCard.getHeight()/2);
+				if (p instanceof MemberPinMarker) {
+					Point position = map.getMapPosition(p.getCoordinate());
+					position.setLocation(position.getX() - m_userCard.getWidth() / 2,
+							position.getY() - m_userCard.getHeight() / 2);
 					m_userCard.showMember(((MemberPinMarker) p).getMember(), position);
 					m_userCard.setVisible(true);
 					map.add(m_userCard);
-				}else if(p instanceof InterestPinMarker){
-					Point position = map.getMapPosition(p.getCoordinate()); 
-					position.setLocation(position.getX() - m_interestCard.getWidth()/2, position.getY() - m_interestCard.getHeight()/2);
+				} else if (p instanceof InterestPinMarker) {
+					Point position = map.getMapPosition(p.getCoordinate());
+					position.setLocation(position.getX() - m_interestCard.getWidth() / 2,
+							position.getY() - m_interestCard.getHeight() / 2);
 					m_interestCard.showInterestPoint(((InterestPinMarker) p).getInterestPoint(), position);
 					m_interestCard.setVisible(true);
 					map.add(m_interestCard);
 				}
 			}
-		}
-		else if(e.getButton() == interestMouseButton) {
+		} else if (e.getButton() == interestMouseButton) {
 			Coordinate c = (Coordinate) map.getPosition(e.getPoint());
-			InterestDialog d = new InterestDialog();
+			InterestForm d = new InterestForm();
 			d.setLocation(e.getLocationOnScreen());
 			d.setVisible(true);
 			d.getAddBtn().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(!d.getTxtDesc().getText().isEmpty() && !d.getTxtName().getText().isEmpty()){
-						Controller.getInstance().addPointOfInterest(d.getTxtName().getText(), d.getTxtDesc().getText(), c);
+					if (!d.getTxtDesc().getText().isEmpty() && !d.getTxtName().getText().isEmpty()) {
+						Controller.getInstance().addPointOfInterest(d.getTxtName().getText(), d.getTxtDesc().getText(),
+								c);
 						d.dispose();
 					}
 				}
-			}); 
+			});
 		}
 		map.updateUI();
 	}
-	
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -204,56 +208,61 @@ public class MapController extends JMapController implements MouseListener, Mous
 		return os != null && os.toLowerCase(Locale.ENGLISH).startsWith("mac os x");
 	}
 
-	// ----------------------------------------------------------------- METHODES ESSENTIELLES -------------------------------------------------
+	// -----------------------------------------------------------------
+	// METHODES ESSENTIELLES -------------------------------------------------
 
 	public void showAndFitOnCurrentPosition() {
 		Coordinate currLocation = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate()
 				.toOSMCoordinate();
-		PinMarker markerCurrLocation = new MemberPinMarker("You", currLocation, PinMarker.GREEN, Controller.getInstance().getCurrentMember());
-		m_listMarkers.add(markerCurrLocation);
-		
+		PinMarker markerCurrLocation = new MemberPinMarker("You", currLocation, PinMarker.GREEN,
+				Controller.getInstance().getCurrentMember());
+		m_listMarkers.setMemberMarker(markerCurrLocation);
+
 		map.setDisplayPosition(new Coordinate(currLocation.getLat(), currLocation.getLon()), 18);
 	}
 
-
-
 	public void showRelationMembers(String kindOfRelation, boolean visible) {
-		ArrayList<MapMarker> toChange = new ArrayList<MapMarker>();
-		for(Member m : Controller.getInstance().getCurrentMember().getRelations(kindOfRelation)) {
-			MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
-			Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
-			PinMarker relation = new MemberPinMarker(m.toString(), osmcMember, PinMarker.BLUE, m);
-			toChange.add(relation);
-		}
-		
+		m_listMarkers.removeAllRelations();
 		if (visible) {
-			this.m_listMarkers.addAll(toChange);
-		} else {
-			this.m_listMarkers.removeAll(toChange);
+			ArrayList<MapMarker> toChange = new ArrayList<MapMarker>();
+			for (Member m : Controller.getInstance().getCurrentMember().getRelations(kindOfRelation)) {
+				MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
+				Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
+				PinMarker relation = new MemberPinMarker(m.toString(), osmcMember, PinMarker.BLUE, m);
+				toChange.add(relation);
+			}
+			m_listMarkers.addAllRelations(toChange);
 		}
 	}
-	
-	public void showPointOfInterest(double p_radius, String nameFilter, float minNote, boolean visible){
-		ArrayList<InterestPoint> pIs = Controller.getInstance().getInterestManager().getNearestPointOfInterest(Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate(), p_radius, nameFilter, minNote);
-		ArrayList<MapMarker> toChange = new ArrayList<MapMarker>();
-		for(InterestPoint p : pIs) {
-			PinMarker relation = new InterestPinMarker(p.getName(), p.getMyCoordinate().toOSMCoordinate(), PinMarker.RED, p);
-			toChange.add(relation);
-		}
-		
+
+	public void showPointOfInterest(double p_radius, String nameFilter, float minNote, boolean visible) {
+		m_listMarkers.removeAllInterest();
 		if (visible) {
-			this.m_listMarkers.addAll(toChange);
-		} else {
-			this.m_listMarkers.removeAll(toChange);
+			ArrayList<InterestPoint> pIs = Controller.getInstance().getInterestManager().getNearestPointOfInterest(
+					Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate(), p_radius,
+					nameFilter, minNote);
+			ArrayList<MapMarker> toChange = new ArrayList<MapMarker>();
+			for (InterestPoint p : pIs) {
+				PinMarker relation = new InterestPinMarker(p.getName(), p.getMyCoordinate().toOSMCoordinate(),
+						PinMarker.RED, p);
+				toChange.add(relation);
+			}
+			m_listMarkers.addAllInterest(toChange);
 		}
 	}
-	
-	public boolean canMoveMap(){
+
+	public boolean canMoveMap() {
 		return !(m_userCard.isVisible() || m_interestCard.isVisible());
 	}
 
 	public PinMarker isOnMarker(Point position) {
-		for (MapMarker m : m_listMarkers.getMarkers()) {
+		for (MapMarker m : m_listMarkers.getAllRelations()) {
+			if (m instanceof PinMarker) {
+				if (((PinMarker) m).contains(position))
+					return (PinMarker) m;
+			}
+		}
+		for (MapMarker m : m_listMarkers.getAllInterest()) {
 			if (m instanceof PinMarker) {
 				if (((PinMarker) m).contains(position))
 					return (PinMarker) m;
@@ -262,12 +271,19 @@ public class MapController extends JMapController implements MouseListener, Mous
 		return null;
 	}
 
-	// ------------------------------------------------------------------ PATTERN OBSERVER-OBSERVABLE -----------------------------------------------
+	// ------------------------------------------------------------------
+	// PATTERN OBSERVER-OBSERVABLE
+	// -----------------------------------------------
 	@Override
 	public void update(Observable o, Object arg) {
 		map.removeAllMapMarkers();
-		MarkerCollection mc = (MarkerCollection)o;
-		for(MapMarker m : mc.getMarkers())
+		MarkerCollection mc = (MarkerCollection) o;
+		if(mc.getCurrentMember() != null){
+			map.addMapMarker(mc.getCurrentMember());
+		}
+		for (MapMarker m : mc.getAllRelations())
+			map.addMapMarker(m);
+		for (MapMarker m : mc.getAllInterest())
 			map.addMapMarker(m);
 		map.updateUI();
 	}

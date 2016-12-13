@@ -1,4 +1,4 @@
-package Ui;
+package Ui.Forms;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
-public class InterestDialog extends JDialog {
+public class InterestForm extends JDialog {
 
 	private static final long serialVersionUID = -8596487088214068325L;
 
@@ -29,7 +29,7 @@ public class InterestDialog extends JDialog {
 	private JButton m_btnAddPI;
 	private JButton m_btnMinus;
 
-	public InterestDialog() {
+	public InterestForm() {
 		super();
 		setUndecorated(true);
 		initialize();
