@@ -6,12 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import Controllers.Controller;
 import Data.InterestManager;
 import Data.SerialManager;
 import Interests.InterestPoint;
@@ -99,20 +102,34 @@ public class FTPManager {
 	public static void retrieveInterestManager() {
 		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
 		String remoteFilePath = "/members/im.dat";
+		
+		FTPFile[] list = null;
+		ArrayList<String> names = new ArrayList<String>();
+
 		try {
-			OutputStream output;
-            output = new FileOutputStream(localFilePath);
-            client.retrieveFile(remoteFilePath,output);
-            output.flush();
-            output.close();
-        } catch (IOException e) {
-        	try {
-				Files.delete(new File(localFilePath).toPath());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-            e.printStackTrace();
-        }
+			list = client.listFiles("/members/");
+			for(FTPFile f : list)
+				names.add(f.getName());
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+		
+		if(names.contains("im.dat")) {
+			try {
+				OutputStream output;
+	            output = new FileOutputStream(localFilePath);
+	            client.retrieveFile(remoteFilePath,output);
+	            output.flush();
+	            output.close();
+	        } catch (Exception e) {
+	        	try {
+					Files.delete(Paths.get(localFilePath));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+	            e.printStackTrace();
+	        }
+		}
 		SplashScreen.getInstance().dispose();
 	}
 	
@@ -120,13 +137,21 @@ public class FTPManager {
 		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
 		String remoteFilePath = "/members/im.dat";
 		
-		//On le récupére pour par le perdre et on envoie une version "merged" du local et du distant.
-		InterestManager localIm = SerialManager.getInterestManager();
+		InterestManager localIm = Controller.getInstance().getInterestManager();
 		retrieveInterestManager();
 		InterestManager remoteIm = SerialManager.getInterestManager();
 		localIm.merge(remoteIm);
 		SerialManager.save(localFilePath, localFilePath);
-				
+		
+	/*	//On le récupére pour par le perdre et on envoie une version "merged" du local et du distant.
+		if(Files.exists(Paths.get(localFilePath))) {
+			InterestManager localIm = SerialManager.getInterestManager();
+			retrieveInterestManager();
+			InterestManager remoteIm = SerialManager.getInterestManager();
+			localIm.merge(remoteIm);
+			SerialManager.save(localFilePath, localFilePath);
+		}
+		*/		
 		try {
 			FileInputStream fis = new FileInputStream(localFilePath);
 	        client.storeFile(remoteFilePath, fis);

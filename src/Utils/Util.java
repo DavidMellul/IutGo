@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Member.Member;
+import fr.unice.iut.info.methodo.maps.Coordinate;
 
 public class Util {
 	 public static List<String> getProhibitedWords(){
@@ -95,6 +96,7 @@ public class Util {
 	 
 	 public static Icon retrieveMoodIcon(Mood m) {
 		 ImageIcon iconToReturn = null;
+		 if(m == null) return new ImageIcon(Util.class.getResource("/Resources/_smiley_indifferent.png"));
 		 switch(m) {
 		 	case HAPPY: iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_happy.png")); break;
 		 	case CALM:	iconToReturn = new ImageIcon(Util.class.getResource("/Resources/_smiley_calm.png"));  break;
@@ -135,5 +137,17 @@ public class Util {
 	 
 	 public static void showBrutalErrorAndQuit(String msg) {
 		 JOptionPane.showMessageDialog(null, "<html><font color=red>"+msg+"</font></html>", "Iut Go - Error", JOptionPane.ERROR_MESSAGE, null);
+	 }
+	 
+	 public static double distanceCoordinates(Coordinate c1, Coordinate c2){
+         double dLat = Math.toRadians(c1.getLat()- c2.getLat());
+         double dLon = Math.toRadians(c1.getLon()- c2.getLon());
+         double lat1 = Math.toRadians(c1.getLat());
+         double lat2 = Math.toRadians(c2.getLat());
+         
+         double a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1)*Math.cos(lat2);
+         double c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+         double d = 6371 * c;
+         return d;
 	 }
 }

@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Member.Member;
@@ -42,21 +44,13 @@ public class SerialManager {
             final FileInputStream fichier = new FileInputStream(fileName);
             ois = new ObjectInputStream(fichier);
             o = ois.readObject();
-        } catch (final java.io.FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (final java.io.IOException e) {
-            e.printStackTrace();
-        } catch (final ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ois != null) {
-                    ois.close();
-                }
-            } catch (final IOException ex) {
-                ex.printStackTrace();
-
-            }
+        }catch(Exception e) {
+        	if(ois != null)
+				try {
+					ois.close();
+					Files.delete(Paths.get(fileName));
+					o = null;
+				} catch (IOException e1) {}
         }
         return o;
     }
@@ -65,7 +59,7 @@ public class SerialManager {
         File[] listOfFiles = new File(Util.getAndCreateAppdataPath()).listFiles();
         ArrayList<Member> list = new ArrayList<Member>();
         for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(".dat")) {
+            if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(".dat") && listOfFiles[i].getName().contains("im") == false) {
                list.add(new Member());
                list.set(list.size()-1, (Member) retrieve(listOfFiles[i].getPath()));
             }
@@ -75,14 +69,18 @@ public class SerialManager {
     }
     
     public static InterestManager getInterestManager() {
-    //	FTPManager.retrieveInterestManager();
+    	FTPManager.retrieveInterestManager();
     	InterestManager im = new InterestManager();
     	InterestManager imToKeep = null;
-    	if(new File(Util.getAndCreateAppdataPath()+File.separator+"im.dat").exists())
-    		imToKeep = (InterestManager)retrieve(Util.getAndCreateAppdataPath()+File.separator+"im.dat");
     	
+    	if(Files.exists(Paths.get(Util.getAndCreateAppdataPath()+File.separator+"im.dat"))) {
+    		Object a = retrieve(Util.getAndCreateAppdataPath()+File.separator+"im.dat");
+    		System.out.println(a);
+    	}
+    		
     	if(imToKeep != null)
     		im = imToKeep;
+    	
     	return im;
     }
 }

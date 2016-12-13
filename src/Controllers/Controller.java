@@ -37,6 +37,7 @@ public class Controller {
 		SQLManager.initConnection();
 		SplashScreen.getInstance().setVisible(true);
 		retrieveAllSerializedData();
+		this.m_interests = new InterestManager();
 		this.m_startScreen = new Form();
 	}
 	public static Controller getInstance() { return m_controller; }
@@ -141,8 +142,10 @@ public class Controller {
 			SerialManager.save(m, Util.getAndCreateAppdataPath()+File.separator+m.getId()+".dat");
 			FTPManager.uploadMember(m);
 		}
-		SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
-		FTPManager.uploadInterestManager();
+		if(m_interests.size() > 0) {
+			SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
+			FTPManager.uploadInterestManager();
+		}
 		FTPManager.closeConnection();
 		SQLManager.closeConnection();
 	}

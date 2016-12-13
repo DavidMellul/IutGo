@@ -113,6 +113,10 @@ public class InterestForm extends JDialog {
 		return m_btnAddPI;
 	}
 	
+	public JButton getMinBtn(){
+		return m_btnMinus;
+	}
+	
 	public JTextField getTxtName(){
 		return m_txtName;
 	}

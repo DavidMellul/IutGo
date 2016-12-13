@@ -6,23 +6,18 @@ import java.util.Observable;
 import Ui.Markers.InterestPinMarker;
 import Ui.Markers.MemberPinMarker;
 import Ui.Markers.RelationPinMarker;
-import fr.unice.iut.info.methodo.maps.interfaces.MapMarker;
 
 public class MarkerCollection extends Observable {
 
 	private MemberPinMarker m_currentMember;
 	private ArrayList<RelationPinMarker> m_listRelations;
 	private ArrayList<InterestPinMarker> m_listInterest;
+	private ArrayList<RelationPinMarker> m_listFormation;
 
 	public MarkerCollection() {
 		m_listRelations = new ArrayList<>();
 		m_listInterest = new ArrayList<>();
-	}
-
-	public void addRelation(RelationPinMarker m) {
-		this.m_listRelations.add(m);
-		setChanged();
-		notifyObservers();
+		m_listFormation = new ArrayList<>();
 	}
 	
 	public void setMemberMarker(MemberPinMarker m){
@@ -31,8 +26,20 @@ public class MarkerCollection extends Observable {
 		notifyObservers();
 	}
 
+	public void addRelation(RelationPinMarker m) {
+		this.m_listRelations.add(m);
+		setChanged();
+		notifyObservers();
+	}
+
 	public void addInteret(InterestPinMarker m) {
 		this.m_listInterest.add(m);
+		setChanged();
+		notifyObservers();
+	}
+
+	public void addFormation(RelationPinMarker m) {
+		this.m_listFormation.add(m);
 		setChanged();
 		notifyObservers();
 	}
@@ -49,6 +56,12 @@ public class MarkerCollection extends Observable {
 		notifyObservers();
 	}
 	
+	public void addAllFormation(ArrayList<RelationPinMarker> list){
+		m_listFormation.addAll(list);
+		setChanged();
+		notifyObservers();
+	}
+	
 	public void removeAllRelations(){
 		m_listRelations.clear();
 		setChanged();
@@ -61,12 +74,23 @@ public class MarkerCollection extends Observable {
 		notifyObservers();
 	}
 	
+	public void removeAllFormation(){
+		m_listFormation.clear();
+		setChanged();
+		notifyObservers();
+	}
+	
+	
 	public ArrayList<RelationPinMarker> getAllRelations(){
 		return this.m_listRelations;
 	}
 	
 	public ArrayList<InterestPinMarker> getAllInterest(){
 		return this.m_listInterest;
+	}
+	
+	public ArrayList<RelationPinMarker> getAllFormation(){
+		return this.m_listFormation;
 	}
 	
 	public MemberPinMarker getCurrentMember(){
