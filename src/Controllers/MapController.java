@@ -228,14 +228,12 @@ public class MapController extends JMapController
 	public void showRelationMembers(String kindOfRelation, boolean visible) {
 		m_listMarkers.removeAllRelations();
 		if (visible) {
-			ArrayList<RelationPinMarker> toChange = new ArrayList<RelationPinMarker>();
 			for (Member m : Controller.getInstance().getCurrentMember().getRelations(kindOfRelation)) {
 				MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
 				Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
 				RelationPinMarker relation = new RelationPinMarker(m.toString(), osmcMember, m);
-				toChange.add(relation);
+				m_listMarkers.addRelation(relation);
 			}
-			m_listMarkers.addAllRelations(toChange);
 		}
 	}
 
@@ -245,12 +243,24 @@ public class MapController extends JMapController
 			ArrayList<InterestPoint> pIs = Controller.getInstance().getInterestManager().getNearestPointOfInterest(
 					Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate(), p_radius,
 					nameFilter, minNote);
-			ArrayList<InterestPinMarker> toChange = new ArrayList<InterestPinMarker>();
 			for (InterestPoint p : pIs) {
 				InterestPinMarker relation = new InterestPinMarker(p.getName(), p.getMyCoordinate().toOSMCoordinate(), p);
-				toChange.add(relation);
+				m_listMarkers.addInteret(relation);
 			}
-			m_listMarkers.addAllInterest(toChange);
+		}
+	}
+	
+	
+	public void showFormationMembers(double p_radius, String formation, boolean visible){
+		m_listMarkers.removeAllFormation();
+		if (visible) {
+			for (Member m : Controller.getInstance().getMembers()) {
+				if(m.equals(Controller.getInstance().getCurrentMember())) break;
+				if(m.getFormation().getFormationName().toLowerCase().contains(formation.toLowerCase())){
+					RelationPinMarker relation = new RelationPinMarker(m.toString(), m.getLastPosition().getMyCoordinate().toOSMCoordinate(), m);
+					m_listMarkers.addFormation(relation);
+				}
+			}
 		}
 	}
 
@@ -259,6 +269,9 @@ public class MapController extends JMapController
 	}
 
 	public PinMarker isOnMarker(Point position) {
+		if(m_listMarkers.getCurrentMember().contains(position)){
+			return m_listMarkers.getCurrentMember();
+		}
 		for (MapMarker m : m_listMarkers.getAllRelations()) {
 			if (m instanceof PinMarker) {
 				if (((PinMarker) m).contains(position))

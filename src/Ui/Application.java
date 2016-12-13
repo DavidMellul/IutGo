@@ -34,7 +34,6 @@ import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.Forms.TitleBarForms;
 import Ui.SearchMenus.Menu;
-import Utils.MarkerCollection;
 import Utils.Util;
 
 
@@ -109,6 +108,14 @@ public class Application extends JFrame {
 				String nameFilter = m_menu.getInterestMenu().getNameFilter().getText();
 				float note = Float.parseFloat(m_menu.getInterestMenu().getRater().getRating().toString());
 				MapController.getInstance().showPointOfInterest(m_radiusChosen, nameFilter, note, visible);
+			}
+		});
+		m_menu.getFormationMenu().getCheckbox().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean visible = ((JCheckBox)e.getSource()).isSelected();
+				String nameFilter = m_menu.getFormationMenu().getField().getText();
+				MapController.getInstance().showFormationMembers(m_radiusChosen, nameFilter, visible);
 			}
 		});
 		
