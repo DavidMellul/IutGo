@@ -2,13 +2,11 @@ package Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import Member.Member;
 import Travels.Travel;
 import Utils.Mood;
 import Utils.MyCoordinate;
+import Utils.Util;
 
 public class TravelManager implements Serializable {
 	
@@ -16,63 +14,29 @@ public class TravelManager implements Serializable {
 
 	private ArrayList<Travel> m_travels = new ArrayList<Travel>();
 
-	private static final TravelManager tm = new TravelManager();
-
-	private TravelManager() {
+	public TravelManager() {
 	};
-
-	public static final TravelManager getInstance() {
-		return tm;
-	}
+	
 
 	public ArrayList<Travel> getTravelList() {
 		return m_travels;
 	}
-
-	public ArrayList<Travel> searchByStart(MyCoordinate c) {
+	
+	public ArrayList<Travel> searchTravelAround(MyCoordinate p_center, double p_radius, String start, String dest, Mood mood){
 		ArrayList<Travel> travelS = new ArrayList<Travel>();
-		for (Travel t : this.m_travels)
-			if (c.equals(t.getMyCoordinateStart()))
-				travelS.add(t);
+		for (Travel t : this.m_travels){
+            double d = Util.distanceCoordinates(p_center.toOSMCoordinate(), t.getCoord().toOSMCoordinate());
+            if(d <= p_radius){
+            	if(t.getSeats() <= 0) continue;
+            	if(!t.getStart().toLowerCase().contains(start.toLowerCase())) continue;
+            	if(!t.getEnd().toLowerCase().contains(dest.toLowerCase())) continue;
+            	if(!mood.equals(Mood.NO_SPECIAL_MOOD) && !mood.equals(null) && mood != t.getDriver().getMood()) continue;
+            	
+            	travelS.add(t);
+            }
+		}
+		
 		return travelS;
-	}
-
-	public ArrayList<Travel> searchByDestination(MyCoordinate c) {
-		ArrayList<Travel> travelD = new ArrayList<Travel>();
-		for (Travel t : this.m_travels)
-			if (c.equals(t.getMyCoordinateEnd()))
-				travelD.add(t);
-		return travelD;
-	}
-
-	public ArrayList<Travel> searchByDate(Calendar date, int offset) {
-		ArrayList<Travel> travelT = new ArrayList<Travel>();
-
-		Calendar datePosOffset = (GregorianCalendar) date.clone();
-		datePosOffset.add(Calendar.HOUR_OF_DAY, offset);
-		Calendar dateNegOffset = (GregorianCalendar) date.clone();
-		dateNegOffset.add(Calendar.HOUR_OF_DAY, -offset);
-
-		for (Travel travel : m_travels) {
-			if (travel.getDate().compareTo(datePosOffset) <= 0 && travel.getDate().compareTo(dateNegOffset) >= 0)
-				travelT.add(travel);
-		}
-		return travelT;
-	}
-
-	public ArrayList<Travel> searchByMood(ArrayList<Travel> travel, Mood mood) {
-		ArrayList<Travel> resultat = new ArrayList<Travel>();
-		for (Travel t : travel) {
-			if (t.getDriver().getMood().equals(mood))
-				resultat.add(t);
-			else
-				for (Member mp : t.getPassengersList())
-					if (mp.getMood().equals(mood)) {
-						resultat.add(t);
-						break;
-					}
-		}
-		return resultat;
 	}
 
 	public boolean addTravel(Travel t) {

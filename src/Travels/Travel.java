@@ -14,17 +14,19 @@ public class Travel implements Serializable{
 	private Calendar m_date;
     private Member m_driver;
     private ArrayList<Member> m_passengersList;
-    private MyCoordinate m_coordinateStart;
-    private MyCoordinate m_coordinateEnd;
+    private MyCoordinate m_coord;
+    private String m_start;
+    private String m_end;
     private int m_seats;
 
 
-    public Travel(Calendar date, Member driver,int seats, MyCoordinate cStart, MyCoordinate cEnd){
+    public Travel(Calendar date, Member driver,int seats, MyCoordinate coord, String cStart, String cEnd){
         this.m_driver = driver;
         this.m_seats = seats;
         this.m_passengersList = new ArrayList<Member>();
-        this.m_coordinateStart = cStart;
-        this.m_coordinateEnd = cEnd;
+        this.m_start = cStart;
+        this.m_end = cEnd;
+        this.m_coord = coord;
         this.m_driver.addTravel(this);
     }
 
@@ -43,15 +45,19 @@ public class Travel implements Serializable{
     public int getSeats(){
         return this.m_seats;
     }
+    
+    public MyCoordinate getCoord(){
+    	return m_coord;
+    }
 
 
-    public MyCoordinate getMyCoordinateStart(){
-        return this.m_coordinateStart;
+    public String getStart(){
+        return this.m_start;
     }
 
  
-    public MyCoordinate getMyCoordinateEnd(){
-        return this.m_coordinateEnd;
+    public String getEnd(){
+        return this.m_end;
     }
 
     public boolean addPasenger(Member passenger){
@@ -77,8 +83,8 @@ public class Travel implements Serializable{
                 "date=" + m_date +
                 ", driver=" + m_driver +
                 ", passengersList=" + m_passengersList +
-                ", coordinateStart=" + m_coordinateStart +
-                ", coordinateEnd=" + m_coordinateEnd +
+                ", coordinateStart=" + m_start +
+                ", coordinateEnd=" + m_end +
                 ", seats=" + m_seats +
                 '}';
     }
