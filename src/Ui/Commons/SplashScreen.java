@@ -12,6 +12,8 @@ import javax.swing.JProgressBar;
 
 public class SplashScreen extends JFrame {
 	
+	private static final long serialVersionUID = -4438762451057153169L;
+
 	// ------------------------------------------------------------- SINGLETON -------------------------------------------
 	private static SplashScreen m_instance = new SplashScreen();
 	

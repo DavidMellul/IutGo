@@ -1,7 +1,6 @@
 package Data;
 
 
-import java.awt.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,6 +10,7 @@ import java.util.Set;
 import Interests.InterestPoint;
 import Interests.Lodging;
 import Utils.MyCoordinate;
+import Utils.Util;
 
 
 public class InterestManager implements Serializable {
@@ -56,23 +56,11 @@ public class InterestManager implements Serializable {
         if(p_radius <= 0) throw new IllegalArgumentException("Radius is 0 or less");
 
         ArrayList<InterestPoint> list = new ArrayList<InterestPoint>();
-
-        double x1 = 6371 * Math.cos(p_center.getLat()) * Math.cos(p_center.getLon());
-        double y1 = 6371 * Math.cos(p_center.getLat()) * Math.sin(p_center.getLon());
-        
-        
         Iterator<InterestPoint> it = m_piList.iterator();
         while(it.hasNext())
         {
             InterestPoint i = it.next();
-            double dLat = Math.toRadians(p_center.getLat()- i.getLat());
-            double dLon = Math.toRadians(p_center.getLon()- i.getLon());
-            double lat1 = Math.toRadians(p_center.getLat());
-            double lat2 = Math.toRadians(i.getLat());
-            
-            double a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1)*Math.cos(lat2);
-            double c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            double d = 6371 * c;
+            double d = Util.distanceCoordinates(p_center.toOSMCoordinate(), i.getMyCoordinate().toOSMCoordinate());
             
             if (Math.abs(d) <= p_radius && i.getName().toLowerCase().contains(nameFilter.toLowerCase()) && i.getNoteMoyenne() >= minNote) {
                 list.add(i);

@@ -61,7 +61,6 @@ public class MapController extends JMapController
 	private MapController(JMapViewer map) {
 		super(map);
 		m_listMarkers = new MarkerCollection();
-		m_listMarkers.setMemberMarker(new MemberPinMarker("You", Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate().toOSMCoordinate()));
 		m_listMarkers.addObserver(this);
 		m_userCard = new UserCard();
 		m_userCard.getBtnMinus().addActionListener(new ActionListener() {
@@ -116,15 +115,21 @@ public class MapController extends JMapController
 		if (e.getButton() == movementMouseButton) {
 			PinMarker p = isOnMarker(e.getPoint());
 			if (p != null) {
-				if (p instanceof MemberPinMarker) {
-					Point position = map.getMapPosition(p.getCoordinate());
+				Point position = map.getMapPosition(p.getCoordinate());
+				if(p instanceof RelationPinMarker){
+					position.setLocation(position.getX() - m_userCard.getWidth() / 2,
+							position.getY() - m_userCard.getHeight() / 2);
+					m_userCard.showMember(((RelationPinMarker) p).getMember(), position);
+					m_userCard.setVisible(true);
+					map.add(m_userCard);
+				}
+				else if (p instanceof MemberPinMarker) {
 					position.setLocation(position.getX() - m_userCard.getWidth() / 2,
 							position.getY() - m_userCard.getHeight() / 2);
 					m_userCard.showMember(((MemberPinMarker) p).getMember(), position);
 					m_userCard.setVisible(true);
 					map.add(m_userCard);
 				} else if (p instanceof InterestPinMarker) {
-					Point position = map.getMapPosition(p.getCoordinate());
 					position.setLocation(position.getX() - m_interestCard.getWidth() / 2,
 							position.getY() - m_interestCard.getHeight() / 2);
 					m_interestCard.showInterestPoint(((InterestPinMarker) p).getInterestPoint(), position);
@@ -148,6 +153,13 @@ public class MapController extends JMapController
 						isEditing = false;
 						d.dispose();
 					}
+				}
+			});
+			d.getMinBtn().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					isEditing = false;
+					d.dispose();
 				}
 			});
 			
@@ -255,7 +267,7 @@ public class MapController extends JMapController
 		m_listMarkers.removeAllFormation();
 		if (visible) {
 			for (Member m : Controller.getInstance().getMembers()) {
-				if(m.equals(Controller.getInstance().getCurrentMember())) break;
+				if(m.equals(Controller.getInstance().getCurrentMember())) continue;
 				if(m.getFormation().getFormationName().toLowerCase().contains(formation.toLowerCase())){
 					RelationPinMarker relation = new RelationPinMarker(m.toString(), m.getLastPosition().getMyCoordinate().toOSMCoordinate(), m);
 					m_listMarkers.addFormation(relation);
@@ -269,7 +281,7 @@ public class MapController extends JMapController
 	}
 
 	public PinMarker isOnMarker(Point position) {
-		if(m_listMarkers.getCurrentMember().contains(position)){
+		if(m_listMarkers.getCurrentMember() != null && m_listMarkers.getCurrentMember().contains(position)){
 			return m_listMarkers.getCurrentMember();
 		}
 		for (MapMarker m : m_listMarkers.getAllRelations()) {
@@ -279,6 +291,12 @@ public class MapController extends JMapController
 			}
 		}
 		for (MapMarker m : m_listMarkers.getAllInterest()) {
+			if (m instanceof PinMarker) {
+				if (((PinMarker) m).contains(position))
+					return (PinMarker) m;
+			}
+		}
+		for (MapMarker m : m_listMarkers.getAllFormation()) {
 			if (m instanceof PinMarker) {
 				if (((PinMarker) m).contains(position))
 					return (PinMarker) m;
@@ -302,6 +320,8 @@ public class MapController extends JMapController
 		for (MapMarker m : mc.getAllRelations())
 			map.addMapMarker(m);
 		for (MapMarker m : mc.getAllInterest())
+			map.addMapMarker(m);
+		for (MapMarker m : mc.getAllFormation())
 			map.addMapMarker(m);
 		map.updateUI();
 	}

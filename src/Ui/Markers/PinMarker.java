@@ -23,9 +23,10 @@ public abstract class PinMarker extends MapMarkerDot {
 	protected Rectangle m_imageRect;
 	
 	
-	public PinMarker(String name, Coordinate coord) {
+	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
 		super(name, coord);
 		m_imageRect = new Rectangle(0, 0, 0, 0);
+		m_icon = icon;
 	}
 
 	@Override
