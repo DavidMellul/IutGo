@@ -259,6 +259,9 @@ public class MapController extends JMapController
 	}
 
 	public PinMarker isOnMarker(Point position) {
+		if(m_listMarkers.getCurrentMember().contains(position)){
+			return m_listMarkers.getCurrentMember();
+		}
 		for (MapMarker m : m_listMarkers.getAllRelations()) {
 			if (m instanceof PinMarker) {
 				if (((PinMarker) m).contains(position))

@@ -12,7 +12,9 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import Data.InterestManager;
 import Data.SerialManager;
+import Interests.InterestPoint;
 import Member.Member;
 import Ui.Commons.SplashScreen;
 import Utils.Util;
@@ -78,7 +80,7 @@ public class FTPManager {
 			if(listOfFile != null)
 				for( int i = 0; i< listOfFile.length; i++) {
 					FTPFile f = listOfFile[i];
-					if(!f.isDirectory() && f.getName().contains(".dat")) {
+					if(!f.isDirectory() && f.getName().contains(".dat") && f.getName().contains("im") == false) {
 						retrieveMember(Character.getNumericValue(f.getName().charAt(0)));
 					}
 					Double percent = new Double((float)i/(float)listOfFile.length)*100.0;
@@ -118,6 +120,13 @@ public class FTPManager {
 		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
 		String remoteFilePath = "/members/im.dat";
 		
+		//On le récupére pour par le perdre et on envoie une version "merged" du local et du distant.
+		InterestManager localIm = SerialManager.getInterestManager();
+		retrieveInterestManager();
+		InterestManager remoteIm = SerialManager.getInterestManager();
+		localIm.merge(remoteIm);
+		SerialManager.save(localFilePath, localFilePath);
+				
 		try {
 			FileInputStream fis = new FileInputStream(localFilePath);
 	        client.storeFile(remoteFilePath, fis);
