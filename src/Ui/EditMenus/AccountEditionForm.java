@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -13,6 +15,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import Controllers.Controller;
@@ -20,7 +23,6 @@ import Ui.Commons.LogBar;
 import Ui.Commons.MemberProfile;
 import Utils.Mood;
 import Utils.Util;
-import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AccountEditionForm extends JPanel implements ActionListener{
@@ -61,6 +63,12 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		btnQuit.setBorderPainted(false);
 		btnQuit.setBorder(null);
 		btnQuit.setBounds(412, 10, 28, 28);
+		btnQuit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { lblQuit.setForeground(Color.BLUE); }
+			@Override
+			public void mouseExited(MouseEvent me) { lblQuit.setForeground(Color.BLACK); }
+		});
 		add(btnQuit);
 		
 		lblQuit = new JLabel("\uF00D");
@@ -110,8 +118,11 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		fieldFormation.setColumns(10);
 		
 		btnConfirm = new JButton("Confirm");
+		btnConfirm.setBackground(Color.BLACK);
+		btnConfirm.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btnConfirm.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 14));
 		btnConfirm.setIcon(new ImageIcon(AccountEditionForm.class.getResource("/Resources/102.png")));
-		btnConfirm.setBounds(178, 170, 89, 23);
+		btnConfirm.setBounds(164, 170, 105, 23);
 		btnConfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

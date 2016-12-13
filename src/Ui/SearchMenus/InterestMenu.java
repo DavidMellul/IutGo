@@ -19,7 +19,7 @@ public class InterestMenu extends AbstractMenu {
 
 
 	public InterestMenu() {
-		super("Search interest points", false);
+		super("Search for interest points", false);
 	}
 
 	@Override

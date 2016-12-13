@@ -73,4 +73,16 @@ public class SerialManager {
 		SplashScreen.getInstance().dispose();
         return list;
     }
+    
+    public static InterestManager getInterestManager() {
+    //	FTPManager.retrieveInterestManager();
+    	InterestManager im = new InterestManager();
+    	InterestManager imToKeep = null;
+    	if(new File(Util.getAndCreateAppdataPath()+File.separator+"im.dat").exists())
+    		imToKeep = (InterestManager)retrieve(Util.getAndCreateAppdataPath()+File.separator+"im.dat");
+    	
+    	if(imToKeep != null)
+    		im = imToKeep;
+    	return im;
+    }
 }

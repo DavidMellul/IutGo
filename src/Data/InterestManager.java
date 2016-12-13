@@ -71,10 +71,6 @@ public class InterestManager implements Serializable {
             double c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             double d = 6371 * c;
             
-//            double x2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.cos(i.getMyCoordinate().getLon());
-//            double y2 = 6371 * Math.cos(i.getMyCoordinate().getLat()) * Math.sin(i.getMyCoordinate().getLon());
-//            double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
-
             if (Math.abs(d) <= p_radius && i.getName().toLowerCase().contains(nameFilter.toLowerCase()) && i.getNoteMoyenne() >= minNote) {
                 list.add(i);
             }

@@ -44,7 +44,7 @@ public class SplashScreen extends JFrame {
 		progressBar.setBackground(new Color(21,164,224));
 		progressBar.setBorder(null);
 		progressBar.setForeground(Color.WHITE);
-		progressBar.setBounds(121, 306, 429, 14);
+		progressBar.setBounds(118, 306, 429, 14);
 		panelPrincipal.add(progressBar);
 		
 		lblPercentage = new JLabel("0%");

@@ -24,9 +24,6 @@ public class RelationMenu extends AbstractMenu {
 	private JCheckBox m_partyMood;
 	private JLabel m_lblMood;
 
-	/**
-	 * Create the panel.
-	 */
 	public RelationMenu() {
 		super("Search for relations", false);
 	}

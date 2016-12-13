@@ -33,11 +33,10 @@ public class Controller {
 	private static Controller m_controller = new Controller();
 	
 	private Controller() {
-		m_interests = new InterestManager();
 		FTPManager.initConnection();
 		SQLManager.initConnection();
 		SplashScreen.getInstance().setVisible(true);
-		this.m_members = SerialManager.getAllMembers();
+		retrieveAllSerializedData();
 		this.m_startScreen = new Form();
 	}
 	public static Controller getInstance() { return m_controller; }
@@ -131,11 +130,19 @@ public class Controller {
 		this.m_currentMember.setAddress(new Address(add));
 	}
 	
+	public void retrieveAllSerializedData() {
+		this.m_members = SerialManager.getAllMembers();
+		this.m_interests = SerialManager.getInterestManager();
+		SplashScreen.getInstance().setVisible(false);
+	}
+	
 	public void serializeAllBeforeClose() {
 		for(Member m : this.m_members) {
 			SerialManager.save(m, Util.getAndCreateAppdataPath()+File.separator+m.getId()+".dat");
 			FTPManager.uploadMember(m);
 		}
+		SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
+		FTPManager.uploadInterestManager();
 		FTPManager.closeConnection();
 		SQLManager.closeConnection();
 	}
@@ -149,5 +156,7 @@ public class Controller {
 	
 	public void addPointOfInterest(String name, String desc, Coordinate c){
 		m_interests.createInterestPoint(name, desc, c.getLat(), c.getLon());
+		SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
+		FTPManager.uploadInterestManager();
 	}
 }

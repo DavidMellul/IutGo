@@ -1,8 +1,10 @@
 package Ui.Forms;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -11,13 +13,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.ActionEvent;
 
 public class InterestForm extends JDialog {
 
@@ -38,6 +33,7 @@ public class InterestForm extends JDialog {
 	public void initialize() {
 		setResizable(false);
 		setSize(450, 195);
+		setAlwaysOnTop(true);
 		getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("\uf05a");
@@ -71,17 +67,19 @@ public class InterestForm extends JDialog {
 		getContentPane().add(m_txtDesc);
 
 		m_btnAddPI = new JButton("\uf067");
-		m_btnAddPI.setForeground(Color.DARK_GRAY);
+		m_btnAddPI.setForeground(Color.BLACK);
 		m_btnAddPI.setBorderPainted(false);
 		m_btnAddPI.setFont(new Font("FontAwesome", Font.PLAIN, 20));
 		m_btnAddPI.setContentAreaFilled(false);
 		m_btnAddPI.setBorder(null);
 		m_btnAddPI.setBounds(375, 11, 30, 30);
+		m_btnAddPI.setToolTipText("Add this point of interest");
+		m_btnAddPI.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		m_btnAddPI.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent me) { m_btnAddPI.setForeground(Color.BLACK); }
+			public void mouseEntered(MouseEvent me) { m_btnAddPI.setForeground(Color.BLUE); }
 			@Override
-			public void mouseExited(MouseEvent me) { m_btnAddPI.setForeground(Color.DARK_GRAY); }
+			public void mouseExited(MouseEvent me) { m_btnAddPI.setForeground(Color.BLACK); }
 		});
 
 		getContentPane().add(m_btnAddPI);
@@ -90,21 +88,22 @@ public class InterestForm extends JDialog {
 		m_btnMinus.setFont(new Font("FontAwesome", Font.PLAIN, 18));
 		m_btnMinus.setContentAreaFilled(false);
 		m_btnMinus.setOpaque(false);
-		m_btnMinus.setForeground(Color.DARK_GRAY);
+		m_btnMinus.setForeground(Color.BLACK);
 		m_btnMinus.setFocusPainted(false);
 		m_btnMinus.setBorder(null);
 		m_btnMinus.setBorderPainted(false);
 		m_btnMinus.setBounds(404, 15, 30, 23);
+		m_btnMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		m_btnMinus.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent me) { m_btnMinus.setForeground(Color.BLACK); }
+			public void mouseEntered(MouseEvent me) { m_btnMinus.setForeground(Color.BLUE); }
 			@Override
-			public void mouseExited(MouseEvent me) { m_btnMinus.setForeground(Color.DARK_GRAY); }
+			public void mouseExited(MouseEvent me) { m_btnMinus.setForeground(Color.BLACK); }
 		});
 		m_btnMinus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}
 		});
 		getContentPane().add(m_btnMinus);

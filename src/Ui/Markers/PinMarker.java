@@ -19,13 +19,12 @@ public abstract class PinMarker extends MapMarkerDot {
 	public static final ImageIcon BLUE = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_blue.png"));
 	public static final ImageIcon CYAN = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_cyan.png"));
 	
-	private ImageIcon m_icon;
-	private Rectangle m_imageRect;
+	protected ImageIcon m_icon;
+	protected Rectangle m_imageRect;
 	
 	
-	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
+	public PinMarker(String name, Coordinate coord) {
 		super(name, coord);
-		m_icon = icon;
 		m_imageRect = new Rectangle(0, 0, 0, 0);
 	}
 

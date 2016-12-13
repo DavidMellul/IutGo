@@ -9,9 +9,10 @@ public class InterestPinMarker extends PinMarker {
 
 	private InterestPoint m_pointOfInterest;
 	
-	public InterestPinMarker(String name, Coordinate coord, ImageIcon icon, InterestPoint interest) {
-		super(name, coord, icon);
-		m_pointOfInterest = interest;
+	public InterestPinMarker(String name, Coordinate coord, InterestPoint interest) {
+		super(name, coord);
+		this.m_pointOfInterest = interest;
+		this.m_icon = RED;
 	}
 	
 	public InterestPoint getInterestPoint(){

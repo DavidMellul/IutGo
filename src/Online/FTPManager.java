@@ -94,6 +94,39 @@ public class FTPManager {
 			uploadMember(m);
 	}
 	
+	public static void retrieveInterestManager() {
+		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
+		String remoteFilePath = "/members/im.dat";
+		try {
+			OutputStream output;
+            output = new FileOutputStream(localFilePath);
+            client.retrieveFile(remoteFilePath,output);
+            output.flush();
+            output.close();
+        } catch (IOException e) {
+        	try {
+				Files.delete(new File(localFilePath).toPath());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+            e.printStackTrace();
+        }
+		SplashScreen.getInstance().dispose();
+	}
+	
+	public static void uploadInterestManager() {
+		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
+		String remoteFilePath = "/members/im.dat";
+		
+		try {
+			FileInputStream fis = new FileInputStream(localFilePath);
+	        client.storeFile(remoteFilePath, fis);
+	        fis.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void closeConnection() {
 		try {
 			client.disconnect();

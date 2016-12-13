@@ -24,6 +24,8 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Controllers.Controller;
 import Controllers.MapController;
@@ -32,6 +34,7 @@ import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
 import Ui.Forms.TitleBarForms;
 import Ui.SearchMenus.Menu;
+import Utils.MarkerCollection;
 import Utils.Util;
 
 
@@ -60,6 +63,8 @@ public class Application extends JFrame {
 	private JLabel lblHome;
 	private JButton btnHome;
 	
+	private float m_radiusChosen = 1.0f;
+	
 	public Application() {
 		super("Iut Go");
 		initialize();
@@ -82,6 +87,14 @@ public class Application extends JFrame {
 		m_menu = new Menu();
 		m_menu.setPreferredSize(new Dimension(190, 600));
 		m_menu.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		m_menu.getRadiusSlider().addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				m_radiusChosen = ((float)m_menu.getRadiusSlider().getValue())/1000f;
+				MapController.getInstance().getMarkerCollection().getCurrentMember().setRadius((int)m_radiusChosen);
+				m_mapViewer.getViewer().updateUI();
+			}
+		});
 		m_menu.getRelationMenu().getCheckbox().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -90,14 +103,12 @@ public class Application extends JFrame {
 			}
 		});
 		m_menu.getInterestMenu().getCheckbox().addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean visible = ((JCheckBox)e.getSource()).isSelected();
-				float p_radius = ((float)m_menu.getRadiusSlider().getValue())/1000f;
 				String nameFilter = m_menu.getInterestMenu().getNameFilter().getText();
 				float note = Float.parseFloat(m_menu.getInterestMenu().getRater().getRating().toString());
-				MapController.getInstance().showPointOfInterest(p_radius, nameFilter, note, visible);
+				MapController.getInstance().showPointOfInterest(m_radiusChosen, nameFilter, note, visible);
 			}
 		});
 		

@@ -1,11 +1,14 @@
 package Ui.EditMenus;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -102,6 +105,13 @@ public class FriendAdditionForm extends JPanel {
 		btnReduce.setOpaque(false);
 		btnReduce.setFont(new Font("FontAwesome", btnReduce.getFont().getStyle(), 14));
 		btnReduce.setBounds(308, 0, 33, 23);
+		btnReduce.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnReduce.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { btnReduce.setForeground(Color.BLUE);}
+			@Override
+			public void mouseExited(MouseEvent me) { btnReduce.setForeground(Color.BLACK); }
+		});
 		add(btnReduce);
 
 	}

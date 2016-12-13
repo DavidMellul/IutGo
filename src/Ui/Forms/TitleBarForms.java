@@ -7,8 +7,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -38,11 +36,13 @@ public class TitleBarForms extends JPanel {
 	private JPanel titlePanel;
 	
 	public TitleBarForms() {
+		setBackground(Color.LIGHT_GRAY);
 		setPreferredSize(new Dimension(640, 40));
 		setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		setBounds(new Rectangle(0, 0, 640, 0));
 		
 		titlePanel = new JPanel();
+		titlePanel.setBackground(Color.LIGHT_GRAY);
 		
 		logo = new JLabel("");
 		logo.setIcon(new ImageIcon(TitleBarForms.class.getResource("/Resources/icone_iutgo_reduced.png")));
@@ -52,14 +52,17 @@ public class TitleBarForms extends JPanel {
 		lblIutgo.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 20));
 		
 		buttonPanel = new JPanel();
+		buttonPanel.setBackground(Color.LIGHT_GRAY);
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
 		minusPanel = new JPanel();
+		minusPanel.setBackground(Color.LIGHT_GRAY);
 		minusPanel.setPreferredSize(new Dimension(30, 30));
 		buttonPanel.add(minusPanel);
 		
 		
 		btnMinus = new JButton();
+		btnMinus.setBackground(Color.LIGHT_GRAY);
 		btnMinus.setToolTipText("Iconify");
 		btnMinus.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMinus.setFont(new Font("FontAwesome", Font.PLAIN, 18));
@@ -72,7 +75,7 @@ public class TitleBarForms extends JPanel {
 		btnMinus.setBorderPainted(false);
 		btnMinus.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent me) { btnMinus.setForeground(Color.GRAY); }
+			public void mouseEntered(MouseEvent me) { btnMinus.setForeground(Color.BLUE); }
 			@Override
 			public void mouseExited(MouseEvent me) { btnMinus.setForeground(Color.BLACK); }
 		});
@@ -88,6 +91,7 @@ public class TitleBarForms extends JPanel {
 		minusPanel.setLayout(gl_minusPanel);
 		
 		closePanel = new JPanel();
+		closePanel.setBackground(Color.LIGHT_GRAY);
 		closePanel.setPreferredSize(new Dimension(30, 30));
 		buttonPanel.add(closePanel);
 		
@@ -110,7 +114,7 @@ public class TitleBarForms extends JPanel {
 
 		btnClose.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent me) { labelCroix.setForeground(Color.GRAY); }
+			public void mouseEntered(MouseEvent me) { labelCroix.setForeground(Color.BLUE); }
 			@Override
 			public void mouseExited(MouseEvent me) { labelCroix.setForeground(Color.BLACK); }
 		});

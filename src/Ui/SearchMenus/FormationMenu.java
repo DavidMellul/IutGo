@@ -1,6 +1,5 @@
 package Ui.SearchMenus;
 import java.awt.GridLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -11,7 +10,7 @@ public class FormationMenu extends AbstractMenu {
 	private JLabel m_lblName;
 
 	public FormationMenu() {
-		super("Search for formation", false);
+		super("Search by formation", false);
 	}
 
 	@Override
@@ -25,5 +24,7 @@ public class FormationMenu extends AbstractMenu {
 		m_name.setColumns(10);
 		m_searchFilters.add(m_name);
 	}
+	
+	public JTextField getField() { return this.m_name; }
 
 }
