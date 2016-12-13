@@ -278,7 +278,6 @@ public class Member implements Serializable{
         }
         return travelPassenger;
     }
-
 	
 	// --------------------------------------------- PARTIE FACEBOOK ----------------------------------------
     public double getDistanceWith(Member m) {

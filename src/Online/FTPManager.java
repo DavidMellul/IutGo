@@ -8,16 +8,11 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import Controllers.Controller;
-import Data.InterestManager;
-import Data.SerialManager;
-import Interests.InterestPoint;
 import Member.Member;
 import Ui.Commons.SplashScreen;
 import Utils.Util;
