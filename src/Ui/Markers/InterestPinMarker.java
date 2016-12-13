@@ -8,7 +8,7 @@ public class InterestPinMarker extends PinMarker {
 	private InterestPoint m_pointOfInterest;
 	
 	public InterestPinMarker(String name, Coordinate coord, InterestPoint interest) {
-		super(name, coord, PinMarker.RED);
+		super(name, coord, PinMarker.INTEREST);
 		this.m_pointOfInterest = interest;
 	}
 	

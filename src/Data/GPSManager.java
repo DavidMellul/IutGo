@@ -19,6 +19,7 @@ import com.maxmind.geoip.LookupService;
 import Member.Member;
 import Utils.GPSData;
 import Utils.MyCoordinate;
+import Utils.Util;
 
 public class GPSManager implements Serializable {
 	private static final long serialVersionUID = -3892867060303029823L;
@@ -133,17 +134,11 @@ public class GPSManager implements Serializable {
 
 	        MyCoordinate p_coordinate = p_member.getLastPosition().getMyCoordinate();
 
-	        double x1 = 6371 * Math.cos(p_coordinate.getLat()) * Math.cos(p_coordinate.getLon());
-	        double y1 = 6371 * Math.cos(p_coordinate.getLat()) * Math.sin(p_coordinate.getLon());
-
 	        Iterator<Member> it = list.iterator();
 	        while(it.hasNext())
 	        {
 	            Member m = it.next();
-	            double x2 = 6371 * Math.cos(m.getLastPosition().getMyCoordinate().getLat()) * Math.cos(m.getLastPosition().getMyCoordinate().getLon());
-	            double y2 = 6371 * Math.cos(m.getLastPosition().getMyCoordinate().getLat()) * Math.sin(m.getLastPosition().getMyCoordinate().getLon());
-	            double d = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
-
+	            double d = Util.distanceCoordinates(p_coordinate.toOSMCoordinate(), m.getLastPosition().getMyCoordinate().toOSMCoordinate());
 	            if(Math.abs(d) > p_radius)
 	                it.remove();
 	        }

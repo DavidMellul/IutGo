@@ -11,7 +11,6 @@ import java.util.List;
 
 import Data.GPSManager;
 import Data.LinkManager;
-import Data.TravelManager;
 import Interests.InterestPoint;
 import Links.CustomLink;
 import Links.Link;
@@ -20,7 +19,6 @@ import Utils.Address;
 import Utils.Formation;
 import Utils.GPSData;
 import Utils.Mood;
-import Utils.MyCoordinate;
 
 public class Member implements Serializable{
 	

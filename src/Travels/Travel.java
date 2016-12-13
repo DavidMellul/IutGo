@@ -20,7 +20,7 @@ public class Travel implements Serializable{
     private int m_seats;
 
 
-    public Travel(Calendar date, Member driver,int seats, MyCoordinate coord, String cStart, String cEnd){
+    public Travel(Member driver,int seats, MyCoordinate coord, String cStart, String cEnd){
         this.m_driver = driver;
         this.m_seats = seats;
         this.m_passengersList = new ArrayList<Member>();

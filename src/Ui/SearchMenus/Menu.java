@@ -99,6 +99,7 @@ public class Menu extends JPanel {
 	
 	public RelationMenu getRelationMenu() { return this.relationMenu; }
 	public InterestMenu getInterestMenu() { return this.interestMenu; }
+	public CarpoolingMenu getCarpoolingMenu() { return this.carpoolingMenu; }
 	public FormationMenu getFormationMenu() { return this.formationMenu; }
 	public JSlider getRadiusSlider() { return this.slider; }
 }

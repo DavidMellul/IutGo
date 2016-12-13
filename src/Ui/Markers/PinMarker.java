@@ -13,16 +13,20 @@ import fr.unice.iut.info.methodo.maps.MapMarkerDot;
 
 public abstract class PinMarker extends MapMarkerDot {
 
-	public static final ImageIcon GREEN = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_green.png"));
-	public static final ImageIcon RED = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_red.png"));
-	public static final ImageIcon YELLOW = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_yellow.png"));
-	public static final ImageIcon BLUE = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_blue.png"));
-	public static final ImageIcon CYAN = new ImageIcon(MapController.class.getResource("/Resources/icone_marker_cyan.png"));
-	
+	public static final ImageIcon SELF = new ImageIcon(
+			MapController.class.getResource("/Resources/icone_marker_green.png"));
+	public static final ImageIcon INTEREST = new ImageIcon(
+			MapController.class.getResource("/Resources/icone_marker_red.png"));
+	public static final ImageIcon TRAVEL = new ImageIcon(
+			MapController.class.getResource("/Resources/icone_marker_yellow.png"));
+	public static final ImageIcon RELATION = new ImageIcon(
+			MapController.class.getResource("/Resources/icone_marker_blue.png"));
+	public static final ImageIcon FORMATION = new ImageIcon(
+			MapController.class.getResource("/Resources/icone_marker_cyan.png"));
+
 	protected ImageIcon m_icon;
 	protected Rectangle m_imageRect;
-	
-	
+
 	public PinMarker(String name, Coordinate coord, ImageIcon icon) {
 		super(name, coord);
 		m_imageRect = new Rectangle(0, 0, 0, 0);
@@ -31,25 +35,25 @@ public abstract class PinMarker extends MapMarkerDot {
 
 	@Override
 	public void paint(Graphics g, Point position, int radius) {
-		if(m_icon != null){
-	        int sizeH = m_icon.getIconHeight();
-	        int sizeW = m_icon.getIconWidth();
+		if (m_icon != null) {
+			int sizeH = m_icon.getIconHeight();
+			int sizeW = m_icon.getIconWidth();
 
-	        if (g instanceof Graphics2D) {
-	        	m_imageRect.setLocation(position.x - sizeW/2, position.y - sizeH);
-	        	m_imageRect.setSize(m_icon.getIconWidth(), m_icon.getIconHeight());
-	        	
-	        	g.drawImage(m_icon.getImage(),m_imageRect.x ,m_imageRect.y, null);
-	        }
+			if (g instanceof Graphics2D) {
+				m_imageRect.setLocation(position.x - sizeW / 2, position.y - sizeH);
+				m_imageRect.setSize(m_icon.getIconWidth(), m_icon.getIconHeight());
+
+				g.drawImage(m_icon.getImage(), m_imageRect.x, m_imageRect.y, null);
+			}
 		}
 
-        if (getLayer() == null || getLayer().isVisibleTexts()){
-        	paintText(g, position);
-        }
+		if (getLayer() == null || getLayer().isVisibleTexts()) {
+			paintText(g, position);
+		}
 	}
-	
-	public boolean contains(Point position){
+
+	public boolean contains(Point position) {
 		return m_imageRect.contains(position);
 	}
-	
+
 }

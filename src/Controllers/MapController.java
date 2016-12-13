@@ -18,14 +18,18 @@ import javax.swing.border.MatteBorder;
 
 import Interests.InterestPoint;
 import Member.Member;
+import Travels.Travel;
 import Ui.Forms.InterestForm;
 import Ui.InfoCards.InterestCard;
 import Ui.InfoCards.UserCard;
+import Ui.Markers.FormationPinMarker;
 import Ui.Markers.InterestPinMarker;
 import Ui.Markers.MemberPinMarker;
 import Ui.Markers.PinMarker;
 import Ui.Markers.RelationPinMarker;
+import Ui.Markers.TravelPinMarker;
 import Utils.MarkerCollection;
+import Utils.Mood;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.JMapController;
@@ -116,7 +120,17 @@ public class MapController extends JMapController
 			PinMarker p = isOnMarker(e.getPoint());
 			if (p != null) {
 				Point position = map.getMapPosition(p.getCoordinate());
-				if(p instanceof RelationPinMarker){
+				if(p instanceof TravelPinMarker){
+					//Afficher panneau travel
+				}
+				else if(p instanceof FormationPinMarker){
+					position.setLocation(position.getX() - m_userCard.getWidth() / 2,
+							position.getY() - m_userCard.getHeight() / 2);
+					m_userCard.showMember(((RelationPinMarker) p).getMember(), position);
+					m_userCard.setVisible(true);
+					map.add(m_userCard);
+				}
+				else if(p instanceof FormationPinMarker){
 					position.setLocation(position.getX() - m_userCard.getWidth() / 2,
 							position.getY() - m_userCard.getHeight() / 2);
 					m_userCard.showMember(((RelationPinMarker) p).getMember(), position);
@@ -262,16 +276,26 @@ public class MapController extends JMapController
 		}
 	}
 	
-	
 	public void showFormationMembers(double p_radius, String formation, boolean visible){
 		m_listMarkers.removeAllFormation();
 		if (visible) {
 			for (Member m : Controller.getInstance().getMembers()) {
 				if(m.equals(Controller.getInstance().getCurrentMember())) continue;
 				if(m.getFormation().getFormationName().toLowerCase().contains(formation.toLowerCase())){
-					RelationPinMarker relation = new RelationPinMarker(m.toString(), m.getLastPosition().getMyCoordinate().toOSMCoordinate(), m);
+					FormationPinMarker relation = new FormationPinMarker(m.toString(), m.getLastPosition().getMyCoordinate().toOSMCoordinate(), m);
 					m_listMarkers.addFormation(relation);
 				}
+			}
+		}
+	}
+	
+	public void showCarpools(double p_radius, String start, String end, Mood mood, boolean visible){
+		MyCoordinate pos = Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate();
+		m_listMarkers.removeAllFormation();
+		if (visible) {
+			for (Travel t : Controller.getInstance().getTravelManager().searchTravelAround(pos, p_radius, start, end, mood)) {
+				TravelPinMarker relation = new TravelPinMarker(t.toString(), t.getCoord().toOSMCoordinate(), t);
+				m_listMarkers.addCarpool(relation);
 			}
 		}
 	}
@@ -296,7 +320,13 @@ public class MapController extends JMapController
 					return (PinMarker) m;
 			}
 		}
-		for (MapMarker m : m_listMarkers.getAllFormation()) {
+		for (MapMarker m : m_listMarkers.getAllFormations()) {
+			if (m instanceof PinMarker) {
+				if (((PinMarker) m).contains(position))
+					return (PinMarker) m;
+			}
+		}
+		for (MapMarker m : m_listMarkers.getAllCarpools()) {
 			if (m instanceof PinMarker) {
 				if (((PinMarker) m).contains(position))
 					return (PinMarker) m;
@@ -317,11 +347,13 @@ public class MapController extends JMapController
 		if(mc.getCurrentMember() != null){
 			map.addMapMarker(mc.getCurrentMember());
 		}
+		for (MapMarker m : mc.getAllCarpools())
+			map.addMapMarker(m);
 		for (MapMarker m : mc.getAllRelations())
 			map.addMapMarker(m);
 		for (MapMarker m : mc.getAllInterest())
 			map.addMapMarker(m);
-		for (MapMarker m : mc.getAllFormation())
+		for (MapMarker m : mc.getAllFormations())
 			map.addMapMarker(m);
 		map.updateUI();
 	}

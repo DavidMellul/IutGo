@@ -11,12 +11,14 @@ import Data.TravelManager;
 import Member.Member;
 import Online.FTPManager;
 import Online.SQLManager;
+import Travels.Travel;
 import Ui.Application;
 import Ui.Commons.SplashScreen;
 import Ui.Forms.Form;
 import Utils.Address;
 import Utils.Formation;
 import Utils.Mood;
+import Utils.MyCoordinate;
 import Utils.Util;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 
@@ -50,6 +52,7 @@ public class Controller {
 	public void setCurrentMember(Member m) { this.m_currentMember = m; }
 	public Member getCurrentMember() { return this.m_currentMember; }
 	public InterestManager getInterestManager() { return this.m_interests; }
+	public TravelManager getTravelManager() { return this.m_travels; }
 	
 	// -------------------------------------- Méthode --------------------------------------
 	public void start() {
@@ -164,5 +167,9 @@ public class Controller {
 	public void addPointOfInterest(String name, String desc, Coordinate c){
 		m_interests.createInterestPoint(name, desc, c.getLat(), c.getLon());
 		SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
+	}
+	
+	public void addPointOfInterest(Member m, int seats, String cStart, String cEnd, Coordinate c){
+		m_travels.addTravel(new Travel(m, seats, new MyCoordinate(c.getLat(), c.getLon()), cStart, cEnd));
 	}
 }
