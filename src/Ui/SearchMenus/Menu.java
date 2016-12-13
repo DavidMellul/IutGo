@@ -2,6 +2,7 @@ package Ui.SearchMenus;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Label;
 import java.awt.Panel;
@@ -94,6 +95,7 @@ public class Menu extends JPanel {
 		
 		Label label_1 = new Label("5000m");
 		panel.add(label_1, BorderLayout.EAST);
+		setBackground(Color.LIGHT_GRAY);
 	}
 	
 	public RelationMenu getRelationMenu() { return this.relationMenu; }
