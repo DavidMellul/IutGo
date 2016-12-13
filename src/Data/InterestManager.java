@@ -1,6 +1,3 @@
-package Data;
-
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +8,6 @@ import Interests.InterestPoint;
 import Interests.Lodging;
 import Utils.MyCoordinate;
 import Utils.Util;
-
 
 public class InterestManager implements Serializable {
 	
