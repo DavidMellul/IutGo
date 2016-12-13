@@ -278,39 +278,7 @@ public class Member implements Serializable{
         }
         return travelPassenger;
     }
-	public ArrayList<Travel> findTravellingMembers(String destination) {
-        ArrayList<Travel> listTravels = new ArrayList<Travel>();
-        
-        TravelManager tm = TravelManager.getInstance();
 
-        String myPosition = this.getLastPosition().toLocation(6);
-        myPosition = myPosition.substring(0,myPosition.indexOf(','));
-
-        for(Travel t : tm.getTravelList()) {
-            MyCoordinate cStart = t.getMyCoordinateStart();
-            MyCoordinate cEnd = t.getMyCoordinateEnd();
-
-            Calendar dTravel = t.getDate();
-
-            GPSData gStart = new GPSData(cStart,dTravel.getTime());
-            GPSData gEnd = new GPSData(cEnd,new Date());
-
-            String locationStart = gStart.toLocation(6); locationStart = gStart.toLocation(6).substring(0,locationStart.indexOf(','));
-            String locationEnd = gEnd.toLocation(6);  locationEnd = gEnd.toLocation(6).substring(0,locationEnd.indexOf(','));
-
-            System.out.println(locationStart+" "+locationEnd);
-            if(locationEnd.equalsIgnoreCase(destination) && locationStart.equalsIgnoreCase(myPosition)) {
-                Calendar tmp = Calendar.getInstance();
-                if(			tmp.get(Calendar.YEAR) == dTravel.get(Calendar.YEAR) 
-                		&& 	tmp.get(Calendar.MONTH) == dTravel.get(Calendar.MONTH) 
-                		&& 	tmp.get(Calendar.DATE) == dTravel.get(Calendar.DATE) 
-                		&& 	tmp.get(Calendar.HOUR_OF_DAY) <= dTravel.get(Calendar.HOUR_OF_DAY)) {
-                    listTravels.add(t);
-                }
-            }
-        }
-        return listTravels;
-    }
 	
 	// --------------------------------------------- PARTIE FACEBOOK ----------------------------------------
     public double getDistanceWith(Member m) {

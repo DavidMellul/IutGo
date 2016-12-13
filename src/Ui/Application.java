@@ -116,6 +116,13 @@ public class Application extends JFrame {
 				MapController.getInstance().showFormationMembers(m_radiusChosen, nameFilter, visible);
 			}
 		});
+		m_menu.getFormationMenu().getField().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nameFilter = m_menu.getFormationMenu().getField().getText();
+				MapController.getInstance().showFormationMembers(m_radiusChosen, nameFilter, true);
+			}
+		});
 		
 		TitleBarForms titleBarForms = new TitleBarForms();
 		titleBarForms.addMouseListener(new MouseAdapter() {

@@ -72,7 +72,6 @@ public class Menu extends JPanel {
 		sl_searchMenuViewport.putConstraint(SpringLayout.EAST, formationMenu, 0, SpringLayout.EAST, relationMenu);
 		searchMenuViewport.add(formationMenu);
 		
-		
 		searchMenu.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		searchMenu.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(searchMenu, BorderLayout.CENTER);

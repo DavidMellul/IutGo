@@ -26,6 +26,7 @@ import Ui.Markers.MemberPinMarker;
 import Ui.Markers.PinMarker;
 import Ui.Markers.RelationPinMarker;
 import Utils.MarkerCollection;
+import Utils.Mood;
 import Utils.MyCoordinate;
 import fr.unice.iut.info.methodo.maps.Coordinate;
 import fr.unice.iut.info.methodo.maps.JMapController;
@@ -245,6 +246,20 @@ public class MapController extends JMapController
 				Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
 				RelationPinMarker relation = new RelationPinMarker(m.toString(), osmcMember, m);
 				m_listMarkers.addRelation(relation);
+			}
+		}
+	}
+	
+	public void showRelationMembersByBood(String kindOfRelation, Mood mood, boolean visible) {
+		m_listMarkers.removeAllRelations();
+		if (visible) {
+			for (Member m : Controller.getInstance().getCurrentMember().getRelations(kindOfRelation)) {
+				if(m.getMood().equals(mood)) {
+					MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
+					Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
+					RelationPinMarker relation = new RelationPinMarker(m.toString(), osmcMember, m);
+					m_listMarkers.addRelation(relation);
+				}
 			}
 		}
 	}

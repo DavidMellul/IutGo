@@ -9,6 +9,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.border.MatteBorder;
 
 import Controllers.Controller;
 import Ui.Commons.LogBar;
+import Utils.Util;
 
 public class FriendAdditionForm extends JPanel {
 	
@@ -74,6 +76,7 @@ public class FriendAdditionForm extends JPanel {
 		btnConfirm.setOpaque(false);
 		btnConfirm.setFont(new Font("FontAwesome", Font.PLAIN, 24));
 		btnConfirm.setBounds(270, 23, 33, 23);
+		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -94,6 +97,12 @@ public class FriendAdditionForm extends JPanel {
 				else
 					JOptionPane.showMessageDialog(null, "Please fill in the field by respecting the format expected.");
 			}
+		});
+		btnConfirm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { btnConfirm.setForeground(Color.BLUE); }
+			@Override
+			public void mouseExited(MouseEvent me) { btnConfirm.setForeground(Color.GREEN); }
 		});
 		add(btnConfirm);
 		

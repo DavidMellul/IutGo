@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import Data.InterestManager;
 import Data.LinkManager;
 import Data.SerialManager;
+import Data.TravelManager;
 import Member.Member;
 import Online.FTPManager;
 import Online.SQLManager;
@@ -24,6 +25,7 @@ public class Controller {
 	private Member m_currentMember;
 	private ArrayList<Member> m_members;
 	private InterestManager m_interests;
+	private TravelManager m_travels;
 	
 	// ---------------------------------------- Vues -----------------------------------------
 	private Form m_startScreen;
@@ -134,6 +136,7 @@ public class Controller {
 	public void retrieveAllSerializedData() {
 		this.m_members = SerialManager.getAllMembers();
 		this.m_interests = SerialManager.getInterestManager();
+		this.m_travels = new TravelManager();
 		SplashScreen.getInstance().setVisible(false);
 	}
 	
@@ -146,6 +149,7 @@ public class Controller {
 			SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
 			FTPManager.uploadInterestManager();
 		}
+
 		FTPManager.closeConnection();
 		SQLManager.closeConnection();
 	}
