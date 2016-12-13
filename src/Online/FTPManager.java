@@ -137,12 +137,12 @@ public class FTPManager {
 		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
 		String remoteFilePath = "/members/im.dat";
 		
-		InterestManager localIm = Controller.getInstance().getInterestManager();
+	/*	InterestManager localIm = Controller.getInstance().getInterestManager();
 		retrieveInterestManager();
 		InterestManager remoteIm = SerialManager.getInterestManager();
 		localIm.merge(remoteIm);
 		SerialManager.save(localFilePath, localFilePath);
-		
+		*/
 	/*	//On le récupére pour par le perdre et on envoie une version "merged" du local et du distant.
 		if(Files.exists(Paths.get(localFilePath))) {
 			InterestManager localIm = SerialManager.getInterestManager();

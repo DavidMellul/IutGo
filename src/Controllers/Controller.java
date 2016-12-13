@@ -146,7 +146,6 @@ public class Controller {
 			SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
 			FTPManager.uploadInterestManager();
 		}
-
 		FTPManager.closeConnection();
 		SQLManager.closeConnection();
 	}
@@ -161,6 +160,5 @@ public class Controller {
 	public void addPointOfInterest(String name, String desc, Coordinate c){
 		m_interests.createInterestPoint(name, desc, c.getLat(), c.getLon());
 		SerialManager.save(m_interests, Util.getAndCreateAppdataPath()+File.separator+"im.dat");
-		//FTPManager.uploadInterestManager();
 	}
 }
