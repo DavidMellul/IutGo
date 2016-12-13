@@ -2,6 +2,7 @@ package Ui.EditMenus;
 
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,6 +63,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		btnQuit.setContentAreaFilled(false);
 		btnQuit.setBorderPainted(false);
 		btnQuit.setBorder(null);
+		btnQuit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnQuit.setBounds(412, 10, 28, 28);
 		btnQuit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -123,6 +125,7 @@ public class AccountEditionForm extends JPanel implements ActionListener{
 		btnConfirm.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 14));
 		btnConfirm.setIcon(new ImageIcon(AccountEditionForm.class.getResource("/Resources/102.png")));
 		btnConfirm.setBounds(164, 170, 105, 23);
+		btnConfirm.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

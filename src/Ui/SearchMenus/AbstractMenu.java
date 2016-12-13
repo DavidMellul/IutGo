@@ -3,14 +3,19 @@ package Ui.SearchMenus;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import Utils.Util;
 
 public abstract class AbstractMenu extends JPanel {
 
@@ -36,6 +41,7 @@ public abstract class AbstractMenu extends JPanel {
 		m_checkbox.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
 		m_checkbox.setHorizontalAlignment(SwingConstants.LEFT);
 		m_checkbox.setSelected(p_startsOpen);
+		m_checkbox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		m_checkbox.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -262,6 +262,20 @@ public class MapController extends JMapController
 			}
 		}
 	}
+	
+	public void showRelationMembersByBood(String kindOfRelation, Mood mood, boolean visible) {
+		m_listMarkers.removeAllRelations();
+		if (visible) {
+			for (Member m : Controller.getInstance().getCurrentMember().getRelations(kindOfRelation)) {
+				if(m.getMood().equals(mood)) {
+					MyCoordinate mcMember = m.getLastPosition().getMyCoordinate();
+					Coordinate osmcMember = new Coordinate(mcMember.getLat(), mcMember.getLon());
+					RelationPinMarker relation = new RelationPinMarker(m.toString(), osmcMember, m);
+					m_listMarkers.addRelation(relation);
+				}
+			}
+		}
+	}
 
 	public void showPointOfInterest(double p_radius, String nameFilter, float minNote, boolean visible) {
 		m_listMarkers.removeAllInterest();

@@ -32,9 +32,9 @@ import Member.Member;
 import Ui.Commons.LogBar;
 import Ui.EditMenus.AccountEditionForm;
 import Ui.EditMenus.FriendAdditionForm;
-import Ui.Forms.InterestForm;
 import Ui.Forms.TitleBarForms;
 import Ui.Forms.TravelCreationForm;
+import Ui.Markers.MemberPinMarker;
 import Ui.SearchMenus.Menu;
 import Utils.Mood;
 import Utils.Util;
@@ -66,6 +66,7 @@ public class Application extends JFrame {
 	private JButton btnHome;
 
 	private double m_radiusChosen = 0.0;
+	private boolean eyeShown;
 	private JButton btnAddTravel;
 	private JLabel lblAddTravel;
 
@@ -115,12 +116,27 @@ public class Application extends JFrame {
 				MapController.getInstance().showPointOfInterest(m_radiusChosen, nameFilter, note, visible);
 			}
 		});
+		m_menu.getInterestMenu().getNameFilter().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nameFilter = m_menu.getInterestMenu().getNameFilter().getText();
+				float note = Float.parseFloat(m_menu.getInterestMenu().getRater().getRating().toString());
+				MapController.getInstance().showPointOfInterest(m_radiusChosen, nameFilter, note, true);
+			}
+		});
 		m_menu.getFormationMenu().getCheckbox().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean visible = ((JCheckBox) e.getSource()).isSelected();
 				String nameFilter = m_menu.getFormationMenu().getField().getText();
 				MapController.getInstance().showFormationMembers(m_radiusChosen, nameFilter, visible);
+			}
+		});
+		m_menu.getFormationMenu().getField().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nameFilter = m_menu.getFormationMenu().getField().getText();
+				MapController.getInstance().showFormationMembers(m_radiusChosen, nameFilter, true);
 			}
 		});
 		m_menu.getCarpoolingMenu().getCheckbox().addActionListener(new ActionListener() {
@@ -454,6 +470,41 @@ public class Application extends JFrame {
 		lblAddTravel.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_travel.png")));
 		lblAddTravel.setBounds(721, 565, 32, 32);
 		m_mapViewer.getViewer().add(lblAddTravel);
+		
+		JButton btnEye = new JButton("");
+		btnEye.setToolTipText("Hide/Show your location");
+		btnEye.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_eye_visible.png")));
+		btnEye.setFocusPainted(false);
+		btnEye.setContentAreaFilled(false);
+		btnEye.setBorder(null);
+		btnEye.setBorderPainted(false);
+		btnEye.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEye.setBounds(721, 565, 32, 32);
+		eyeShown = true;
+		btnEye.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MapController.getInstance().getMarkerCollection().setMemberMarker(
+						new MemberPinMarker("You", Controller.getInstance().getCurrentMember().getLastPosition().getMyCoordinate().toOSMCoordinate()));
+				if(eyeShown)  {
+					btnEye.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_eye_invisible.png")));
+					MapController.getInstance().getMarkerCollection().getCurrentMember().setVisible(false);
+				}
+				else {
+					btnEye.setIcon(new ImageIcon(Application.class.getResource("/Resources/icone_eye_visible.png")));
+					MapController.getInstance().getMarkerCollection().getCurrentMember().setVisible(true);
+				}
+				eyeShown = !eyeShown;
+				m_mapViewer.getViewer().updateUI();
+			}
+		});
+		btnEye.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent me) { btnEye.setIcon(Util.darken(btnEye.getIcon())); }
+			@Override
+			public void mouseExited(MouseEvent me) { btnEye.setIcon(Util.brighten(btnEye.getIcon())); }
+		});
+		m_mapViewer.getViewer().add(btnEye);
 	}
 
 	public Menu getMenu() {
