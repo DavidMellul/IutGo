@@ -1,9 +1,12 @@
 package Data;
 
 
+import java.awt.List;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import Interests.InterestPoint;
 import Interests.Lodging;
@@ -76,5 +79,15 @@ public class InterestManager implements Serializable {
             }
         }
         return list;
+    }
+    
+    public ArrayList<InterestPoint> getListPoints() { return this.m_piList; }
+    
+    public void merge(InterestManager im) { 
+    	ArrayList<InterestPoint> al = this.m_piList;
+    	Set<InterestPoint> hs = new HashSet<InterestPoint>();
+    	hs.addAll(al);
+    	al.clear();
+    	al.addAll(hs);
     }
 }
