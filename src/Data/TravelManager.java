@@ -2,8 +2,12 @@ package Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import Member.Member;
 import Travels.Travel;
+import Utils.GPSData;
 import Utils.Mood;
 import Utils.MyCoordinate;
 import Utils.Util;
@@ -38,7 +42,31 @@ public class TravelManager implements Serializable {
 		
 		return travelS;
 	}
-
+	
+//
+//	public ArrayList<Travel> findTravellingMembers(Member m, String destination) {
+//        ArrayList<Travel> listTravels = new ArrayList<Travel>();
+//
+//        String myPosition = m.getLastPosition().toLocation(6);
+//        myPosition = myPosition.substring(0,myPosition.indexOf(','));
+//
+//        for(Travel t : m_travels) {
+//            MyCoordinate cStart = t.getMyCoordinateStart();
+//            MyCoordinate cEnd = t.getMyCoordinateEnd();
+//
+//            GPSData gStart = new GPSData(cStart,dTravel.getTime());
+//            GPSData gEnd = new GPSData(cEnd,new Date());
+//
+//            String locationStart = gStart.toLocation(6); locationStart = gStart.toLocation(6).substring(0,locationStart.indexOf(','));
+//            String locationEnd = gEnd.toLocation(6);  locationEnd = gEnd.toLocation(6).substring(0,locationEnd.indexOf(','));
+//
+//            if(locationEnd.equalsIgnoreCase(destination) && locationStart.equalsIgnoreCase(myPosition)) {
+//                    listTravels.add(t);
+//            }
+//        }
+//        return listTravels;
+//    }
+	
 	public boolean addTravel(Travel t) {
 		if (m_travels.add(t))
 			return true;
