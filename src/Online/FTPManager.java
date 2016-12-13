@@ -8,16 +8,11 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import Controllers.Controller;
-import Data.InterestManager;
-import Data.SerialManager;
-import Interests.InterestPoint;
 import Member.Member;
 import Ui.Commons.SplashScreen;
 import Utils.Util;
@@ -137,12 +132,12 @@ public class FTPManager {
 		String localFilePath = Util.getAndCreateAppdataPath()+File.separator+"im.dat";
 		String remoteFilePath = "/members/im.dat";
 		
-		InterestManager localIm = Controller.getInstance().getInterestManager();
+	/*	InterestManager localIm = Controller.getInstance().getInterestManager();
 		retrieveInterestManager();
 		InterestManager remoteIm = SerialManager.getInterestManager();
 		localIm.merge(remoteIm);
 		SerialManager.save(localFilePath, localFilePath);
-		
+		*/
 	/*	//On le récupére pour par le perdre et on envoie une version "merged" du local et du distant.
 		if(Files.exists(Paths.get(localFilePath))) {
 			InterestManager localIm = SerialManager.getInterestManager();

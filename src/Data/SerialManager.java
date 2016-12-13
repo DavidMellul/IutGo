@@ -23,6 +23,8 @@ public class SerialManager {
             oos = new ObjectOutputStream(fichier);
             oos.writeObject(o);
             oos.flush();
+            if(o instanceof InterestManager)
+        		FTPManager.uploadInterestManager();
         } catch (final java.io.IOException e) {
             e.printStackTrace();
         } finally {
@@ -75,11 +77,12 @@ public class SerialManager {
     	
     	if(Files.exists(Paths.get(Util.getAndCreateAppdataPath()+File.separator+"im.dat"))) {
     		Object a = retrieve(Util.getAndCreateAppdataPath()+File.separator+"im.dat");
-    		System.out.println(a);
+    		imToKeep = (InterestManager) a;
     	}
     		
     	if(imToKeep != null)
     		im = imToKeep;
+    	
     	
     	return im;
     }
