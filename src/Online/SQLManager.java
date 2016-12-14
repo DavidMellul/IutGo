@@ -16,7 +16,7 @@ public class SQLManager {
 	    String dbName = "cl1lff8g_iutgo";
 	    String driver = "com.mysql.jdbc.Driver";
 	    String userName = "cl1lff8g_david";
-	    String password = "dagovide2306";
+	    String password = "iutgo1412";
 	    
 		conn = null;
 	   try {
