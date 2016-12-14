@@ -21,7 +21,7 @@ public class FTPManager {
 	private static String server = "ftp.dmware.fr";
 	private static int port = 21;
 	private static String user = "IutGo@dmware.fr";
-	private static String pass = "dagovide2306";
+	private static String pass = "iutgo1412";
 	
 	private static FTPClient client;
 	
@@ -138,7 +138,7 @@ public class FTPManager {
 		localIm.merge(remoteIm);
 		SerialManager.save(localFilePath, localFilePath);
 		*/
-	/*	//On le récupére pour par le perdre et on envoie une version "merged" du local et du distant.
+	/*	//On le rÃ©cupÃ©re pour par le perdre et on envoie une version "merged" du local et du distant.
 		if(Files.exists(Paths.get(localFilePath))) {
 			InterestManager localIm = SerialManager.getInterestManager();
 			retrieveInterestManager();
