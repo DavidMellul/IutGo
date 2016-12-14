@@ -15,7 +15,7 @@ public class SQLManager {
 		String url = "jdbc:mysql://lhcp1011.webapps.net:3306/";
 	    String dbName = "cl1lff8g_iutgo";
 	    String driver = "com.mysql.jdbc.Driver";
-	    String userName = "cl1lff8g_david";
+	    String userName = "cl1lff8g_iutgo";
 	    String password = "iutgo1412";
 	    
 		conn = null;
